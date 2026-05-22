@@ -1,0 +1,33 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Angular build output
+dist/
+tmp/
+out-tsc/
+
+# Angular cache
+.angular/
+
+# Test & coverage
+coverage/
+test-results/
+e2e-results/
+
+# IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+jenkins-monitor.log
+
+# Environment
+.env
+.env.*
