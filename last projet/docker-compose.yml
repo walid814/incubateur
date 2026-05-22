@@ -1,0 +1,29 @@
+services:
+  angular:
+    build: 
+      context: .
+      dockerfile: Dockerfile  # Dockerfile Angular à la racine
+    container_name: incubateur
+    volumes:
+      - ./incubateur:/app/incubateur   # Monte le projet Angular
+      - /app/incubateur/node_modules   # Préserve les dépendances
+    ports:
+      - "4200:4200"
+    stdin_open: true
+    tty: true
+    working_dir: /app/incubateur       # S'assure qu'on travaille dans le bon dossier
+    command: ng serve --host 0.0.0.0 --poll=100
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8081:8080"   # Jenkins sur 8081 car ton backend occupe déjà 8080
+      - "50000:50000" # Pour connecter les agents Jenkins si besoin
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    stdin_open: true
+    tty: true
+
+volumes:
+  jenkins_home:

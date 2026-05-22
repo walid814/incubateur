@@ -1,0 +1,79 @@
+# Dockerfile multi-stage pour tests Jenkins
+FROM node:18-alpine as base
+
+# Installation des dépendances système pour Chrome
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont
+
+# Configuration de Chrome pour les tests
+ENV CHROME_BIN=/usr/bin/chromium-browser \
+    CHROME_PATH=/usr/bin/chromium-browser
+
+# Dossier de travail
+WORKDIR /app
+
+# Installation d'Angular CLI
+RUN npm install -g @angular/cli
+
+# Stage pour les tests
+FROM base as test
+
+# Copier les fichiers de configuration
+COPY incubateur/package*.json ./incubateur/
+COPY incubateur/angular.json ./incubateur/
+COPY incubateur/tsconfig*.json ./incubateur/
+COPY incubateur/karma.conf*.js ./incubateur/
+COPY incubateur/.eslintrc.json ./incubateur/
+
+WORKDIR /app/incubateur
+
+# Installer les dépendances
+RUN npm ci
+
+# Copier le code source
+COPY incubateur/src ./src
+
+# Désactiver l'analytics Angular
+RUN ng analytics disable
+
+# Commandes de test par défaut
+CMD ["npm", "run", "test:ci"]
+
+# Stage pour la construction
+FROM base as build
+
+WORKDIR /app/incubateur
+
+# Copier les fichiers nécessaires
+COPY incubateur/package*.json ./
+COPY incubateur/angular.json ./
+COPY incubateur/tsconfig*.json ./
+
+# Installer les dépendances de production
+RUN npm ci --only=production
+
+# Copier le code source
+COPY incubateur/src ./src
+COPY incubateur/public ./public
+
+# Construire l'application
+RUN npm run build:prod
+
+# Stage final pour la production
+FROM nginx:alpine as production
+
+# Copier la configuration nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copier les fichiers construits
+COPY --from=build /app/incubateur/dist /usr/share/nginx/html
+
+# Exposition du port
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
