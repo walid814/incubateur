@@ -1,0 +1,132 @@
+:host {
+  display: block;
+}
+
+/* Bloc activité/tâches: colonnes dashboard */
+.activities-tasks-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.dashboard-activities,
+.dashboard-tasks {
+  mat-card {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  mat-card-title {
+    color: #111111;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    mat-icon {
+      color: #0b63ce;
+    }
+  }
+}
+
+.recent-activities {
+  .activity-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .activity-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      color: #ffffff;
+
+      &.approval { background: #0b63ce; }
+      &.user { background: #2f7ad8; }
+      &.funding { background: #3d8be2; }
+      &.review { background: #5a9ce9; }
+      &.profile { background: #6a7280; }
+      &.document { background: #4f5d75; }
+      &.application { background: #1f5fbf; }
+      &.none { background: #6c757d; }
+    }
+
+    .activity-text {
+      margin: 0 0 0.25rem;
+      color: #111111;
+      font-weight: 500;
+    }
+
+    .activity-time {
+      margin: 0;
+      color: #4b5563;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+.pending-tasks {
+  .task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .task-text {
+      margin: 0;
+      color: #111111;
+      font-weight: 500;
+    }
+
+    .task-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .task-priority {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+
+      &.high {
+        background: #fde2e2;
+        color: #8b1e1e;
+      }
+
+      &.medium {
+        background: #e6f0ff;
+        color: #0b63ce;
+      }
+
+      &.low {
+        background: #e8f5e8;
+        color: #2e7d32;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .activities-tasks-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

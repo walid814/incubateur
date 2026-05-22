@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+/* Bloc stats: cartes de synthèse isolées */
+.dashboard-stats-overview {
+  mat-card {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    box-shadow: none;
+    border-radius: 12px;
+  }
+
+  mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #111111;
+
+    mat-icon {
+      color: #0b63ce;
+    }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+
+    .stat-item {
+      text-align: center;
+      padding: 14px;
+      background: #ffffff;
+      border: 1px solid #e3e6ea;
+      border-radius: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      }
+
+      .stat-number {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #0b63ce;
+      }
+
+      .stat-label {
+        margin-top: 4px;
+        font-size: 0.85rem;
+        color: #4b5563;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

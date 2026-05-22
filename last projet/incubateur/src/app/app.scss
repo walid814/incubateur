@@ -1,0 +1,82 @@
+// Variables de couleurs inspirées de forumassotousensemble.org
+:root {
+  --primary-color: #e74c3c;    // Rouge africain (couleur principale du site FATE)
+  --primary-dark: #c0392b;     // Rouge plus foncé
+  --secondary-color: #f1c40f;  // Jaune doré du site FATE
+  --secondary-dark: #f39c12;   // Jaune plus foncé
+  --accent-color: #27ae60;     // Vert africain
+  --accent-dark: #229954;      // Vert plus foncé
+  --text-dark: #2c3e50;        // Bleu-gris foncé
+  --text-light: #7f8c8d;       // Gris moyen
+  --bg-light: #e4dfd1;         // Beige clair africain
+  --bg-warm: #aa9e77;          // Fond chaud avec le jaune FATE
+  --white: #6b5e5e;
+  --fate-yellow: #f1c40f;      // Jaune spécifique du site FATE
+}
+
+// Layout global
+.main-content {
+  min-height: calc(100vh - 200px); // Ajuste selon la hauteur de navbar + footer
+  display: flex;
+  flex-direction: column;
+}
+
+// Styles globaux pour Material Design
+.mat-mdc-raised-button.mat-primary {
+  background-color: var(--primary-color) !important;
+  
+  &:hover {
+    background-color: var(--primary-dark) !important;
+  }
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background-color: var(--accent-color) !important;
+  
+  &:hover {
+    background-color: var(--accent-dark) !important;
+  }
+}
+
+// Nouveau style pour bouton avec jaune FATE
+.mat-mdc-raised-button.mat-warn {
+  background-color: var(--fate-yellow) !important;
+  color: var(--text-dark) !important;
+  
+  &:hover {
+    background-color: var(--secondary-dark) !important;
+    color: var(--white) !important;
+  }
+}
+
+// Conteneurs globaux
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
+}
+
+// Typography harmonisée
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+// Liens harmonisés
+a {
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: var(--primary-dark);
+  }
+}

@@ -1,0 +1,498 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Charte graphique moderne - Jaune et nuances
+// Palette de couleurs moderne
+:root {
+  // Couleurs principales - Jaune moderne
+  --jaune-primary: #FFD700;
+  --jaune-light: #FFED4E;
+  --jaune-dark: #F59E0B;
+  --jaune-secondary: #FCD34D;
+  
+  // Couleurs d'appui
+  --bleu-primary: #0066cc;
+  --bleu-dark: #004499;
+  --gris-light: #f8f9fa;
+  --gris-medium: #6c757d;
+  --gris-dark: #343a40;
+  --text-dark: #2c3e50;
+  --white: #ffffff;
+  
+  // Couleurs d'accent
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  
+  // Ombres et effets
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  --border-radius-button: 30px;
+  --transition: all 0.3s ease;
+}
+
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--gris-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+// Layout global pour navbar fixe pleine largeur
+app-root {
+  display: block;
+  min-height: 100vh;
+}
+
+/* =====================================================
+   LAYOUT GLOBAL POUR PAGES AVEC NAVBAR FIXE
+   ===================================================== */
+
+// Classes pour gérer l'espace nécessaire avec la navbar fixe
+.page-content {
+  padding-top: 80px; // 64px navbar + 16px marge
+  min-height: calc(100vh - 64px);
+}
+
+.page-content-dashboard {
+  padding-top: 80px; // Pour les pages dashboard/admin
+  min-height: calc(100vh - 64px);
+}
+
+/* =====================================================
+   STYLES GLOBAUX POUR TOUS LES BOUTONS - JAUNE MODERNE
+   ===================================================== */
+
+/* Boutons Material Angular - Style jaune global */
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-outlined-button,
+.mat-mdc-button {
+  border-radius: var(--border-radius-button) !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px !important;
+  transition: var(--transition) !important;
+  min-height: 44px !important;
+  padding: 12px 24px !important;
+}
+
+/* Boutons primaires (jaunes) */
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  background: var(--jaune-primary) !important;
+  color: var(--text-dark) !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
+}
+
+.mat-mdc-raised-button.mat-primary:hover,
+.mat-mdc-unelevated-button.mat-primary:hover {
+  background: var(--jaune-light) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5) !important;
+}
+
+/* Boutons outlined (bordure jaune) */
+.mat-mdc-outlined-button.mat-primary {
+  background: transparent !important;
+  color: var(--jaune-primary) !important;
+  border: 2px solid var(--jaune-primary) !important;
+}
+
+.mat-mdc-outlined-button.mat-primary:hover {
+  background: var(--jaune-primary) !important;
+  color: var(--text-dark) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4) !important;
+}
+
+/* Boutons text/basic */
+.mat-mdc-button.mat-primary {
+  color: var(--jaune-primary) !important;
+  background: transparent !important;
+}
+
+.mat-mdc-button.mat-primary:hover {
+  background: rgba(255, 215, 0, 0.1) !important;
+  color: var(--jaune-dark) !important;
+}
+
+/* Boutons d'accent (bleu) */
+.mat-mdc-raised-button.mat-accent,
+.mat-mdc-unelevated-button.mat-accent {
+  background: var(--bleu-primary) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3) !important;
+}
+
+.mat-mdc-raised-button.mat-accent:hover,
+.mat-mdc-unelevated-button.mat-accent:hover {
+  background: var(--bleu-dark) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(0, 102, 204, 0.4) !important;
+}
+
+/* Boutons warn (rouge) */
+.mat-mdc-raised-button.mat-warn,
+.mat-mdc-unelevated-button.mat-warn {
+  background: var(--danger-color) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3) !important;
+}
+
+.mat-mdc-raised-button.mat-warn:hover,
+.mat-mdc-unelevated-button.mat-warn:hover {
+  background: #c82333 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4) !important;
+}
+
+/* Boutons icon */
+.mat-mdc-icon-button {
+  border-radius: 50% !important;
+  transition: var(--transition) !important;
+}
+
+.mat-mdc-icon-button:hover {
+  transform: scale(1.1) !important;
+  background: rgba(255, 215, 0, 0.1) !important;
+}
+
+/* Boutons FAB */
+.mat-mdc-fab {
+  background: var(--jaune-primary) !important;
+  color: var(--text-dark) !important;
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4) !important;
+}
+
+.mat-mdc-fab:hover {
+  background: var(--jaune-light) !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5) !important;
+}
+
+/* Classes personnalisées pour boutons spéciaux */
+.btn-jaune {
+  background: var(--jaune-primary) !important;
+  color: var(--text-dark) !important;
+  border: none !important;
+  border-radius: var(--border-radius-button) !important;
+  padding: 12px 24px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px !important;
+  transition: var(--transition) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
+}
+
+.btn-jaune:hover {
+  background: var(--jaune-light) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5) !important;
+}
+
+/* Classes utilitaires pour les couleurs élégantes */
+.primary-blue { color: var(--primary-blue) !important; }
+.secondary-blue { color: var(--secondary-blue) !important; }
+.light-blue { color: var(--light-blue) !important; }
+.accent-blue { color: var(--accent-blue) !important; }
+.navy-blue { color: var(--navy-blue) !important; }
+.sky-blue { color: var(--sky-blue) !important; }
+
+.bg-primary-blue { background-color: var(--primary-blue) !important; color: var(--pure-white) !important; }
+.bg-secondary-blue { background-color: var(--secondary-blue) !important; color: var(--pure-white) !important; }
+.bg-light-blue { background-color: var(--light-blue) !important; color: var(--pure-white) !important; }
+.bg-accent-blue { background-color: var(--accent-blue) !important; color: var(--pure-white) !important; }
+.bg-off-white { background-color: var(--off-white) !important; color: var(--text-primary) !important; }
+.bg-cream-white { background-color: var(--cream-white) !important; color: var(--text-primary) !important; }
+
+/* Boutons avec la palette élégante */
+.btn-primary-blue {
+  background-color: var(--primary-blue) !important;
+  color: var(--pure-white) !important;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: var(--secondary-blue) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.3);
+  }
+}
+
+.btn-secondary-blue {
+  background-color: var(--secondary-blue) !important;
+  color: var(--pure-white) !important;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: var(--light-blue) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+  }
+}
+
+.btn-accent-blue {
+  background-color: var(--accent-blue) !important;
+  color: var(--pure-white) !important;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--navy-blue) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(26, 188, 156, 0.3);
+  }
+}
+
+/* =====================================================
+   THEME GLOBAL SANS DEGRADE - COULEURS UNIES
+   ===================================================== */
+
+/* Palette solide globale */
+:root {
+  --solid-bg-main: #f1f3f5;
+  --solid-bg-soft: #e9ecef;
+  --solid-bg-brand: #0066cc;
+  --solid-bg-brand-dark: #004499;
+  --solid-bg-accent: #ffd700;
+  --solid-text-main: #111111;
+  --solid-text-muted: #495057;
+}
+
+/* Supprime toutes les images de fond de type degradé */
+app-root *,
+app-root *::before,
+app-root *::after {
+  background-image: none !important;
+}
+
+/* Titres principaux en noir sur toutes les pages */
+app-root h1,
+app-root h2,
+app-root .section-title,
+app-root .page-title,
+app-root .hero-title {
+  color: var(--solid-text-main) !important;
+}
+
+/* Surfaces principales en couleurs unies */
+app-root .hero-section {
+  background: var(--solid-bg-soft) !important;
+}
+
+app-root .mission-section,
+app-root .services-section,
+app-root .impact-section,
+app-root .success-factors-section,
+app-root .project-types-section,
+app-root .dashboard-section,
+app-root .faq-section,
+app-root .contact-section,
+app-root .apropos-section,
+app-root .partenaires-section,
+app-root .candidature-section,
+app-root .inscription-section,
+app-root .connexion-section,
+app-root .admin-section {
+  background: var(--solid-bg-main) !important;
+}
+
+/* Fond gris uniforme pour tous les wrappers de pages */
+app-root .accueil-container,
+app-root .apropos-container,
+app-root .faq-container,
+app-root .contact-container,
+app-root .connexion-page-wrapper,
+app-root .dashboard-container,
+app-root .partenaires-container,
+app-root .candidature-container,
+app-root .inscription-container,
+app-root .financement-container,
+app-root .admin-container,
+app-root .page-content,
+app-root .page-content-dashboard,
+app-root section,
+app-root main {
+  background-color: var(--solid-bg-main) !important;
+}
+
+/* CTA et zones de mise en avant en couleur unie */
+app-root .final-cta-section,
+app-root .cta-section,
+app-root .contact-cta-section {
+  background: var(--solid-bg-accent) !important;
+  color: var(--solid-text-main) !important;
+}
+
+/* Cartes blanches sur toutes les pages */
+app-root mat-card,
+app-root .mat-mdc-card,
+app-root .mission-card,
+app-root .service-card,
+app-root .factor-card,
+app-root .type-card,
+app-root .stat-card,
+app-root .action-card,
+app-root .resource-card,
+app-root .project-card,
+app-root .faq-panel {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  opacity: 1 !important;
+}
+
+/* Hover simple sans transparence ni effet complexe */
+app-root mat-card:hover,
+app-root .mat-mdc-card:hover,
+app-root .mission-card:hover,
+app-root .service-card:hover,
+app-root .factor-card:hover,
+app-root .type-card:hover,
+app-root .stat-card:hover,
+app-root .action-card:hover,
+app-root .resource-card:hover,
+app-root .project-card:hover,
+app-root .faq-panel:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 22px rgba(17, 17, 17, 0.12) !important;
+}
+
+/* Couleurs unies pour zones d'icones */
+app-root .mission-icon,
+app-root .service-icon,
+app-root .factor-icon,
+app-root .type-icon,
+app-root .action-icon,
+app-root .category-icon,
+app-root .resource-icon,
+app-root .stat-icon {
+  background: var(--solid-bg-accent) !important;
+}
+
+app-root .navbar,
+app-root .navbar-container,
+app-root .admin-header,
+app-root .dashboard-header,
+app-root .hero-banner {
+  background: var(--solid-bg-brand) !important;
+}
+
+app-root .navbar mat-icon,
+app-root .admin-header mat-icon,
+app-root .dashboard-header mat-icon,
+app-root .hero-banner mat-icon {
+  color: #ffffff !important;
+}
+
+/* Texte secondaire harmonise */
+app-root p,
+app-root .section-subtitle,
+app-root .hero-subtitle,
+app-root .card-description,
+app-root .muted-text {
+  color: var(--solid-text-muted) !important;
+}
+
+.karla {
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Global button styles - Border radius 2px pour tous les boutons */
+button,
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-stroked-button,
+.mat-mdc-icon-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab,
+.mdc-button,
+a[mat-button],
+a[mat-raised-button],
+a[mat-stroked-button],
+a[mat-flat-button],
+.inscription-btn,
+.login-btn,
+.cta-button,
+.secondary-button {
+  border-radius: 2px !important;
+  
+  &.mat-mdc-button-base {
+    border-radius: 2px !important;
+  }
+}
+
+/* Forcer le border-radius sur les pseudo-éléments des boutons Material */
+.mat-mdc-button .mdc-button__ripple,
+.mat-mdc-raised-button .mdc-button__ripple,
+.mat-mdc-outlined-button .mdc-button__ripple,
+.mat-mdc-unelevated-button .mdc-button__ripple {
+  border-radius: 2px !important;
+}
+
+/* =====================================================
+   CORRECTION GLOBALE DES ICONES
+   Objectif: icones Material toujours visibles (aucune coupure)
+   ===================================================== */
+
+/* Le conteneur d'icone suit la taille reelle de la police */
+mat-icon,
+.mat-icon,
+.material-icons,
+.material-symbols-outlined {
+  width: 1em !important;
+  height: 1em !important;
+  line-height: 1em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  vertical-align: middle !important;
+  text-rendering: geometricPrecision;
+}
+
+/* Evite que certains conteneurs Material rognent les icones */
+.mat-mdc-icon-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab,
+.mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field-icon-prefix,
+.mat-expansion-panel-header,
+.mat-mdc-card {
+  overflow: visible !important;
+}
+
+/* Les icones dans les boutons conservent un alignement net */
+.mat-mdc-button mat-icon,
+.mat-mdc-raised-button mat-icon,
+.mat-mdc-outlined-button mat-icon,
+.mat-mdc-unelevated-button mat-icon,
+.mat-mdc-icon-button mat-icon {
+  flex-shrink: 0;
+}

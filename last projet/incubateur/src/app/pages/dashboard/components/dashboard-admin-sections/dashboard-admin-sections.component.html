@@ -1,0 +1,143 @@
+<section class="admin-management">
+  <mat-card>
+    <mat-card-title>
+      <mat-icon>admin_panel_settings</mat-icon>
+      Gestion de la plateforme
+    </mat-card-title>
+    <mat-card-content>
+      <div class="admin-quick-actions">
+        <div class="admin-action-card">
+          <mat-icon>groups_2</mat-icon>
+          <h3>Utilisateurs récents</h3>
+          <p>{{ userStats.recent }} nouvelles inscriptions cette semaine</p>
+          <button mat-stroked-button color="primary" routerLink="/admin/users">Gérer</button>
+        </div>
+
+        <div class="admin-action-card">
+          <mat-icon>assignment_turned_in</mat-icon>
+          <h3>Candidatures</h3>
+          <p>{{ candidatureStats.enAttente }} candidatures en attente</p>
+          <button mat-stroked-button color="primary" routerLink="/admin/candidatures">Gérer</button>
+        </div>
+
+        <div class="admin-action-card">
+          <mat-icon>assignment</mat-icon>
+          <h3>Projets en attente</h3>
+          <p>0 projets nécessitent une validation</p>
+          <button mat-stroked-button color="accent" routerLink="/admin/projects">Réviser</button>
+        </div>
+
+        <div class="admin-action-card">
+          <mat-icon>support_agent</mat-icon>
+          <h3>Support</h3>
+          <p>0 tickets ouverts</p>
+          <button mat-stroked-button color="warn" routerLink="/admin/support">Traiter</button>
+        </div>
+
+        <div class="admin-action-card">
+          <mat-icon>account_balance</mat-icon>
+          <h3>Financements</h3>
+          <p>€0 en cours d'allocation</p>
+          <button mat-stroked-button color="primary" routerLink="/admin/funding">Gérer</button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section class="user-management-section">
+  <mat-card class="user-management-card">
+    <mat-card-title>
+      <mat-icon>people</mat-icon>
+      Gestion des utilisateurs
+    </mat-card-title>
+    <mat-card-content>
+      <div class="user-management-actions">
+        <div class="action-group">
+          <h3>Actions rapides</h3>
+          <div class="action-buttons">
+            <button mat-raised-button color="primary" routerLink="/register">
+              <mat-icon>person_add</mat-icon>
+              Créer un compte utilisateur
+            </button>
+            <button mat-raised-button color="accent" routerLink="/admin/users">
+              <mat-icon>manage_accounts</mat-icon>
+              Gérer tous les utilisateurs
+            </button>
+            <button mat-stroked-button color="warn" (click)="exportRequested.emit()">
+              <mat-icon>download</mat-icon>
+              Exporter les données
+            </button>
+          </div>
+        </div>
+
+        <div class="user-stats">
+          <h3>Statistiques</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <mat-icon>groups_2</mat-icon>
+              <span class="stat-number">{{ userStats.total || 0 }}</span>
+              <span class="stat-label">Total utilisateurs</span>
+            </div>
+            <div class="stat-item">
+              <mat-icon>person_add</mat-icon>
+              <span class="stat-number">{{ userStats.recent || 0 }}</span>
+              <span class="stat-label">Nouveaux (7j)</span>
+            </div>
+            <div class="stat-item">
+              <mat-icon>verified_user</mat-icon>
+              <span class="stat-number">{{ userStats.active || 0 }}</span>
+              <span class="stat-label">Actifs</span>
+            </div>
+            <div class="stat-item">
+              <mat-icon>admin_panel_settings</mat-icon>
+              <span class="stat-number">{{ userStats.admins || 0 }}</span>
+              <span class="stat-label">Administrateurs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section class="admin-candidatures-overview">
+  <mat-card>
+    <mat-card-title>
+      <mat-icon>assignment_turned_in</mat-icon>
+      Candidatures récentes
+      <span class="candidature-count" [matBadge]="candidatureStats.enAttente" matBadgeColor="primary"></span>
+    </mat-card-title>
+    <mat-card-content>
+      <div class="candidatures-summary">
+        <div class="summary-stat">
+          <div class="stat-number primary">{{ candidatureStats.enAttente || 0 }}</div>
+          <div class="stat-label">En attente</div>
+        </div>
+        <div class="summary-stat">
+          <div class="stat-number accent">{{ candidatureStats.enCoursEvaluation || 0 }}</div>
+          <div class="stat-label">En évaluation</div>
+        </div>
+        <div class="summary-stat">
+          <div class="stat-number success">{{ candidatureStats.acceptees || 0 }}</div>
+          <div class="stat-label">Acceptées</div>
+        </div>
+        <div class="summary-stat">
+          <div class="stat-number">{{ formatCurrency(candidatureStats.montantTotalDemande || 0) }}</div>
+          <div class="stat-label">Montant total</div>
+        </div>
+      </div>
+
+      <div class="candidatures-actions">
+        <button mat-stroked-button color="primary" routerLink="/admin/candidatures">
+          <mat-icon>assignment_turned_in</mat-icon>
+          Gérer les candidatures
+        </button>
+        <button mat-stroked-button color="accent">
+          <mat-icon>rate_review</mat-icon>
+          Évaluer en attente
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

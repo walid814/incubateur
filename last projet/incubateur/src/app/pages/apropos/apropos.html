@@ -1,0 +1,137 @@
+﻿<div class="apropos-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>À Propos de Notre Mission</h1>
+      <p class="hero-subtitle">
+        Nous créons un écosystème solidaire pour transformer l'entrepreneuriat dans les quartiers populaires
+      </p>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-content">
+        <div class="story-text">
+          <h2>Notre Histoire</h2>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <h2>Notre Impact en Chiffres</h2>
+      <div class="stats-grid">
+        <div class="stat-card" *ngFor="let stat of stats">
+          <mat-icon class="stat-icon">{{stat.icon}}</mat-icon>
+          <span class="stat-number">{{stat.number}}</span>
+          <span class="stat-label">{{stat.label}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values-section">
+    <div class="container">
+      <h2>Nos Valeurs</h2>
+      <p class="section-subtitle">
+        Les principes qui guident notre action quotidienne
+      </p>
+      
+      <div class="values-grid">
+        <mat-card *ngFor="let value of values" class="value-card">
+          <mat-card-content>
+            <div class="value-icon">
+              <mat-icon>{{value.icon}}</mat-icon>
+            </div>
+            <h3>{{value.title}}</h3>
+            <p>{{value.description}}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <!-- <section class="team-section">
+    <div class="container">
+      <h2>Notre Équipe</h2>
+      <p class="section-subtitle">
+        Des experts passionnés au service de votre réussite
+      </p>
+      
+      <div class="team-grid">
+        <mat-card *ngFor="let member of team" class="team-card">
+          <mat-card-content>
+            <div class="member-avatar">
+              <mat-icon>{{member.image}}</mat-icon>
+            </div>
+            <h3>{{member.name}}</h3>
+            <h4>{{member.role}}</h4>
+            <p>{{member.description}}</p>
+            <button mat-icon-button color="primary">
+              <mat-icon>business</mat-icon>
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+ -->
+  <!-- Testimonials Section -->
+   <!--
+  <section class="testimonials-section">
+    <div class="container">
+      <h2>Ils Témoignent</h2>
+      <p class="section-subtitle">
+        La parole aux entrepreneurs accompagnés
+      </p>
+      
+      <div class="testimonials-grid">
+        <mat-card *ngFor="let testimonial of testimonials" class="testimonial-card">
+          <mat-card-content>
+            <div class="quote-icon">
+              <mat-icon>format_quote</mat-icon>
+            </div>
+            <p class="testimonial-text">"{{testimonial.quote}}"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <mat-icon>{{testimonial.image}}</mat-icon>
+              </div>
+              <div class="author-info">
+                <h4>{{testimonial.name}}</h4>
+                <span>{{testimonial.project}}</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+-->
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Rejoignez le Mouvement</h2>
+      <p>Devenez acteur du changement dans votre territoire</p>
+      
+      <div class="cta-buttons">
+        <button mat-raised-button color="primary" routerLink="/candidature" class="cta-button">
+          <mat-icon>flight_takeoff</mat-icon>
+          Candidater maintenant
+        </button>
+        
+        <button mat-button color="primary" routerLink="/contact" class="secondary-button">
+          <mat-icon>contact_support</mat-icon>
+          Nous contacter
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+

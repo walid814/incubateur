@@ -1,0 +1,206 @@
+﻿<mat-toolbar color="primary">
+  <!-- Desktop Navigation -->
+  <div class="desktop-nav" *ngIf="!(isHandset$ | async)">
+    
+    <!-- Barre principale avec logo, navigation et authentification -->
+    <div class="toolbar-content">
+      <div class="main-nav-row">
+        <!-- Logo -->
+        <div class="brand">
+          <span class="brand-text">F.A.T.E</span>
+        </div>
+
+        <!-- Navigation principale -->
+        <div class="nav-links">
+          <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Accueil</button>
+          <button mat-button routerLink="/apropos" routerLinkActive="active">À propos</button>
+          <button mat-button routerLink="/ressources" routerLinkActive="active">Ressources</button>
+          <button mat-button routerLink="/partenaires" routerLinkActive="active">Partenaires</button>
+          <button mat-button routerLink="/faq" routerLinkActive="active">FAQ</button>
+          <button mat-button routerLink="/contact" routerLinkActive="active">Contact</button>
+          
+          <!-- Navigation pour utilisateur connecté -->
+          <button mat-button routerLink="/dashboard" routerLinkActive="active" *ngIf="isAuthenticated()">Dashboard</button>
+          
+          <!-- Boutons admin -->
+          <ng-container *ngIf="isAuthenticated() && getCurrentUser()?.role === 'ADMIN'">
+            <!--<button mat-button routerLink="/utilisateurs">Utilisateurs</button> -->
+          </ng-container>
+        </div>
+
+        <!-- Section authentification -->
+        <div class="auth-section">
+          <!-- Utilisateur non connecté -->
+          <div *ngIf="!isAuthenticated()" class="auth-buttons">
+            <button mat-button routerLink="/connexion" routerLinkActive="active-auth" class="login-btn">
+              <mat-icon>person</mat-icon>
+              Connexion
+            </button>
+            <a class="inscription-btn" routerLink="/candidature" routerLinkActive="active-auth">
+              <mat-icon>flight_takeoff</mat-icon>
+              S'inscrire
+            </a>
+          </div>
+          
+          <!-- Utilisateur connecté -->
+          <div *ngIf="isAuthenticated()" class="user-menu">
+            <button class="user-avatar-navbar" 
+                    [matTooltip]="getCurrentUser()?.firstname + ' ' + getCurrentUser()?.lastname"
+                    [matMenuTriggerFor]="userMenuNavbar"
+                    mat-button>
+              <span class="avatar-initials-navbar">
+                {{getInitials()}}
+              </span>
+            </button>
+            
+            <!-- Menu déroulant utilisateur -->
+            <mat-menu #userMenuNavbar="matMenu" class="user-dropdown-menu-navbar">
+              <button mat-menu-item routerLink="/dashboard">
+                <mat-icon>dashboard</mat-icon>
+                <span>Dashboard</span>
+              </button>
+              <button mat-menu-item routerLink="/profil">
+                <mat-icon>person</mat-icon>
+                <span>Profil</span>
+              </button>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Déconnexion</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barre de recherche (uniquement si utilisateur non connecté) -->
+     <!--
+    <div class="search-bar-container" *ngIf="!isAuthenticated()">
+      <div class="search-bar-content">
+        <div class="search-bar">
+          <div class="search-wrapper">
+            <mat-form-field appearance="outline" class="search-field">
+              <input matInput 
+                     type="text" 
+                     placeholder="Rechercher des projets, ressources..."
+                     class="search-input"
+                     (keydown.enter)="onSearch()"
+                     [(ngModel)]="searchQuery"
+              />
+            </mat-form-field>
+            <button mat-icon-button class="search-btn" aria-label="Rechercher" (click)="onSearch()">
+              <mat-icon class="search-icon-left">search</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+  </div>
+ 
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" *ngIf="isHandset$ | async">
+    <div class="brand">
+      <span class="brand-text">F.A.T.E</span>
+    </div>
+
+    <!-- Utilisateur connecté sur mobile -->
+    <div *ngIf="isAuthenticated()" class="mobile-user-info">
+      <div class="user-avatar-mobile" 
+           [matTooltip]="getCurrentUser()?.firstname + ' ' + getCurrentUser()?.lastname">
+        <span class="avatar-initials-mobile">
+          {{getInitials()}}
+        </span>
+      </div>
+    </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="mobileMenu" aria-label="Menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-menu #mobileMenu="matMenu">
+      <button mat-menu-item routerLink="/" routerLinkActive="active-mobile" [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>home</mat-icon>
+        <span>Accueil</span>
+      </button>
+
+      <button mat-menu-item routerLink="/apropos" routerLinkActive="active-mobile">
+        <mat-icon>info</mat-icon>
+        <span>À propos</span>
+      </button>
+
+      <button mat-menu-item routerLink="/ressources" routerLinkActive="active-mobile">
+        <mat-icon>menu_book</mat-icon>
+        <span>Ressources</span>
+      </button>
+
+      <button mat-menu-item routerLink="/partenaires" routerLinkActive="active-mobile">
+        <mat-icon>volunteer_activism</mat-icon>
+        <span>Partenaires</span>
+      </button>
+
+      <button mat-menu-item routerLink="/faq" routerLinkActive="active-mobile">
+        <mat-icon>help_center</mat-icon>
+        <span>FAQ</span>
+      </button>
+
+      <button mat-menu-item routerLink="/contact" routerLinkActive="active-mobile">
+        <mat-icon>contact_support</mat-icon>
+        <span>Contact</span>
+      </button>
+      
+      <!-- Dashboard pour utilisateur connecté -->
+      <button mat-menu-item routerLink="/dashboard" routerLinkActive="active-mobile" *ngIf="isAuthenticated()">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </button>
+      
+      <!-- Boutons admin sur mobile -->
+      <ng-container *ngIf="isAuthenticated() && getCurrentUser()?.role === 'ADMIN'">
+        <button mat-menu-item routerLink="/utilisateurs" routerLinkActive="active-mobile">
+          <mat-icon>groups_2</mat-icon>
+          <span>Utilisateurs</span>
+        </button>
+        <button mat-menu-item routerLink="/profil" routerLinkActive="active-mobile">
+          <mat-icon>account_circle</mat-icon>
+          <span>Profil</span>
+        </button>
+      </ng-container>
+      
+      <mat-divider></mat-divider>
+      
+      <!-- Utilisateur non connecté -->
+      <div *ngIf="!isAuthenticated()">
+        <button mat-menu-item routerLink="/connexion" routerLinkActive="active-mobile">
+          <mat-icon>login</mat-icon>
+          <span>Connexion</span>
+        </button>
+        <button mat-menu-item routerLink="/candidature" routerLinkActive="active-mobile">
+          <mat-icon>person_add</mat-icon>
+          <span>Candidater</span>
+        </button>
+      </div>
+      
+      <!-- Utilisateur connecté -->
+      <div *ngIf="isAuthenticated()">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<!-- Bouton retour en haut -->
+<button 
+  mat-fab 
+  class="scroll-to-top-btn" 
+  [class.visible]="showScrollToTop"
+  (click)="scrollToTop()"
+  [matTooltip]="'Retour en haut'"
+  matTooltipPosition="left">
+  <mat-icon>keyboard_arrow_up</mat-icon>
+</button>
+

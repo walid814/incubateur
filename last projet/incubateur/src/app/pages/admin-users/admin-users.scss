@@ -1,0 +1,327 @@
+.admin-users-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 80px auto 0; // Ajout d'une marge supérieure pour éviter le masquage par la navbar
+  min-height: calc(100vh - 80px); // Hauteur minimale pour prendre en compte la navbar
+}
+
+/* En-tête */
+.users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+
+  .header-title {
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 8px 0;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+
+      mat-icon {
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+        color: var(--jaune-primary);
+      }
+    }
+
+    p {
+      margin: 0;
+      color: var(--text-medium);
+      font-size: 1.1rem;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 12px;
+  }
+}
+
+/* Statistiques */
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+
+  .stat-card {
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    transition: var(--transition);
+
+    &:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .stat-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      mat-icon {
+        font-size: 2.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      .stat-info {
+        display: flex;
+        flex-direction: column;
+
+        .stat-number {
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--text-dark);
+          line-height: 1;
+        }
+
+        .stat-label {
+          font-size: 0.9rem;
+          color: var(--text-medium);
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+/* Filtres */
+.filters-card {
+  margin-bottom: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px 0;
+    color: var(--text-dark);
+    font-size: 1.2rem;
+
+    mat-icon {
+      color: var(--jaune-primary);
+    }
+  }
+
+  .filters-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 16px;
+    align-items: end;
+
+    .search-field {
+      min-width: 300px;
+    }
+
+    .clear-filters-btn {
+      height: 56px;
+      min-width: 120px;
+    }
+  }
+}
+
+/* Tableau */
+.table-card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      color: var(--text-dark);
+
+      mat-icon {
+        color: var(--jaune-primary);
+      }
+    }
+  }
+
+  .table-container {
+    overflow-x: auto;
+    border-radius: var(--border-radius);
+    border: 1px solid #e1e5e9;
+
+    .users-table {
+      width: 100%;
+      background: white;
+
+      th {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        font-weight: 600;
+        color: var(--text-dark);
+        border-bottom: 2px solid var(--jaune-primary);
+        padding: 16px 12px;
+      }
+
+      td {
+        padding: 16px 12px;
+        border-bottom: 1px solid #f1f3f5;
+        vertical-align: middle;
+      }
+
+      tr:hover {
+        background-color: rgba(255, 215, 0, 0.05);
+      }
+
+      .email-link {
+        color: var(--bleu-primary);
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .mat-mdc-chip {
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .danger-item {
+        color: var(--danger-color) !important;
+        
+        mat-icon {
+          color: var(--danger-color) !important;
+        }
+      }
+    }
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-medium);
+
+    mat-icon {
+      font-size: 4rem;
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+}
+
+/* Pagination */
+.mat-mdc-paginator {
+  border-top: 1px solid #e1e5e9;
+  background: #f8f9fa;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .filters-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    .search-field {
+      grid-column: 1 / -1;
+      min-width: auto;
+    }
+
+    .clear-filters-btn {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-users-container {
+    padding: 16px;
+  }
+
+  .users-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+
+    .header-actions {
+      justify-content: center;
+    }
+  }
+
+  .stats-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-container {
+    font-size: 0.9rem;
+
+    th, td {
+      padding: 12px 8px;
+    }
+  }
+
+  .users-table {
+    .mat-mdc-chip {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+/* Animation des cartes */
+.stat-card,
+.filters-card,
+.table-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles pour les chips de statut */
+.mat-mdc-chip.mat-primary {
+  background-color: rgba(0, 102, 204, 0.1) !important;
+  color: var(--bleu-primary) !important;
+}
+
+.mat-mdc-chip.mat-accent {
+  background-color: rgba(255, 215, 0, 0.2) !important;
+  color: var(--jaune-dark) !important;
+}
+
+.mat-mdc-chip.mat-warn {
+  background-color: rgba(220, 53, 69, 0.1) !important;
+  color: var(--danger-color) !important;
+}

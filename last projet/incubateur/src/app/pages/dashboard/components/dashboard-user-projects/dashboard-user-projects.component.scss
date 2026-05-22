@@ -1,0 +1,241 @@
+:host {
+  display: block;
+}
+
+/* Bloc projets: liste, progression et financement */
+.dashboard-projects-financing {
+  .projects-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #111111;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+
+    mat-icon {
+      color: #0b63ce;
+    }
+
+    .project-count {
+      margin-left: auto;
+    }
+  }
+
+  .no-projects {
+    text-align: center;
+    padding: 40px 20px;
+
+    .large-icon {
+      font-size: 64px;
+      height: 64px;
+      width: 64px;
+      margin-bottom: 16px;
+      color: #0b63ce;
+    }
+
+    p {
+      color: #4b5563;
+      margin-bottom: 20px;
+    }
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 12px;
+  }
+
+  .project-card {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+
+      h3 {
+        margin: 0 0 8px;
+        color: #111111;
+      }
+
+      .project-category {
+        background: #0b63ce;
+        color: #ffffff;
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 0.8rem;
+      }
+    }
+
+    .project-description p {
+      color: #4b5563;
+      margin: 0 0 12px;
+    }
+
+    .project-progress {
+      margin-bottom: 16px;
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        color: #4b5563;
+        font-size: 0.9rem;
+      }
+    }
+
+    .project-financing {
+      background: #ffffff;
+      border: 1px solid #e3e6ea;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+
+      .financing-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        h4 {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0;
+          color: #111111;
+        }
+      }
+
+      .financing-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eceff3;
+
+        &.highlight {
+          background: rgba(11, 99, 206, 0.08);
+          border: none;
+          border-radius: 8px;
+          padding: 10px;
+          margin-top: 6px;
+        }
+
+        .financing-label {
+          color: #4b5563;
+        }
+
+        .financing-amount {
+          font-weight: 600;
+
+          &.total,
+          &.allocated,
+          &.remaining {
+            color: #0b63ce;
+          }
+        }
+      }
+
+      .funding-sources {
+        margin-top: 16px;
+
+        h5 {
+          color: #111111;
+          margin: 0 0 8px;
+        }
+
+        .funding-source-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .funding-source-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid #e3e6ea;
+          border-radius: 8px;
+          padding: 8px;
+        }
+
+        .source-info {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .source-amount {
+          color: #0b63ce;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .project-team {
+      margin-bottom: 14px;
+
+      h5 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #111111;
+        margin: 0 0 8px;
+      }
+
+      .team-members {
+        display: flex;
+        gap: 8px;
+      }
+
+      .member-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #0b63ce;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+    }
+
+    .project-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-projects-financing .project-card {
+    .project-header {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .project-actions {
+      flex-direction: column;
+    }
+
+    .financing-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  }
+}

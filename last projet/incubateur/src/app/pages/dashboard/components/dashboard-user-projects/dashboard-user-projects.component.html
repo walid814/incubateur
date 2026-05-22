@@ -1,0 +1,136 @@
+<section class="dashboard-projects-financing">
+  <div class="projects-section-title">
+      <mat-icon>flight_takeoff</mat-icon>
+      Projets en cours et financements alloués
+      <span class="project-count" [matBadge]="activeProjects.length" matBadgeColor="accent"></span>
+  </div>
+
+  <div *ngIf="activeProjects.length === 0" class="no-projects">
+    <mat-icon class="large-icon" color="primary">assignment</mat-icon>
+    <p>Aucun projet en cours.<br>Commencez par soumettre votre première idée !</p>
+    <button mat-raised-button color="primary" routerLink="/candidature">
+      <mat-icon>add</mat-icon>
+      Créer un projet
+    </button>
+  </div>
+
+  <div *ngIf="activeProjects.length > 0" class="projects-list">
+    <div *ngFor="let project of activeProjects" class="project-card" (click)="navigateToProjectRequested.emit(project.id)">
+          <div class="project-header">
+            <div class="project-title-section">
+              <h3>{{ project.name }}</h3>
+              <mat-chip-set>
+                <mat-chip [color]="getStatusColor(project.status)" selected>
+                  {{ getStatusLabel(project.status) }}
+                </mat-chip>
+                <mat-chip [color]="getPriorityColor(project.priority)" selected>
+                  <mat-icon [matTooltip]="'Priorité: ' + project.priority">{{ getPriorityIcon(project.priority) }}</mat-icon>
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+            <div class="project-category">{{ project.category }}</div>
+          </div>
+
+          <div class="project-description">
+            <p>{{ project.description }}</p>
+          </div>
+
+          <div class="project-tags">
+            <mat-chip-set>
+              <mat-chip *ngFor="let tag of project.tags">{{ tag }}</mat-chip>
+            </mat-chip-set>
+          </div>
+
+          <div class="project-progress">
+            <div class="progress-header">
+              <span>Avancement: {{ project.progress }}%</span>
+              <span *ngIf="getNextMilestone(project) as milestone" class="next-milestone">
+                Prochaine étape: {{ milestone.title }}
+                <mat-icon *ngIf="getDaysUntilDeadline(milestone.dueDate) <= 7" color="warn" matTooltip="Échéance proche !">warning</mat-icon>
+              </span>
+            </div>
+            <mat-progress-bar mode="determinate" [value]="project.progress"></mat-progress-bar>
+          </div>
+
+          <div class="project-financing">
+            <div class="financing-header">
+              <h4>
+                <mat-icon>account_balance</mat-icon>
+                Financement
+              </h4>
+              <button mat-icon-button (click)="navigateToFinancingRequested.emit(); $event.stopPropagation()" matTooltip="Détails du financement">
+                <mat-icon>info</mat-icon>
+              </button>
+            </div>
+
+            <div class="financing-details">
+              <div class="financing-row">
+                <span class="financing-label">Budget total:</span>
+                <span class="financing-amount total">{{ formatCurrency(project.budget) }}</span>
+              </div>
+              <div class="financing-row">
+                <span class="financing-label">Financement alloué:</span>
+                <span class="financing-amount allocated">{{ formatCurrency(project.fundingAllocated) }}</span>
+              </div>
+              <div class="financing-row">
+                <span class="financing-label">Utilisé:</span>
+                <span class="financing-amount used">{{ formatCurrency(project.fundingUsed) }}</span>
+              </div>
+              <div class="financing-row highlight">
+                <span class="financing-label">Restant disponible:</span>
+                <span class="financing-amount remaining">{{ formatCurrency(project.fundingRemaining) }}</span>
+              </div>
+            </div>
+
+            <div class="funding-utilization">
+              <div class="utilization-header">
+                <span>Utilisation: {{ getFundingUtilizationPercentage(project) }}%</span>
+                <span class="utilization-amount">{{ formatCurrency(project.fundingUsed) }} / {{ formatCurrency(project.fundingAllocated) }}</span>
+              </div>
+              <mat-progress-bar mode="determinate" [value]="getFundingUtilizationPercentage(project)" [color]="getFundingUtilizationPercentage(project) > 80 ? 'warn' : 'primary'"></mat-progress-bar>
+            </div>
+
+            <div *ngIf="getProjectFinancingById(project.id) as financing" class="funding-sources">
+              <h5>Sources de financement</h5>
+              <div class="funding-source-list">
+                <div *ngFor="let source of financing.fundingSources" class="funding-source-item">
+                  <div class="source-info">
+                    <span class="source-name">{{ source.name }}</span>
+                    <mat-chip [color]="source.status === 'obtenu' ? 'accent' : 'warn'" selected>
+                      {{ source.status === 'obtenu' ? 'Obtenu' : source.status === 'en_cours' ? 'En cours' : 'En attente' }}
+                    </mat-chip>
+                  </div>
+                  <div class="source-amount">{{ formatCurrency(source.amount) }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-team">
+            <h5>
+              <mat-icon>groups_2</mat-icon>
+              Équipe ({{ project.team.length }})
+            </h5>
+            <div class="team-members">
+              <div *ngFor="let member of project.team.slice(0, 3)" class="team-member" [matTooltip]="member.name + ' - ' + member.role">
+                <div class="member-avatar">{{ member.name.charAt(0) }}</div>
+              </div>
+              <div *ngIf="project.team.length > 3" class="team-member more" [matTooltip]="'+' + (project.team.length - 3) + ' autres membres'">
+                <div class="member-avatar">+{{ project.team.length - 3 }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-actions">
+            <button mat-raised-button color="primary" (click)="navigateToProjectRequested.emit(project.id); $event.stopPropagation()">
+              <mat-icon>visibility</mat-icon>
+              Voir détails
+            </button>
+            <button mat-button color="accent" (click)="navigateToFinancingRequested.emit(); $event.stopPropagation()">
+              <mat-icon>account_balance</mat-icon>
+              Gestion financement
+            </button>
+          </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,492 @@
+// Variables de couleurs modernes - Thème jaune
+$jaune-primary: #FFD700;
+$jaune-light: #FFED4E;
+$jaune-dark: #F59E0B;
+$jaune-secondary: #FCD34D;
+$bleu-primary: #0066cc;
+$bleu-dark: #004499;
+$text-dark: #2c3e50;
+$text-light: #6c757d;
+$bg-light: #f8f9fa;
+$white: #ffffff;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$border-color: #e1e5e9;
+
+.financement-container {
+  padding: 20px;
+  background-color: $bg-light;
+  min-height: 100vh;
+
+  .financement-header {
+    margin-bottom: 30px;
+
+    .header-nav {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+
+      .header-title {
+        h1 {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin: 0 0 8px 0;
+          color: var(--primary-blue);
+          font-size: 2rem;
+          font-weight: 600;
+        }
+
+        p {
+          color: var(--text-secondary);
+          margin: 0;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+
+  .funding-stats {
+    margin-bottom: 30px;
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+
+      .stat-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(30, 122, 160, 0.1);
+        }
+
+        .stat-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 50px;
+          height: 50px;
+          background: rgba(30, 122, 160, 0.1);
+          border-radius: 50%;
+
+          mat-icon {
+            font-size: 24px;
+            height: 24px;
+            width: 24px;
+          }
+        }
+
+        .stat-content {
+          .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 4px;
+          }
+
+          .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+
+    .funding-breakdown {
+      h3 {
+        color: var(--primary-blue);
+        margin: 0 0 20px 0;
+        font-size: 1.3rem;
+      }
+
+      .breakdown-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+
+        .breakdown-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 15px;
+          background: rgba(30, 122, 160, 0.05);
+          border-radius: 8px;
+          border: 1px solid rgba(30, 122, 160, 0.1);
+
+          mat-icon {
+            color: var(--primary-blue);
+          }
+
+          .breakdown-label {
+            flex: 1;
+            font-weight: 500;
+            color: var(--text-primary);
+          }
+
+          .breakdown-amount {
+            font-weight: bold;
+            color: var(--primary-blue);
+          }
+        }
+      }
+    }
+  }
+
+  .funding-tabs {
+    .tab-content {
+      padding: 20px 0;
+    }
+  }
+
+  .project-financing-card {
+    margin-bottom: 30px;
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      h2 {
+        color: var(--primary-blue);
+        margin: 0;
+        font-size: 1.5rem;
+      }
+    }
+
+    .financing-summary {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 25px;
+      padding: 15px;
+      background: rgba(30, 122, 160, 0.05);
+      border-radius: 8px;
+
+      .summary-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .summary-label {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+        }
+
+        .summary-value {
+          font-weight: bold;
+          color: var(--primary-blue);
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .project-funding-sources {
+      margin-bottom: 25px;
+
+      h4 {
+        color: var(--primary-blue);
+        margin: 0 0 15px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .funding-sources-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .funding-source-card {
+          padding: 20px;
+          background: white;
+          border: 1px solid #e9ecef;
+          border-radius: 12px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(30, 122, 160, 0.1);
+          }
+
+          .source-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+
+            .source-info {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+
+              mat-icon {
+                color: var(--primary-blue);
+              }
+
+              .source-details {
+                h5 {
+                  margin: 0 0 4px 0;
+                  color: var(--text-primary);
+                  font-size: 1.1rem;
+                }
+
+                .source-type {
+                  color: var(--text-secondary);
+                  font-size: 0.9rem;
+                }
+              }
+            }
+
+            .source-status-amount {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              gap: 8px;
+
+              .source-amount {
+                font-weight: bold;
+                color: var(--primary-blue);
+                font-size: 1.2rem;
+              }
+            }
+          }
+
+          .source-dates {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+
+            .date-item {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              color: var(--text-secondary);
+              font-size: 0.9rem;
+
+              mat-icon {
+                font-size: 16px;
+                height: 16px;
+                width: 16px;
+              }
+            }
+          }
+
+          .source-conditions {
+            h6 {
+              margin: 0 0 8px 0;
+              color: var(--text-primary);
+              font-size: 0.95rem;
+            }
+
+            mat-chip {
+              margin-right: 8px;
+              margin-bottom: 4px;
+            }
+          }
+        }
+      }
+    }
+
+    .project-expenses {
+      h4 {
+        color: var(--primary-blue);
+        margin: 0 0 15px 0;
+      }
+
+      .expenses-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .expense-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px;
+          background: rgba(248, 249, 250, 0.8);
+          border-radius: 8px;
+          border: 1px solid #e9ecef;
+
+          .expense-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .expense-category {
+              font-weight: 500;
+              color: var(--primary-blue);
+              font-size: 0.9rem;
+            }
+
+            .expense-description {
+              color: var(--text-secondary);
+              font-size: 0.85rem;
+            }
+          }
+
+          .expense-details {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .expense-amount {
+              font-weight: bold;
+              color: var(--text-primary);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .funding-table {
+    width: 100%;
+    
+    .source-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      mat-icon {
+        color: var(--primary-blue);
+      }
+
+      .source-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .source-name {
+          font-weight: 500;
+          color: var(--text-primary);
+        }
+
+        .project-name {
+          color: var(--text-secondary);
+          font-size: 0.85rem;
+        }
+      }
+    }
+
+    .amount-cell {
+      font-weight: bold;
+      color: var(--primary-blue);
+    }
+
+    th {
+      background: rgba(30, 122, 160, 0.05);
+      color: var(--primary-blue);
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(248, 249, 250, 0.5);
+    }
+
+    tr:hover {
+      background: rgba(30, 122, 160, 0.05);
+    }
+  }
+
+  .opportunities-section {
+    .opportunities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+
+      .opportunity-card {
+        padding: 25px;
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        text-align: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(30, 122, 160, 0.15);
+          border-color: var(--primary-blue);
+        }
+
+        mat-icon {
+          font-size: 48px;
+          height: 48px;
+          width: 48px;
+          margin-bottom: 15px;
+        }
+
+        h4 {
+          color: var(--primary-blue);
+          margin: 0 0 10px 0;
+          font-size: 1.2rem;
+        }
+
+        p {
+          color: var(--text-secondary);
+          margin: 0 0 20px 0;
+          line-height: 1.5;
+        }
+
+        button {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .financement-container {
+    padding: 15px;
+
+    .stats-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .breakdown-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .project-header {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 15px;
+    }
+
+    .financing-summary {
+      flex-direction: column !important;
+      gap: 15px !important;
+    }
+
+    .source-header {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 15px;
+
+      .source-status-amount {
+        align-items: flex-start !important;
+      }
+    }
+
+    .opportunities-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .funding-table {
+      font-size: 0.85rem;
+    }
+  }
+}

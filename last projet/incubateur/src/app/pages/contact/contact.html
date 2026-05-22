@@ -1,0 +1,188 @@
+<div class="contact-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Contactez-nous</h1>
+      <p class="hero-subtitle">
+        Notre équipe est à votre écoute pour répondre à toutes vos questions 
+        et vous accompagner dans votre projet entrepreneurial
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form and Info -->
+  <section class="contact-main-section">
+    <div class="container">
+      <div class="contact-content">
+        
+        <!-- Contact Form -->
+        <div class="contact-form-container">
+          <mat-card class="contact-form-card">
+            <mat-card-header>
+              <div class="form-header">
+                <mat-icon class="form-icon">mark_email_unread</mat-icon>
+                <div>
+                  <mat-card-title>Envoyez-nous un message</mat-card-title>
+                  <mat-card-subtitle>Nous vous répondons sous 24h</mat-card-subtitle>
+                </div>
+              </div>
+            </mat-card-header>
+            
+            <mat-card-content>
+              <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput formControlName="prenom" required>
+                    <mat-error>{{getFieldError('prenom')}}</mat-error>
+                  </mat-form-field>
+                  
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="nom" required>
+                    <mat-error>{{getFieldError('nom')}}</mat-error>
+                  </mat-form-field>
+                </div>
+                
+                <div class="form-row">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" required>
+                    <mat-error>{{getFieldError('email')}}</mat-error>
+                  </mat-form-field>
+                  
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Téléphone (optionnel)</mat-label>
+                    <input matInput type="tel" formControlName="telephone">
+                  </mat-form-field>
+                </div>
+                
+                <mat-form-field appearance="outline" class="form-field-full">
+                  <mat-label>Sujet de votre demande</mat-label>
+                  <mat-select formControlName="sujet" required>
+                    <mat-option *ngFor="let reason of contactReasons" [value]="reason.value">
+                      {{reason.label}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>{{getFieldError('sujet')}}</mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="form-field-full">
+                  <mat-label>Votre message</mat-label>
+                  <textarea matInput 
+                           formControlName="message" 
+                           rows="6" 
+                           placeholder="Décrivez votre demande en détail..."
+                           required></textarea>
+                  <mat-error>{{getFieldError('message')}}</mat-error>
+                </mat-form-field>
+                
+                <button mat-raised-button 
+                        color="primary" 
+                        type="submit" 
+                        [disabled]="!contactForm.valid"
+                        class="submit-button">
+                  <mat-icon>send</mat-icon>
+                  Envoyer le message
+                </button>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info-container">
+          
+          <!-- Office Locations -->
+          <div class="contact-locations">
+            <mat-card *ngFor="let office of contactInfo" class="location-card">
+              <mat-card-content>
+                <div class="location-header">
+                  <mat-icon class="location-icon">{{office.icon}}</mat-icon>
+                  <h3>{{office.title}}</h3>
+                </div>
+                
+                <div class="location-details">
+                  <div class="location-item">
+                    <mat-icon>home</mat-icon>
+                    <div>
+                      <p>{{office.address}}</p>
+                      <p>{{office.city}}</p>
+                    </div>
+                  </div>
+                  
+                  <div class="location-item">
+                    <mat-icon>schedule</mat-icon>
+                    <p>{{office.schedule}}</p>
+                  </div>
+                  
+                  <div class="location-item">
+                    <mat-icon>phone</mat-icon>
+                    <p>{{office.phone}}</p>
+                  </div>
+                  
+                  <div class="location-item">
+                    <mat-icon>email</mat-icon>
+                    <p>{{office.email}}</p>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Quick Contact -->
+          <mat-card class="quick-contact-card">
+            <mat-card-content>
+              <h3>Contactez-nous rapidement</h3>
+              
+              <div class="quick-contact-options">
+                <a href="tel:+33123456789" class="quick-contact-item">
+                  <mat-icon>phone</mat-icon>
+                  <div>
+                    <strong>Téléphone</strong>
+                    <span>01 23 45 67 89</span>
+                  </div>
+                </a>
+                
+                <a href="mailto:contact@incubateur-solidaire.fr" class="quick-contact-item">
+                  <mat-icon>email</mat-icon>
+                  <div>
+                    <strong>Email</strong>
+                    <span>contact&#64;incubateur-solidaire.fr</span>
+                  </div>
+                </a>
+                
+                <div class="quick-contact-item">
+                  <mat-icon>chat</mat-icon>
+                  <div>
+                    <strong>Chat en ligne</strong>
+                    <span>Lun-Ven 9h-17h</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Social Media
+          <mat-card class="social-card">
+            <mat-card-content>
+              <h3>Suivez-nous</h3>
+              <p>Restez informé de nos actualités et événements</p>
+              
+              <div class="social-links">
+                <a *ngFor="let social of socialLinks" 
+                   [href]="social.url" 
+                   class="social-link"
+                   [style.color]="social.color">
+                  <mat-icon>{{social.icon}}</mat-icon>
+                  <span>{{social.name}}</span>
+                </a>
+              </div>
+            </mat-card-content>
+          </mat-card> -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+

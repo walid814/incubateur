@@ -1,0 +1,81 @@
+<div class="dashboard-header-adecco">
+  <div>
+    <div class="user-welcome-section">
+      <div class="user-avatar-container">
+        <button class="user-avatar"
+                [matTooltip]="currentUser?.firstname + ' ' + currentUser?.lastname"
+                [matMenuTriggerFor]="userMenu"
+                mat-button>
+          <span class="avatar-initials">{{ initials }}</span>
+        </button>
+
+        <mat-menu #userMenu="matMenu" class="user-dropdown-menu">
+          <button mat-menu-item routerLink="/profil">
+            <mat-icon>person</mat-icon>
+            <span>Profil</span>
+          </button>
+          <button mat-menu-item (click)="logoutRequested.emit()">
+            <mat-icon>logout</mat-icon>
+            <span>Déconnexion</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      <div class="welcome-text">
+        <h1>Bonjour,</h1>
+        <h2>{{ currentUser?.firstname }} {{ currentUser?.lastname }}</h2>
+        <span class="user-role-badge" [ngClass]="{'admin-badge': isAdmin, 'user-badge': isUser}">
+          {{ isAdmin ? 'Administrateur' : 'Entrepreneur' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="user-progress-bar" *ngIf="isUser">
+      <mat-progress-bar mode="determinate" [value]="progressPercentage"></mat-progress-bar>
+    </div>
+    <p>{{ welcomeMessage }}</p>
+
+    <div class="role-specific-actions">
+      <button mat-raised-button color="primary" *ngIf="isAdmin" routerLink="/admin/users">
+        <mat-icon>groups_2</mat-icon>
+        Gérer les utilisateurs
+      </button>
+      <button mat-raised-button color="accent" *ngIf="isAdmin" routerLink="/admin/projects">
+        <mat-icon>dashboard</mat-icon>
+        Voir tous les projets
+      </button>
+      <button mat-raised-button color="warn" *ngIf="isUser">
+        <mat-icon>flight_takeoff</mat-icon>
+        Découvrir les opportunités
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard-actions">
+    <ng-container *ngIf="isAdmin">
+      <button mat-raised-button color="primary">
+        <mat-icon>analytics</mat-icon>
+        Rapports de la plateforme
+      </button>
+      <button mat-raised-button color="warn">
+        <mat-icon>support_agent</mat-icon>
+        Support utilisateurs
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="isUser">
+      <button mat-raised-button color="primary">
+        <mat-icon>cloud_upload</mat-icon>
+        Soumettre un business plan
+      </button>
+      <button mat-raised-button color="accent">
+        <mat-icon>send</mat-icon>
+        Envoyer un document
+      </button>
+      <button mat-raised-button color="warn">
+        <mat-icon>verified_user</mat-icon>
+        Demander un accompagnement
+      </button>
+    </ng-container>
+  </div>
+</div>

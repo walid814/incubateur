@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Backend Connectivity</title>
+</head>
+<body>
+    <h1>Test de Connexion Backend</h1>
+    <button onclick="testBackend()">Tester Backend Direct</button>
+    <button onclick="testProxy()">Tester via Proxy</button>
+    <div id="results"></div>
+
+    <script>
+        async function testBackend() {
+            const results = document.getElementById('results');
+            try {
+                const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'password123'
+                    })
+                });
+                results.innerHTML = `<p>Backend Direct: ${response.status} - ${response.statusText}</p>`;
+                const data = await response.text();
+                results.innerHTML += `<p>Response: ${data}</p>`;
+            } catch (error) {
+                results.innerHTML = `<p>Erreur Backend Direct: ${error.message}</p>`;
+            }
+        }
+
+        async function testProxy() {
+            const results = document.getElementById('results');
+            try {
+                const response = await fetch('/api/v1/auth/authenticate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'password123'
+                    })
+                });
+                results.innerHTML += `<p>Proxy: ${response.status} - ${response.statusText}</p>`;
+                const data = await response.text();
+                results.innerHTML += `<p>Response: ${data}</p>`;
+            } catch (error) {
+                results.innerHTML += `<p>Erreur Proxy: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

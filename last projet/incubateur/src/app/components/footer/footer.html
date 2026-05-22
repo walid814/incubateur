@@ -1,0 +1,108 @@
+<footer class="footer">
+  <div class="footer-content">
+    <div class="container">
+      
+      <!-- Main Footer Content -->
+      <div class="footer-main">
+        
+        <!-- Brand Section -->
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <!-- <mat-icon class="brand-icon">diversity_1</mat-icon> -->
+            <h3>F.A.T.E</h3>
+          </div>
+          <p class="brand-description">
+            Nous accompagnons l'entrepreneuriat dans les quartiers populaires 
+            pour créer un impact social durable et favoriser l'inclusion économique.
+          </p>
+          
+          <!-- Social Links -->
+          <div class="social-links">
+            <a *ngFor="let social of socialLinks" 
+               [href]="social.url" 
+               class="social-link"
+               [attr.aria-label]="social.name">
+              <mat-icon>{{social.icon}}</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4>Liens Rapides</h4>
+          <ul class="footer-links">
+            <li *ngFor="let link of quickLinks">
+              <a [routerLink]="link.route">{{link.label}}</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-section">
+          <h4>Nos Services</h4>
+          <ul class="footer-links">
+            <li *ngFor="let service of services">
+              <a [routerLink]="service.route">{{service.label}}</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <div class="contact-info">
+            <div class="contact-item">
+              <mat-icon>location_on</mat-icon>
+              <span>{{contactInfo.address}}</span>
+            </div>
+            
+            <div class="contact-item">
+              <mat-icon>phone</mat-icon>
+              <a [href]="'tel:' + contactInfo.phone">{{contactInfo.phone}}</a>
+            </div>
+            
+            <div class="contact-item">
+              <mat-icon>email</mat-icon>
+              <a [href]="'mailto:' + contactInfo.email">{{contactInfo.email}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div class="newsletter-section">
+        <div class="newsletter-content">
+          <div class="newsletter-text">
+            <h4>Restez informé</h4>
+            <p>Recevez nos actualités et découvrez les nouveaux projets accompagnés</p>
+          </div>
+          
+          <div class="newsletter-form">
+            <div class="email-input-group">
+              <input type="email" placeholder="Votre adresse email" class="email-input">
+              <button mat-raised-button color="accent" class="subscribe-btn">
+                <mat-icon>send</mat-icon>
+                S'abonner
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div class="bottom-content">
+          <div class="copyright">
+            <p>&copy; {{currentYear}} F.A.T.E. Tous droits réservés.</p>
+          </div>
+          
+          <div class="legal-links">
+            <a href="/mentions-legales">Mentions légales</a>
+            <a href="/politique-confidentialite">Politique de confidentialité</a>
+            <a href="/cookies">Gestion des cookies</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

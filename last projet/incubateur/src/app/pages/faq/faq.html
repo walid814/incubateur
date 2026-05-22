@@ -1,0 +1,138 @@
+<div class="faq-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Questions Fréquemment Posées</h1>
+      <p class="hero-subtitle">
+        Trouvez rapidement les réponses à vos questions sur notre accompagnement, 
+        nos financements et notre processus de sélection
+      </p>
+    </div>
+  </section>
+
+  <!-- Quick Actions -->
+  <section class="quick-actions-section">
+    <div class="container">
+      <div class="quick-actions-grid">
+        <mat-card *ngFor="let action of quickActions" class="action-card">
+          <mat-card-content>
+            <div class="action-icon" [ngClass]="'icon-' + action.color">
+              <mat-icon>{{action.icon}}</mat-icon>
+            </div>
+            <h3>{{action.title}}</h3>
+            <p>{{action.description}}</p>
+            <button mat-raised-button [color]="action.color" [routerLink]="action.link">
+              Accéder
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Categories -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-category" *ngFor="let category of faqCategories">
+        <div class="category-header">
+          <div class="category-icon">
+            <mat-icon>{{category.icon}}</mat-icon>
+          </div>
+          <h2>{{category.title}}</h2>
+        </div>
+        
+        <mat-accordion class="faq-accordion">
+          <mat-expansion-panel *ngFor="let faq of category.questions" class="faq-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon class="question-icon">help_center</mat-icon>
+                {{faq.question}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            
+            <div class="faq-answer">
+              <p>{{faq.answer}}</p>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="contact-cta-section">
+    <div class="container">
+      <mat-card class="cta-card">
+        <mat-card-content>
+          <div class="cta-content">
+            <div class="cta-text">
+              <h2>Vous ne trouvez pas la réponse à votre question ?</h2>
+              <p>
+                Notre équipe est à votre disposition pour répondre à toutes vos interrogations 
+                et vous accompagner dans votre démarche entrepreneuriale.
+              </p>
+            </div>
+            
+            <div class="cta-actions">
+              <button mat-raised-button color="primary" routerLink="/contact" class="contact-btn">
+                <mat-icon>contact_support</mat-icon>
+                Nous contacter
+              </button>
+              
+              <button mat-button color="primary" class="phone-btn">
+                <mat-icon>phone</mat-icon>
+                01 23 45 67 89
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Help Section -->
+  <section class="help-section">
+    <div class="container">
+      <h2>Ressources Utiles</h2>
+      
+      <div class="resources-grid">
+        <mat-card class="resource-card">
+          <mat-card-content>
+            <mat-icon class="resource-icon">description</mat-icon>
+            <h3>Guide du Candidat</h3>
+            <p>Téléchargez notre guide complet pour préparer votre candidature</p>
+            <button mat-button color="primary">
+              <mat-icon>download</mat-icon>
+              Télécharger
+            </button>
+          </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="resource-card">
+          <mat-card-content>
+            <mat-icon class="resource-icon">calendar_today</mat-icon>
+            <h3>Prochaines Sessions</h3>
+            <p>Consultez le calendrier des sessions d'information et ateliers</p>
+            <button mat-button color="primary">
+              <mat-icon>event</mat-icon>
+              Voir l'agenda
+            </button>
+          </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="resource-card">
+          <mat-card-content>
+            <mat-icon class="resource-icon">smart_display</mat-icon>
+            <h3>Témoignages Vidéo</h3>
+            <p>Découvrez les parcours de nos entrepreneurs accompagnés</p>
+            <button mat-button color="primary">
+              <mat-icon>play_circle</mat-icon>
+              Regarder
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+</div>
+

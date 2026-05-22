@@ -1,0 +1,541 @@
+// Variables de couleurs modernes - Thème jaune
+$jaune-primary: #FFD700;
+$jaune-light: #FFED4E;
+$jaune-dark: #F59E0B;
+$jaune-secondary: #FCD34D;
+$bleu-primary: #0066cc;
+$bleu-dark: #004499;
+$text-dark: #2c3e50;
+$text-light: #6c757d;
+$bg-light: #f8f9fa;
+$white: #ffffff;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$border-color: #e1e5e9;
+
+.apropos-container {
+  min-height: 100vh;
+}
+
+// Hero Section
+.hero-section {
+  background: linear-gradient(135deg, $bleu-primary 0%, $bleu-dark 100%);
+  color: $white;
+  padding: 80px 0 60px;
+  text-align: center;
+  
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+    
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.2;
+      
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+}
+
+// Story Section
+.story-section {
+  padding: 80px 0;
+  background: $white;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .story-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  
+  .story-text {
+    h2 {
+      color: $jaune-primary;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      font-weight: 600;
+    }
+    
+    h3 {
+      color: $text-dark;
+      font-size: 1.5rem;
+      margin: 32px 0 16px;
+      font-weight: 600;
+    }
+    
+    p {
+      color: $text-light;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+  }
+  
+  .story-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .large-icon {
+      font-size: 200px;
+      color: $jaune-primary;
+      opacity: 0.7;
+    }
+  }
+}
+
+// Stats Section
+.stats-section {
+  padding: 80px 0;
+  background: $bg-light;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+  
+  h2 {
+    color: $jaune-primary;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    font-weight: 600;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+  }
+  
+  .stat-card {
+    background: $white;
+    padding: 40px 24px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(30, 122, 160, 0.1);
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stat-icon {
+      font-size: 48px;
+      color: $jaune-primary;
+      margin-bottom: 20px;
+    }
+    
+    .stat-number {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: $jaune-primary;
+      margin-bottom: 8px;
+    }
+    
+    .stat-label {
+      color: $text-light;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+  }
+}
+
+// Values Section
+.values-section {
+  padding: 80px 0;
+  background: $white;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  h2 {
+    color: $jaune-primary;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+  
+  .section-subtitle {
+    text-align: center;
+    color: $text-light;
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+  }
+  
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+  }
+  
+  .value-card {
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(30, 122, 160, 0.1);
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+    
+    mat-card-content {
+      padding: 32px;
+      text-align: center;
+    }
+    
+    .value-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: rgba(0, 102, 204, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      
+      mat-icon {
+        font-size: 42px;
+        width: 42px;
+        height: 42px;
+        line-height: 42px;
+        color: $bleu-primary;
+        display: block;
+        overflow: visible;
+      }
+    }
+    
+    h3 {
+      color: $text-dark;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    
+    p {
+      color: $text-light;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Team Section
+.team-section {
+  padding: 80px 0;
+  background: $bg-light;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  h2 {
+    color: $jaune-primary;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+  
+  .section-subtitle {
+    text-align: center;
+    color: $text-light;
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+  }
+  
+  .team-card {
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(30, 122, 160, 0.1);
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+    
+    mat-card-content {
+      padding: 32px;
+      text-align: center;
+    }
+    
+    .member-avatar {
+      margin-bottom: 24px;
+      
+      mat-icon {
+        font-size: 80px;
+        color: $jaune-primary;
+        background: rgba(30, 122, 160, 0.1);
+        border-radius: 50%;
+        padding: 20px;
+      }
+    }
+    
+    h3 {
+      color: $text-dark;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    h4 {
+      color: $jaune-primary;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    
+    p {
+      color: $text-light;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+// Testimonials Section
+.testimonials-section {
+  padding: 80px 0;
+  background: $white;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  h2 {
+    color: $jaune-primary;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+  
+  .section-subtitle {
+    text-align: center;
+    color: $text-light;
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+  }
+  
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+  }
+  
+  .testimonial-card {
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(30, 122, 160, 0.1);
+    
+    mat-card-content {
+      padding: 32px;
+    }
+    
+    .quote-icon {
+      margin-bottom: 16px;
+      
+      mat-icon {
+        font-size: 32px;
+        color: $jaune-primary;
+      }
+    }
+    
+    .testimonial-text {
+      color: $text-dark;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      
+      .author-avatar {
+        mat-icon {
+          font-size: 48px;
+          color: $jaune-primary;
+          background: rgba(30, 122, 160, 0.1);
+          border-radius: 50%;
+          padding: 12px;
+        }
+      }
+      
+      .author-info {
+        h4 {
+          color: $text-dark;
+          margin: 0 0 4px 0;
+          font-weight: 600;
+        }
+        
+        span {
+          color: $text-light;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+// CTA Section
+.cta-section {
+  padding: 80px 0;
+  /* Fond uni pour rester cohérent avec la charte sans dégradé */
+  background: $bleu-primary;
+  color: $white;
+  text-align: center;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-buttons button {
+    min-height: 56px;
+    min-width: 240px;
+    letter-spacing: 0.2px;
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+  
+  .cta-button {
+    /* Bouton principal blanc, lisible et sans jaune */
+    background: $white;
+    color: #111111;
+    padding: 18px 36px;
+    border-radius: 14px;
+    border: 2px solid #111111;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    &:hover {
+      background: #f3f4f6;
+      color: #111111;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #111111;
+      outline-offset: 3px;
+    }
+    
+    mat-icon {
+      margin-right: 8px;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+  
+  .secondary-button {
+    /* Bouton secondaire bleu foncé pour contraster avec le principal */
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 2px solid #111111 !important;
+    padding: 18px 36px;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    .mdc-button__label {
+      color: #111111 !important;
+    }
+    
+    &:hover {
+      background: #f3f4f6 !important;
+      color: #111111 !important;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.26);
+    }
+
+    &:focus-visible {
+      outline: 3px solid #111111;
+      outline-offset: 3px;
+    }
+    
+    mat-icon {
+      margin-right: 8px;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+      color: #111111 !important;
+    }
+  }
+}

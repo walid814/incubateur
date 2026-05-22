@@ -1,0 +1,301 @@
+<div class="admin-candidatures-container page-content-dashboard">
+  <!-- En-tête avec statistiques -->
+  <div class="candidatures-header">
+    <div class="header-title">
+      <h1>
+        <mat-icon>assignment_turned_in</mat-icon>
+        Gestion des Candidatures
+      </h1>
+      <p>Gérez et évaluez les candidatures d'entrepreneurs</p>
+    </div>
+
+    <div class="header-actions">
+      <!-- 
+      <button mat-raised-button color="accent" (click)="forceReload()" matTooltip="Recharger les données">
+        <mat-icon>refresh</mat-icon>
+        Recharger
+      </button>
+      -->
+      <button mat-raised-button color="primary" (click)="exporterCandidatures()">
+        <mat-icon>download</mat-icon>
+        Exporter
+      </button>
+    </div>
+  </div>
+
+  <!-- Statistiques rapides -->
+  <div class="stats-overview">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon color="primary">assignment</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{statistiques.total || 0}}</span>
+            <span class="stat-label">Total candidatures</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon color="accent">schedule</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{statistiques.enAttente || 0}}</span>
+            <span class="stat-label">En attente</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #4CAF50;">check_circle</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{statistiques.acceptees || 0}}</span>
+            <span class="stat-label">Acceptées</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #2196F3;">payments</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{formatMontant(statistiques.montantTotalDemande || 0)}}</span>
+            <span class="stat-label">Montant total demandé</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #9C27B0;">people</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{getUsersFromCandidatures()}}</span>
+            <span class="stat-label">Candidats uniques</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Statistiques détaillées des utilisateurs -->
+  <div class="user-stats-section">
+    <mat-card class="user-stats-card">
+      <mat-card-title>
+        <mat-icon>diversity_1</mat-icon>
+        Statistiques des candidats
+      </mat-card-title>
+      <mat-card-content>
+        <div class="user-stats-grid">
+          <div class="user-stat-item">
+            <mat-icon>apartment</mat-icon>
+            <span class="stat-number">{{getUniqueVilles().length}}</span>
+            <span class="stat-label">Villes représentées</span>
+          </div>
+          <div class="user-stat-item">
+            <mat-icon>schedule</mat-icon>
+            <span class="stat-number">{{getCandidaturesThisMonth()}}</span>
+            <span class="stat-label">Candidatures ce mois</span>
+          </div>
+          <div class="user-stat-item">
+            <mat-icon>trending_up</mat-icon>
+            <span class="stat-number">{{getTauxAcceptation()}}%</span>
+            <span class="stat-label">Taux d'acceptation</span>
+          </div>
+          <div class="user-stat-item">
+            <mat-icon>access_time</mat-icon>
+            <span class="stat-number">{{getTempsTraitementMoyen()}}</span>
+            <span class="stat-label">Temps moyen de traitement</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Filtres et recherche -->
+  <mat-card class="filters-card">
+    <mat-card-content>
+      <div class="filters-container">
+        <mat-form-field>
+          <mat-label>Rechercher</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Nom, email, projet...">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Statut</mat-label>
+          <mat-select [(value)]="filtreStatut" (selectionChange)="appliquerFiltres()">
+            <mat-option *ngFor="let statut of statutOptions" [value]="statut.value">
+              {{statut.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Secteur d'activité</mat-label>
+          <mat-select [(value)]="filtreSecteur" (selectionChange)="appliquerFiltres()">
+            <mat-option *ngFor="let secteur of secteurOptions" [value]="secteur.value">
+              {{secteur.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="resetFiltres()">
+          <mat-icon>clear</mat-icon>
+          Réinitialiser
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Tableau des candidatures -->
+  <mat-card class="candidatures-table-card">
+    <mat-card-content>
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort class="candidatures-table">
+          
+          <!-- Colonne Nom -->
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+            <td mat-cell *matCellDef="let candidature">{{candidature.lastname}}</td>
+          </ng-container>
+
+          <!-- Colonne Prénom -->
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</th>
+            <td mat-cell *matCellDef="let candidature">{{candidature.firstname}}</td>
+          </ng-container>
+
+          <!-- Colonne Email -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let candidature">
+              <a [href]="'mailto:' + candidature.email" class="email-link">
+                {{candidature.email}}
+              </a>
+            </td>
+          </ng-container>
+
+          <!-- Colonne Téléphone -->
+          <ng-container matColumnDef="telephone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Téléphone</th>
+            <td mat-cell *matCellDef="let candidature">
+              <a [href]="'tel:' + candidature.telephone" class="phone-link">{{candidature.telephone}}</a>
+            </td>
+          </ng-container>
+
+          <!-- Colonne Ville -->
+          <ng-container matColumnDef="ville">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ville</th>
+            <td mat-cell *matCellDef="let candidature">{{candidature.ville}}</td>
+          </ng-container>
+
+          <!-- Colonne Motivation -->
+          <ng-container matColumnDef="motivation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Motivation</th>
+            <td mat-cell *matCellDef="let candidature">
+              <span class="motivation-preview" [matTooltip]="candidature.motivation">
+                {{candidature.motivation ? (candidature.motivation.length > 50 ? candidature.motivation.substring(0, 50) + '...' : candidature.motivation) : 'N/A'}}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Colonne Statut -->
+          <ng-container matColumnDef="statut">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Statut</th>
+            <td mat-cell *matCellDef="let candidature">
+              <mat-chip [class]="'statut-chip statut-' + candidature.statut">
+                {{getStatutLabel(candidature.statut)}}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <!-- Colonne Date de création -->
+          <ng-container matColumnDef="dateCreation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Date création</th>
+            <td mat-cell *matCellDef="let candidature">{{formatDate(candidature.dateCreation)}}</td>
+          </ng-container>
+
+          <!-- Colonne Actions -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let candidature">
+              <button mat-icon-button [matMenuTriggerFor]="actionMenu" 
+                      matTooltip="Actions">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              
+              <mat-menu #actionMenu="matMenu">
+                <button mat-menu-item (click)="voirDetails(candidature)">
+                  <mat-icon>visibility</mat-icon>
+                  <span>Voir détails</span>
+                </button>
+                
+                <mat-divider></mat-divider>
+                
+                <button mat-menu-item 
+                        (click)="changerStatut(candidature, 'en_cours_evaluation')"
+                        [disabled]="candidature.statut === 'en_cours_evaluation'">
+                  <mat-icon>rate_review</mat-icon>
+                  <span>Évaluer</span>
+                </button>
+                
+                <button mat-menu-item 
+                        (click)="changerStatut(candidature, 'accepte')"
+                        [disabled]="candidature.statut === 'accepte'">
+                  <mat-icon style="color: #4CAF50;">check_circle</mat-icon>
+                  <span>Accepter</span>
+                </button>
+                
+                <button mat-menu-item 
+                        (click)="changerStatut(candidature, 'refuse')"
+                        [disabled]="candidature.statut === 'refuse'">
+                  <mat-icon style="color: #f44336;">cancel</mat-icon>
+                  <span>Refuser</span>
+                </button>
+                
+                <mat-divider></mat-divider>
+                
+                <button mat-menu-item (click)="supprimerCandidature(candidature)"
+                        class="delete-action">
+                  <mat-icon>delete</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+              class="candidature-row"
+              [class.row-en-attente]="row.statut === 'en_attente'"
+              [class.row-accepte]="row.statut === 'accepte'"
+              [class.row-refuse]="row.statut === 'refuse'">
+          </tr>
+        </table>
+
+        <!-- Message si aucune candidature -->
+        <div *ngIf="dataSource.data.length === 0" class="no-candidatures">
+          <mat-icon>assignment_turned_in</mat-icon>
+          <h3>Aucune candidature trouvée</h3>
+          <p>Il n'y a actuellement aucune candidature correspondant aux critères sélectionnés.</p>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" 
+                     showFirstLastButtons
+                     aria-label="Sélectionnez une page">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
+

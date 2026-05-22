@@ -1,0 +1,32 @@
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    @if (isAdmin) {
+      <button mat-button routerLink="/admin/users"><mat-icon>groups_2</mat-icon><span>Gestion utilisateurs</span></button>
+      <button mat-button routerLink="/admin/candidatures"><mat-icon>assignment_turned_in</mat-icon><span>Gestion candidatures</span></button>
+      <button mat-button routerLink="/register"><mat-icon>person_add</mat-icon><span>Créer un compte</span></button>
+      <button mat-button routerLink="/admin/projects"><mat-icon>assignment</mat-icon><span>Tous les projets</span></button>
+      <button mat-button routerLink="/admin/funding"><mat-icon>account_balance</mat-icon><span>Financements</span></button>
+      <button mat-button routerLink="/admin/reports"><mat-icon>analytics</mat-icon><span>Rapports</span></button>
+      <button mat-button routerLink="/admin/settings"><mat-icon>settings</mat-icon><span>Configuration</span></button>
+      <button mat-button routerLink="/admin/support"><mat-icon>support_agent</mat-icon><span>Support</span></button>
+    }
+
+    @if (isUser) {
+      <button mat-button routerLink="/profil"><mat-icon>person</mat-icon><span>Profil</span></button>
+      <button mat-button routerLink="/mes-projets"><mat-icon>flight_takeoff</mat-icon><span>Mes Projets</span></button>
+      <button mat-button routerLink="/candidatures"><mat-icon>assignment</mat-icon><span>Candidatures</span></button>
+      <button mat-button routerLink="/documents"><mat-icon>description</mat-icon><span>Documents</span></button>
+      <button mat-button routerLink="/formations"><mat-icon>school</mat-icon><span>Formations</span></button>
+      <button mat-button routerLink="/mentoring"><mat-icon>support_agent</mat-icon><span>Mentoring</span></button>
+      <button mat-button routerLink="/financement"><mat-icon>account_balance</mat-icon><span>Financement</span></button>
+      <button mat-button routerLink="/ressources"><mat-icon>menu_book</mat-icon><span>Ressources</span></button>
+      <button mat-button routerLink="/evenements"><mat-icon>event</mat-icon><span>Événements</span></button>
+    }
+
+    <div class="sidebar-separator"></div>
+    <button mat-button color="warn" (click)="logoutRequested.emit()"><mat-icon>logout</mat-icon><span>Se déconnecter</span></button>
+  </nav>
+  <div class="sidebar-footer">
+    <a routerLink="/faq">Guide pratique entrepreneur<br>FAQ</a>
+  </div>
+</aside>

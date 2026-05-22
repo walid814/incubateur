@@ -1,0 +1,300 @@
+<div class="candidature-container page-content">
+  <!-- Form Section -->
+  <div class="form-section">
+    <div class="container">
+      <div class="page-header">
+        <h1>Candidature</h1>
+        <p>Rejoignez notre incubateur et transformez votre idée en projet d'impact social</p>
+      </div>
+      <div class="candidature-form-wrapper">
+        <mat-stepper [linear]="true" #stepper orientation="vertical" class="modern-stepper">
+          <!-- Étape 1: Informations personnelles -->
+          <mat-step [stepControl]="informationsPersonnellesForm">
+            <form [formGroup]="informationsPersonnellesForm">
+              <ng-template matStepLabel>
+                <span class="step-label">
+                  <mat-icon>person</mat-icon>
+                  Informations personnelles
+                </span>
+              </ng-template>
+
+              <div class="step-content">
+                <h3>Parlez-nous de vous</h3>
+                <p class="step-description">Ces informations nous aideront à mieux vous connaître et à personnaliser notre accompagnement.</p>
+                
+                <div class="form-grid">
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput formControlName="firstname" required>
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('firstname')?.hasError('required')">
+                      Le prénom est requis
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="lastname" required>
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('lastname')?.hasError('required')">
+                      Le nom est requis
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Adresse email</mat-label>
+                    <input matInput type="email" formControlName="email" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('email')?.hasError('required')">
+                      L'email est requis
+                    </mat-error>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('email')?.hasError('email')">
+                      Format d'email invalide
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Numéro de téléphone</mat-label>
+                    <input matInput type="tel" formControlName="telephone" required>
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-hint>Format: 06 12 34 56 78</mat-hint>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('telephone')?.hasError('required')">
+                      Le numéro de téléphone est requis
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Adresse complète</mat-label>
+                    <input matInput formControlName="adresse" required>
+                    <mat-icon matSuffix>home</mat-icon>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('adresse')?.hasError('required')">
+                      L'adresse est requise
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Ville</mat-label>
+                    <input matInput formControlName="ville" required>
+                    <mat-icon matSuffix>apartment</mat-icon>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('ville')?.hasError('required')">
+                      La ville est requise
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Code postal</mat-label>
+                    <input matInput formControlName="codePostal" required>
+                    <mat-icon matSuffix>local_post_office</mat-icon>
+                    <mat-error *ngIf="informationsPersonnellesForm.get('codePostal')?.hasError('required')">
+                      Le code postal est requis
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="step-actions">
+                  <button mat-fab color="primary" matStepperNext [disabled]="!informationsPersonnellesForm.valid" class="next-button">
+                    <mat-icon>arrow_forward</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </mat-step>
+
+          <!-- Étape 2: Motivation et objectifs -->
+          <mat-step [stepControl]="motivationForm">
+            <form [formGroup]="motivationForm">
+              <ng-template matStepLabel>
+                <span class="step-label">
+                  <mat-icon>psychology</mat-icon>
+                  Motivation & Projet
+                </span>
+              </ng-template>
+
+              <div class="step-content">
+                <h3>Votre projet et vos ambitions</h3>
+                <p class="step-description">Détaillez votre vision et ce qui vous motive à rejoindre notre communauté d'entrepreneurs sociaux.</p>
+
+                <mat-form-field appearance="outline" 
+                  class="form-field full-width"
+                  [ngClass]="getMotivationFieldClass()">
+                  <mat-label>Votre motivation</mat-label>
+                  <textarea matInput formControlName="motivation" rows="8" required
+                    placeholder="Expliquez-nous pourquoi vous souhaitez rejoindre notre incubateur. Quels sont vos objectifs ? Comment notre accompagnement peut-il vous aider à réussir votre projet d'impact social ?">
+                  </textarea>
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-hint>{{ getCharacterCountMessage(getMotivationCharacterCount(), 200, 255) }}</mat-hint>
+                  <mat-error *ngIf="motivationForm.get('motivation')?.hasError('required')">
+                    La motivation est requise
+                  </mat-error>
+                  <mat-error *ngIf="motivationForm.get('motivation')?.hasError('minlength')">
+                    Minimum 200 caractères requis
+                  </mat-error>
+                  <mat-error *ngIf="motivationForm.get('motivation')?.hasError('maxlength')">
+                    Maximum 255 caractères autorisés
+                  </mat-error>
+                </mat-form-field>
+                
+                <!-- Barre de progression pour motivation -->
+                <div class="character-progress-wrapper">
+                  <div class="progress-bar" [ngClass]="getMotivationFieldClass()">
+                    <div class="progress-fill" 
+                         [style.width.%]="getMotivationProgress()"
+                         [ngClass]="getMotivationFieldClass()">
+                    </div>
+                  </div>
+                  <span class="progress-label" [ngClass]="getMotivationFieldClass()">
+                    {{ getMotivationProgress() | number:'1.0-0' }}% complété
+                  </span>
+                </div>
+
+                <mat-form-field appearance="outline" 
+                  class="form-field full-width"
+                  [ngClass]="getObjectifsFieldClass()">
+                  <mat-label>Vos objectifs à court et long terme</mat-label>
+                  <textarea matInput formControlName="objectifs" rows="6" required
+                    placeholder="Décrivez vos objectifs à court terme (6-12 mois) et à long terme (2-5 ans). Comment votre projet va-t-il créer un impact social positif ?">
+                  </textarea>
+                  <mat-icon matSuffix>flag</mat-icon>
+                  <mat-hint>{{ getCharacterCountMessage(getObjectifsCharacterCount(), 50, 255) }}</mat-hint>
+                  <mat-error *ngIf="motivationForm.get('objectifs')?.hasError('required')">
+                    Les objectifs sont requis
+                  </mat-error>
+                  <mat-error *ngIf="motivationForm.get('objectifs')?.hasError('minlength')">
+                    Minimum 50 caractères requis
+                  </mat-error>
+                  <mat-error *ngIf="motivationForm.get('objectifs')?.hasError('maxlength')">
+                    Maximum 255 caractères autorisés
+                  </mat-error>
+                </mat-form-field>
+                
+                <!-- Barre de progression pour objectifs -->
+                <div class="character-progress-wrapper">
+                  <div class="progress-bar" [ngClass]="getObjectifsFieldClass()">
+                    <div class="progress-fill" 
+                         [style.width.%]="getObjectifsProgress()"
+                         [ngClass]="getObjectifsFieldClass()">
+                    </div>
+                  </div>
+                  <span class="progress-label" [ngClass]="getObjectifsFieldClass()">
+                    {{ getObjectifsProgress() | number:'1.0-0' }}% complété
+                  </span>
+                </div>
+
+                <div class="step-actions">
+                  <button mat-mini-fab matStepperPrevious class="prev-button">
+                    <mat-icon>arrow_back</mat-icon>
+                  </button>
+                  <button mat-fab color="primary" matStepperNext [disabled]="!motivationForm.valid" class="next-button">
+                    <mat-icon>arrow_forward</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </mat-step>
+
+          <!-- Étape 3: Récapitulatif et validation -->
+          <mat-step>
+            <ng-template matStepLabel>
+              <span class="step-label">
+                <mat-icon>check_circle</mat-icon>
+                Validation
+              </span>
+            </ng-template>
+
+            <div class="step-content recap-content">
+              <h3>Récapitulatif de votre candidature</h3>
+              <p class="step-description">Vérifiez vos informations avant de soumettre votre candidature.</p>
+
+              <div class="recap-cards">
+                <mat-card class="recap-card">
+                  <mat-card-header>
+                    <div mat-card-avatar>
+                      <mat-icon>person</mat-icon>
+                    </div>
+                    <mat-card-title>Informations personnelles</mat-card-title>
+                    <mat-card-subtitle>Vos coordonnées</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="info-grid">
+                      <div class="info-item">
+                        <strong>Nom complet :</strong>
+                        <span>{{informationsPersonnellesForm.value.firstname}} {{informationsPersonnellesForm.value.lastname}}</span>
+                      </div>
+                      <div class="info-item">
+                        <strong>Email :</strong>
+                        <span>{{informationsPersonnellesForm.value.email}}</span>
+                      </div>
+                      <div class="info-item">
+                        <strong>Téléphone :</strong>
+                        <span>{{informationsPersonnellesForm.value.telephone}}</span>
+                      </div>
+                      <div class="info-item">
+                        <strong>Adresse :</strong>
+                        <span>{{informationsPersonnellesForm.value.adresse}}, {{informationsPersonnellesForm.value.ville}} {{informationsPersonnellesForm.value.codePostal}}</span>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button color="primary" (click)="stepper.selectedIndex = 0">
+                      <mat-icon>edit</mat-icon>
+                      Modifier
+                    </button>
+                  </mat-card-actions>
+                </mat-card>
+
+                <mat-card class="recap-card">
+                  <mat-card-header>
+                    <div mat-card-avatar>
+                      <mat-icon>psychology</mat-icon>
+                    </div>
+                    <mat-card-title>Motivation & Projet</mat-card-title>
+                    <mat-card-subtitle>Vos ambitions</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="motivation-preview">
+                      <div class="motivation-section">
+                        <h4><mat-icon>description</mat-icon> Votre motivation</h4>
+                        <p class="motivation-text">{{motivationForm.value.motivation}}</p>
+                      </div>
+                      <div class="motivation-section">
+                        <h4><mat-icon>flag</mat-icon> Vos objectifs</h4>
+                        <p class="motivation-text">{{motivationForm.value.objectifs}}</p>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button color="primary" (click)="stepper.selectedIndex = 1">
+                      <mat-icon>edit</mat-icon>
+                      Modifier
+                    </button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+
+              <div class="final-actions">
+                <button mat-mini-fab matStepperPrevious class="prev-button">
+                  <mat-icon>arrow_back</mat-icon>
+                </button>
+                
+                <div class="submit-section">
+                  <div class="submit-info">
+                    <mat-icon>info</mat-icon>
+                    <p>En soumettant votre candidature, vous acceptez d'être contacté par notre équipe dans les 5 jours ouvrés.</p>
+                  </div>
+                  
+                  <button mat-raised-button color="accent" size="large" (click)="onSubmit()" 
+                          [disabled]="!informationsPersonnellesForm.valid || !motivationForm.valid || isSubmitting"
+                          class="submit-button">
+                    <mat-icon>{{isSubmitting ? 'hourglass_empty' : 'send'}}</mat-icon>
+                    {{isSubmitting ? 'Envoi en cours...' : 'Soumettre ma candidature'}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </div>
+    </div>
+  </div>
+</div>
+

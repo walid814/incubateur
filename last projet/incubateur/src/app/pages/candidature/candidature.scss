@@ -1,0 +1,805 @@
+@use 'sass:color';
+
+// Variables de couleurs modernes - Jaune
+$jaune-primary: #FFD700;
+$jaune-light: #FFED4E;
+$jaune-dark: #F59E0B;
+$text-dark: #2c3e50;
+$text-light: #6c757d;
+$bg-light: #f8f9fa;
+$white: #ffffff;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$border-color: #e1e5e9;
+
+.candidature-container {
+  min-height: 100vh;
+  background: $bg-light;
+}
+
+// Form Section
+.form-section {
+  padding: 80px 0;
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 48px;
+    
+    h1 {
+      color: $text-dark;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      
+      @media (max-width: 768px) {
+        font-size: 2.2rem;
+      }
+    }
+    
+    p {
+      color: $text-light;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.candidature-form-wrapper {
+  .modern-stepper {
+    background: $white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    
+    @media (max-width: 768px) {
+      padding: 24px;
+      margin: 0 16px;
+    }
+  }
+}
+
+// Stepper Styling
+::ng-deep {
+  .mat-stepper-vertical {
+    .mat-step {
+      &.mat-step-selected {
+        .mat-step-header {
+          .mat-step-icon {
+            background-color: $jaune-primary !important;
+            color: $white !important;
+          }
+          
+          .mat-step-label {
+            color: $jaune-primary !important;
+            font-weight: 600 !important;
+          }
+        }
+      }
+      
+      .mat-step-header {
+        padding: 24px 0;
+        
+        .mat-step-icon {
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .mat-step-label {
+          margin-left: 16px;
+          font-size: 1.1rem;
+        }
+      }
+      
+      .mat-step-content {
+        margin-left: 20px;
+        border-left: 2px solid $border-color;
+        padding-left: 40px;
+        padding-bottom: 40px;
+      }
+    }
+  }
+}
+
+// Step Content
+.step-content {
+  h3 {
+    color: $text-dark;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  .step-description {
+    color: $text-light;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+}
+
+.step-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  mat-icon {
+    font-size: 20px;
+  }
+}
+
+// Form Grid
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 40px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.form-field {
+  width: 100%;
+  
+  ::ng-deep {
+    .mat-mdc-form-field-outline {
+      color: $border-color;
+    }
+    
+    .mat-mdc-form-field-focus-overlay {
+      background-color: transparent;
+    }
+    
+    &.mat-focused {
+      .mat-mdc-form-field-outline-thick {
+        color: $jaune-primary;
+      }
+    }
+    
+    .mat-mdc-form-field-label {
+      color: $text-light;
+    }
+    
+    .mat-mdc-form-field-input {
+      color: $text-dark;
+    }
+    
+    .mat-mdc-form-field-hint {
+      color: $text-light;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Step Actions
+.step-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  
+  .next-button, .prev-button {
+    border-radius: 25px !important;
+    padding: 12px 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+    min-height: 48px !important;
+    
+    &:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4) !important;
+    }
+  }
+  
+  .next-button {
+    background: $jaune-primary !important;
+    color: $text-dark !important;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3) !important;
+    
+    &:hover {
+      background: $jaune-light !important;
+    }
+  }
+  
+  .prev-button {
+    background: transparent !important;
+    color: $jaune-primary !important;
+    border: 2px solid $jaune-primary !important;
+    
+    &:hover {
+      background: $jaune-primary !important;
+      color: $text-dark !important;
+    }
+  }
+}
+
+// Recap Content
+.recap-content {
+  .recap-cards {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  
+  .recap-card {
+    border: 2px solid $border-color;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: $jaune-primary;
+      box-shadow: 0 8px 32px rgba(255, 215, 0, 0.15);
+      transform: translateY(-4px);
+    }
+    
+    ::ng-deep {
+      .mat-mdc-card-header {
+        background: linear-gradient(135deg, $bg-light 0%, #ffffff 100%);
+        padding: 24px;
+        
+        .mat-mdc-card-avatar {
+          background-color: $jaune-primary;
+          color: $white;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          mat-icon {
+            font-size: 24px;
+          }
+        }
+        
+        .mat-mdc-card-title {
+          color: $text-dark;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+        
+        .mat-mdc-card-subtitle {
+          color: $text-light;
+        }
+      }
+      
+      .mat-mdc-card-content {
+        padding: 24px;
+      }
+      
+      .mat-mdc-card-actions {
+        padding: 16px 24px;
+        background-color: $bg-light;
+      }
+    }
+  }
+}
+
+.info-grid {
+  display: grid;
+  gap: 16px;
+  
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid $border-color;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    strong {
+      color: $text-dark;
+      font-weight: 600;
+      min-width: 120px;
+    }
+    
+    span {
+      color: $text-light;
+      text-align: right;
+      flex: 1;
+      margin-left: 16px;
+    }
+  }
+}
+
+.motivation-preview {
+  .motivation-section {
+    margin-bottom: 24px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: $text-dark;
+      font-weight: 600;
+      margin-bottom: 12px;
+      
+      mat-icon {
+        color: $jaune-primary;
+        font-size: 20px;
+      }
+    }
+    
+    .motivation-text {
+      color: $text-light;
+      line-height: 1.6;
+      padding: 16px;
+      background-color: $bg-light;
+      border-radius: 12px;
+      border-left: 4px solid $jaune-primary;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+  }
+}
+
+// Final Actions
+.final-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  margin-top: 40px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+}
+
+.submit-section {
+  flex: 1;
+  text-align: center;
+  
+  .submit-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #e3f2fd;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    
+    mat-icon {
+      color: $jaune-primary;
+      font-size: 20px;
+    }
+    
+    p {
+      color: $text-dark;
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      text-align: left;
+    }
+  }
+  
+  .submit-button {
+    background: linear-gradient(135deg, $jaune-primary 0%, $jaune-light 100%) !important;
+    color: $text-dark !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    padding: 16px 48px !important;
+    border-radius: 30px !important;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4) !important;
+    transition: all 0.3s ease !important;
+    letter-spacing: 0.5px !important;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-4px) !important;
+      box-shadow: 0 16px 40px rgba(255, 215, 0, 0.6) !important;
+      background: linear-gradient(135deg, $jaune-light 0%, $jaune-primary 100%) !important;
+    }
+    
+    &:disabled {
+      opacity: 0.7 !important;
+      cursor: not-allowed !important;
+      background: #e0e0e0 !important;
+      color: #9e9e9e !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    
+    mat-icon {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 16px 24px;
+    }
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-content {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 0;
+  }
+  
+  .form-section {
+    padding: 60px 0;
+  }
+  
+  .candidature-form-wrapper .modern-stepper {
+    border-radius: 16px;
+  }
+}
+
+/* =====================================================
+   STYLES DYNAMIQUES POUR LES CHAMPS DE CARACTÈRES
+   ===================================================== */
+
+// État par défaut
+.field-default {
+  .mat-mdc-form-field-outline {
+    color: #e1e5e9 !important;
+  }
+  
+  .mat-mdc-text-field-wrapper {
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .mat-mdc-form-field-label {
+    color: #6c757d !important;
+  }
+}
+
+// État d'avertissement (proche du minimum)
+.field-warning {
+  .mat-mdc-form-field-outline {
+    color: #f59e0b !important;
+    border-width: 2px !important;
+  }
+  
+  .mat-mdc-text-field-wrapper {
+    background-color: #fef3cd;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+  }
+  
+  .mat-mdc-form-field-label {
+    color: #f59e0b !important;
+    font-weight: 500 !important;
+  }
+  
+  .mat-mdc-form-field-icon-suffix {
+    color: #f59e0b !important;
+  }
+  
+  .mat-mdc-form-field-hint-wrapper {
+    color: #f59e0b !important;
+    font-weight: 500 !important;
+  }
+}
+
+// État de succès (objectif atteint)
+.field-success {
+  .mat-mdc-form-field-outline {
+    color: #28a745 !important;
+    border-width: 2px !important;
+  }
+  
+  .mat-mdc-text-field-wrapper {
+    background-color: #d4edda;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+  }
+  
+  .mat-mdc-form-field-label {
+    color: #28a745 !important;
+    font-weight: 600 !important;
+  }
+  
+  .mat-mdc-form-field-icon-suffix {
+    color: #28a745 !important;
+  }
+  
+  .mat-mdc-form-field-hint-wrapper {
+    color: #28a745 !important;
+    font-weight: 600 !important;
+  }
+  
+  // Animation de succès
+  &::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: #28a745;
+    font-size: 20px;
+    font-weight: bold;
+    animation: successPulse 1s ease-in-out;
+  }
+}
+
+// État d'erreur (dépassement)
+.field-error {
+  .mat-mdc-form-field-outline {
+    color: #dc3545 !important;
+    border-width: 2px !important;
+  }
+  
+  .mat-mdc-text-field-wrapper {
+    background-color: #f8d7da;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+  }
+  
+  .mat-mdc-form-field-label {
+    color: #dc3545 !important;
+    font-weight: 500 !important;
+  }
+  
+  .mat-mdc-form-field-icon-suffix {
+    color: #dc3545 !important;
+  }
+  
+  .mat-mdc-form-field-hint-wrapper {
+    color: #dc3545 !important;
+    font-weight: 500 !important;
+  }
+  
+  // Animation d'erreur
+  &::after {
+    content: '⚠';
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: #dc3545;
+    font-size: 20px;
+    animation: errorShake 0.5s ease-in-out;
+  }
+}
+
+/* Animations */
+@keyframes successPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes errorShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Amélioration de l'accessibilité et de la lisibilité des hints */
+.mat-mdc-form-field-hint-wrapper {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease;
+}
+
+/* Styles pour les différents types de messages */
+.field-success .mat-mdc-form-field-hint-wrapper {
+  background-color: rgba(40, 167, 69, 0.1);
+  border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.field-warning .mat-mdc-form-field-hint-wrapper {
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.field-error .mat-mdc-form-field-hint-wrapper {
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.field-default .mat-mdc-form-field-hint-wrapper {
+  background-color: rgba(108, 117, 125, 0.1);
+  border: 1px solid rgba(108, 117, 125, 0.2);
+}
+
+/* =====================================================
+   BARRES DE PROGRESSION DES CARACTÈRES
+   ===================================================== */
+
+.character-progress-wrapper {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  
+  &.field-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+  }
+  
+  &.field-warning {
+    background-color: rgba(245, 158, 11, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  
+  &.field-error {
+    background-color: rgba(220, 53, 69, 0.2);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+  }
+  
+  &.field-default {
+    background-color: rgba(108, 117, 125, 0.2);
+    border: 1px solid rgba(108, 117, 125, 0.3);
+  }
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease, background-color 0.3s ease;
+  position: relative;
+  
+  &.field-default {
+    background: linear-gradient(90deg, #6c757d 0%, #8e9aaf 100%);
+  }
+  
+  &.field-warning {
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+  }
+  
+  &.field-success {
+    background: linear-gradient(90deg, #28a745 0%, #34d058 100%);
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+      animation: progressShine 2s ease-in-out infinite;
+    }
+  }
+  
+  &.field-error {
+    background: linear-gradient(90deg, #dc3545 0%, #f86a6a 100%);
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.3);
+    animation: progressPulse 1s ease-in-out infinite;
+  }
+}
+
+.progress-label {
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: right;
+  transition: color 0.3s ease;
+  
+  &.field-default {
+    color: #6c757d;
+  }
+  
+  &.field-warning {
+    color: #f59e0b;
+    font-weight: 600;
+  }
+  
+  &.field-success {
+    color: #28a745;
+    font-weight: 600;
+  }
+  
+  &.field-error {
+    color: #dc3545;
+    font-weight: 600;
+  }
+}
+
+/* Animations pour les barres de progression */
+@keyframes progressShine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes progressPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Responsive pour les barres de progression */
+@media (max-width: 768px) {
+  .character-progress-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  
+  .progress-label {
+    text-align: center;
+    min-width: auto;
+  }
+  
+  .progress-bar {
+    height: 6px;
+  }
+}

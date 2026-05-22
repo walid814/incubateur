@@ -1,0 +1,54 @@
+<div class="activities-tasks-row">
+  <section class="dashboard-activities">
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>history</mat-icon>
+        Activités récentes
+      </mat-card-title>
+      <mat-card-content>
+        <div class="recent-activities">
+          <div *ngFor="let activity of activities" class="activity-item">
+            <div class="activity-icon" [ngClass]="activity.type">
+              <mat-icon *ngIf="activity.type === 'approval'">check_circle</mat-icon>
+              <mat-icon *ngIf="activity.type === 'user'">person_add</mat-icon>
+              <mat-icon *ngIf="activity.type === 'funding'">payments</mat-icon>
+              <mat-icon *ngIf="activity.type === 'review'">rate_review</mat-icon>
+              <mat-icon *ngIf="activity.type === 'profile'">account_circle</mat-icon>
+              <mat-icon *ngIf="activity.type === 'document'">description</mat-icon>
+              <mat-icon *ngIf="activity.type === 'application'">assignment</mat-icon>
+              <mat-icon *ngIf="activity.type === 'none'">info</mat-icon>
+            </div>
+            <div class="activity-content">
+              <p class="activity-text">{{ activity.action }}</p>
+              <p class="activity-time">{{ activity.time }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <section class="dashboard-tasks">
+    <mat-card>
+      <mat-card-title>
+        <mat-icon>task_alt</mat-icon>
+        Tâches en attente
+      </mat-card-title>
+      <mat-card-content>
+        <div class="pending-tasks">
+          <div *ngFor="let task of tasks" class="task-item">
+            <div class="task-content">
+              <p class="task-text">{{ task.task }}</p>
+            </div>
+            <div class="task-actions">
+              <span class="task-priority" [ngClass]="task.priority">{{ task.priority }}</span>
+              <button mat-icon-button color="primary" [routerLink]="task.link">
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>

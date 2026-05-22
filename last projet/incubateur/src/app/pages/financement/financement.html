@@ -1,0 +1,306 @@
+<div class="financement-container">
+  <!-- Header -->
+  <div class="financement-header">
+    <div class="header-nav">
+      <button mat-icon-button (click)="goBackToDashboard()" matTooltip="Retour au dashboard">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-title">
+        <h1>
+          <mat-icon>account_balance</mat-icon>
+          Gestion des financements
+        </h1>
+        <p>Vue d'ensemble de tous vos financements et sources de fonds</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistiques générales -->
+  <div class="funding-stats">
+    <mat-card>
+      <mat-card-title>Vue d'ensemble financière</mat-card-title>
+      <mat-card-content>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <mat-icon color="accent">trending_up</mat-icon>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">{{formatCurrency(fundingStats.obtainedAmount || 0)}}</div>
+              <div class="stat-label">Financements obtenus</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <mat-icon color="primary">pending</mat-icon>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">{{formatCurrency(fundingStats.pendingAmount || 0)}}</div>
+              <div class="stat-label">En cours d'obtention</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">
+              <mat-icon color="warn">dataset</mat-icon>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">{{fundingStats.totalSources || 0}}</div>
+              <div class="stat-label">Sources de financement</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Répartition par type -->
+        <div class="funding-breakdown">
+          <h3>Répartition par type de financement</h3>
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <mat-icon>redeem</mat-icon>
+              <span class="breakdown-label">Subventions</span>
+              <span class="breakdown-amount">{{formatCurrency(fundingStats.subventions || 0)}}</span>
+            </div>
+            <div class="breakdown-item">
+              <mat-icon>trending_up</mat-icon>
+              <span class="breakdown-label">Investissements</span>
+              <span class="breakdown-amount">{{formatCurrency(fundingStats.investissements || 0)}}</span>
+            </div>
+            <div class="breakdown-item">
+              <mat-icon>account_balance</mat-icon>
+              <span class="breakdown-label">Prêts</span>
+              <span class="breakdown-amount">{{formatCurrency(fundingStats.prets || 0)}}</span>
+            </div>
+            <div class="breakdown-item">
+              <mat-icon>language</mat-icon>
+              <span class="breakdown-label">Aides publiques</span>
+              <span class="breakdown-amount">{{formatCurrency(fundingStats.aides || 0)}}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Onglets de détail -->
+  <mat-tab-group class="funding-tabs">
+    <!-- Onglet Vue par projet -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>flight_takeoff</mat-icon>
+        Par projet
+      </ng-template>
+      
+      <div class="tab-content">
+        <div *ngFor="let financing of projectFinancing" class="project-financing-card">
+          <mat-card>
+            <mat-card-header>
+              <div class="project-header">
+                <h2>{{getProjectName(financing.projectId)}}</h2>
+                <button mat-button color="primary" (click)="navigateToProject(financing.projectId)">
+                  <mat-icon>visibility</mat-icon>
+                  Voir le projet
+                </button>
+              </div>
+            </mat-card-header>
+            
+            <mat-card-content>
+              <div class="financing-summary">
+                <div class="summary-item">
+                  <span class="summary-label">Budget total :</span>
+                  <span class="summary-value">{{formatCurrency(financing.totalBudget)}}</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">Sources de financement :</span>
+                  <span class="summary-value">{{financing.fundingSources.length}}</span>
+                </div>
+              </div>
+
+              <!-- Sources de financement pour ce projet -->
+              <div class="project-funding-sources">
+                <h4>Sources de financement</h4>
+                <div class="funding-sources-list">
+                  <div *ngFor="let source of financing.fundingSources" class="funding-source-card">
+                    <div class="source-header">
+                      <div class="source-info">
+                        <mat-icon>{{getFundingTypeIcon(source.type)}}</mat-icon>
+                        <div class="source-details">
+                          <h5>{{source.name}}</h5>
+                          <span class="source-type">{{getFundingTypeLabel(source.type)}}</span>
+                        </div>
+                      </div>
+                      <div class="source-status-amount">
+                        <mat-chip [color]="getStatusColor(source.status)" selected>
+                          {{getStatusLabel(source.status)}}
+                        </mat-chip>
+                        <span class="source-amount">{{formatCurrency(source.amount)}}</span>
+                      </div>
+                    </div>
+                    
+                    <div class="source-dates">
+                      <span class="date-item">
+                        <mat-icon>event</mat-icon>
+                        Demande : {{source.applicationDate | date:'dd/MM/yyyy'}}
+                      </span>
+                      <span *ngIf="source.approvalDate" class="date-item">
+                        <mat-icon>check_circle</mat-icon>
+                        Approbation : {{source.approvalDate | date:'dd/MM/yyyy'}}
+                      </span>
+                    </div>
+                    
+                    <div *ngIf="source.conditions.length > 0" class="source-conditions">
+                      <h6>Conditions :</h6>
+                      <mat-chip-set>
+                        <mat-chip *ngFor="let condition of source.conditions">{{condition}}</mat-chip>
+                      </mat-chip-set>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Historique des dépenses -->
+              <div class="project-expenses">
+                <h4>Dernières dépenses</h4>
+                <div class="expenses-list">
+                  <div *ngFor="let expense of financing.expenses.slice(0, 3)" class="expense-item">
+                    <div class="expense-info">
+                      <span class="expense-category">{{expense.category}}</span>
+                      <span class="expense-description">{{expense.description}}</span>
+                    </div>
+                    <div class="expense-details">
+                      <span class="expense-amount">{{formatCurrency(expense.amount)}}</span>
+                      <mat-chip [color]="expense.approved ? 'accent' : 'warn'" selected>
+                        {{expense.approved ? 'Approuvé' : 'En attente'}}
+                      </mat-chip>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- Onglet Toutes les sources -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>list</mat-icon>
+        Toutes les sources
+      </ng-template>
+      
+      <div class="tab-content">
+        <mat-card>
+          <mat-card-title>Tableau de toutes les sources de financement</mat-card-title>
+          <mat-card-content>
+            <table mat-table [dataSource]="getAllFundingSources()" class="funding-table">
+              <!-- Colonne Source -->
+              <ng-container matColumnDef="dataset">
+                <th mat-header-cell *matHeaderCellDef>Source</th>
+                <td mat-cell *matCellDef="let source">
+                  <div class="source-cell">
+                    <mat-icon>{{getFundingTypeIcon(source.type)}}</mat-icon>
+                    <div class="source-info">
+                      <span class="source-name">{{source.name}}</span>
+                      <span class="project-name">{{source.projectName}}</span>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Colonne Type -->
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef>Type</th>
+                <td mat-cell *matCellDef="let source">
+                  <mat-chip>{{getFundingTypeLabel(source.type)}}</mat-chip>
+                </td>
+              </ng-container>
+
+              <!-- Colonne Montant -->
+              <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef>Montant</th>
+                <td mat-cell *matCellDef="let source">
+                  <span class="amount-cell">{{formatCurrency(source.amount)}}</span>
+                </td>
+              </ng-container>
+
+              <!-- Colonne Statut -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Statut</th>
+                <td mat-cell *matCellDef="let source">
+                  <mat-chip [color]="getStatusColor(source.status)" selected>
+                    {{getStatusLabel(source.status)}}
+                  </mat-chip>
+                </td>
+              </ng-container>
+
+              <!-- Colonne Date -->
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Date de demande</th>
+                <td mat-cell *matCellDef="let source">
+                  {{source.applicationDate | date:'dd/MM/yyyy'}}
+                </td>
+              </ng-container>
+
+              <!-- Colonne Actions -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let source">
+                  <button mat-icon-button (click)="navigateToProject(source.projectId)" matTooltip="Voir le projet">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Onglet Opportunités -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>search</mat-icon>
+        Opportunités
+      </ng-template>
+      
+      <div class="tab-content">
+        <mat-card>
+          <mat-card-title>Nouvelles opportunités de financement</mat-card-title>
+          <mat-card-content>
+            <div class="opportunities-section">
+              <p>Découvrez de nouvelles sources de financement adaptées à vos projets :</p>
+              
+              <div class="opportunities-grid">
+                <div class="opportunity-card">
+                  <mat-icon color="primary">payments</mat-icon>
+                  <h4>Subventions BPI France</h4>
+                  <p>Aide à l'innovation pour les projets technologiques</p>
+                  <button mat-raised-button color="primary">En savoir plus</button>
+                </div>
+                
+                <div class="opportunity-card">
+                  <mat-icon color="accent">trending_up</mat-icon>
+                  <h4>French Tech Seed</h4>
+                  <p>Financement pour les startups Deep Tech</p>
+                  <button mat-raised-button color="accent">Candidater</button>
+                </div>
+                
+                <div class="opportunity-card">
+                  <mat-icon color="warn">language</mat-icon>
+                  <h4>Aides régionales</h4>
+                  <p>Dispositifs d'aide locaux pour l'entrepreneuriat</p>
+                  <button mat-raised-button color="warn">Découvrir</button>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+

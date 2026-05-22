@@ -1,0 +1,56 @@
+<section class="dashboard-stats-overview">
+  <mat-card>
+    <mat-card-title>
+      <mat-icon>analytics</mat-icon>
+      @if (isAdmin) {
+        <span>Statistiques de la plateforme</span>
+      }
+      @if (isUser) {
+        <span>Vue d'ensemble de vos projets</span>
+      }
+    </mat-card-title>
+    <mat-card-content>
+      @if (isAdmin) {
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">{{ adminStats.totalUsers }}</div>
+            <div class="stat-label">Utilisateurs totaux</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ adminStats.activeProjects }}</div>
+            <div class="stat-label">Projets actifs</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ formatCurrency(adminStats.totalFunding) }}</div>
+            <div class="stat-label">Financement alloué</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ adminStats.approvedThisMonth }}</div>
+            <div class="stat-label">Projets approuvés ce mois</div>
+          </div>
+        </div>
+      }
+
+      @if (isUser) {
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">{{ projectStats.total || 0 }}</div>
+            <div class="stat-label">Projets totaux</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ projectStats.active || 0 }}</div>
+            <div class="stat-label">En cours</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ formatCurrency(projectStats.totalFunding || 0) }}</div>
+            <div class="stat-label">Financement total</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ formatCurrency(projectStats.totalUsed || 0) }}</div>
+            <div class="stat-label">Utilisé</div>
+          </div>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</section>

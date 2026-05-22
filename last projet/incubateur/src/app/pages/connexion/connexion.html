@@ -1,0 +1,56 @@
+<div class="connexion-page-wrapper page-content">
+<h1>SE CONNECTER</h1>
+<div class="connexion-form-wrapper">
+  <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()" class="connexion-form">
+    <div class="form-grid">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required>
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="connexionForm.get('email')?.hasError('required')">
+          L'email est requis
+        </mat-error>
+        <mat-error *ngIf="connexionForm.get('email')?.hasError('email')">
+          Format d'email invalide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="connexionForm.get('password')?.hasError('required')">
+          Le mot de passe est requis
+        </mat-error>
+        <mat-error *ngIf="connexionForm.get('password')?.hasError('minlength')">
+          Le mot de passe doit contenir au moins 6 caractères
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-options">
+      <mat-checkbox formControlName="rememberMe" class="remember-checkbox">
+        <mat-icon>verified_user</mat-icon>
+        Se souvenir de moi
+      </mat-checkbox>
+      <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+    </div>
+
+    <div class="form-actions">
+      <button mat-fab color="primary" type="submit" [disabled]="!connexionForm.valid" class="login-button">
+        <mat-icon>login</mat-icon>
+      </button>
+    </div>
+
+    <div class="signup-section">
+      <p class="signup-text">
+        Pas encore de compte ?
+        <button mat-button color="accent" (click)="goToSignup()" type="button">
+          Créer un compte
+        </button>
+    </div>
+  </form>
+</div>
+</div>

@@ -1,0 +1,184 @@
+:host {
+  display: block;
+}
+
+/* Bloc admin: gestion plateforme */
+.admin-management {
+  mat-card {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  .admin-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .admin-action-card {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    mat-icon {
+      color: #0b63ce;
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      color: #111111;
+      margin: 0 0 8px;
+    }
+
+    p {
+      color: #4b5563;
+      margin: 0 0 14px;
+    }
+  }
+}
+
+/* Bloc utilisateurs: stats et actions */
+.user-management-section {
+  margin-top: 20px;
+
+  .user-management-card {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  .user-management-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      button {
+        justify-content: flex-start;
+      }
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 12px;
+        background: #ffffff;
+        border: 1px solid #e3e6ea;
+        border-radius: 10px;
+
+        mat-icon {
+          color: #0b63ce;
+          margin-bottom: 6px;
+        }
+
+        .stat-number {
+          color: #0b63ce;
+          font-size: 1.4rem;
+          font-weight: 700;
+        }
+
+        .stat-label {
+          color: #4b5563;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+/* Bloc candidatures: résumé admin */
+.admin-candidatures-overview {
+  margin-top: 20px;
+
+  mat-card {
+    background: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+
+  mat-card-title {
+    color: #111111;
+
+    mat-icon {
+      color: #0b63ce;
+    }
+  }
+
+  .candidatures-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+
+    .summary-stat {
+      text-align: center;
+      padding: 12px;
+      background: #ffffff;
+      border: 1px solid #e3e6ea;
+      border-radius: 8px;
+
+      .stat-number {
+        color: #111111;
+        font-size: 1.5rem;
+        font-weight: 700;
+
+        &.primary,
+        &.accent {
+          color: #0b63ce;
+        }
+
+        &.success {
+          color: #198754;
+        }
+      }
+
+      .stat-label {
+        color: #4b5563;
+      }
+    }
+  }
+
+  .candidatures-actions {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 968px) {
+  .user-management-section .user-management-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-candidatures-overview .candidatures-actions {
+    flex-direction: column;
+  }
+}
