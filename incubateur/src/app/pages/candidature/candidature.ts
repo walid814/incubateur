@@ -138,13 +138,13 @@ export class CandidatureComponent {
   onSubmit() {
     // Vérifier si une soumission est déjà en cours
     if (this.isSubmitting) {
-      alert('Candidature en cours, veuillez patienter...');
+      this.notificationService.showInfo('Patientez', 'Candidature en cours d\'envoi…');
       return;
     }
 
     // Vérifier le cooldown
     if (this.submitCooldown) {
-      alert('Veuillez attendre 30 secondes avant de soumettre à nouveau.');
+      this.notificationService.showWarning('Trop rapide', 'Veuillez attendre 30 secondes avant de soumettre à nouveau.');
       return;
     }
 

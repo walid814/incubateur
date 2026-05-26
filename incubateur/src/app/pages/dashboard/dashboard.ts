@@ -23,6 +23,7 @@ import { DashboardStatsOverviewComponent } from './components/dashboard-stats-ov
 import { DashboardAdminSectionsComponent } from './components/dashboard-admin-sections/dashboard-admin-sections.component';
 import { DashboardUserProjectsComponent } from './components/dashboard-user-projects/dashboard-user-projects.component';
 import { DashboardActivityTasksComponent } from './components/dashboard-activity-tasks/dashboard-activity-tasks.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -116,18 +117,12 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private projectService: ProjectService,
     private candidatureAdminService: CandidatureAdminService,
-    private userAdminService: UserAdminService
-  ) {
-    console.log('🚀 Dashboard constructor appelé');
-  }
+    private userAdminService: UserAdminService,
+    private notify: NotificationService
+  ) {}
 
   ngOnInit() {
-    console.log('🚀 Dashboard ngOnInit appelé');
-    
-    // Forcer la récupération des données utilisateur
-    console.log('🔍 localStorage token:', localStorage.getItem('token'));
-    console.log('🔍 localStorage user:', localStorage.getItem('user'));
-    
+
     this.currentUser = this.authService.getCurrentUser();
     console.log('👤 Utilisateur actuel:', this.currentUser);
     console.log('🔐 Token présent:', !!this.authService.getToken());
@@ -246,9 +241,8 @@ export class DashboardComponent implements OnInit {
         
         console.log('✅ Exportation terminée');
       },
-      error: (error) => {
-        console.error('❌ Erreur lors de l\'exportation:', error);
-        alert('Erreur lors de l\'exportation des données utilisateurs');
+      error: () => {
+        this.notify.showError('Export impossible', 'Erreur lors de l\'exportation des données utilisateurs.');
       }
     });
   }

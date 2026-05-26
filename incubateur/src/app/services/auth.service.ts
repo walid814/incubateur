@@ -86,9 +86,6 @@ export class AuthService {
             console.error('❌ Impossible de stocker user: response.user est undefined');
           }
           
-          console.log('AuthService: Token stocké dans localStorage:', localStorage.getItem('token'));
-          console.log('AuthService: User stocké dans localStorage:', localStorage.getItem('user'));
-          console.log('AuthService: currentUserSubject value après next:', this.currentUserSubject.value);
         }),
         catchError(error => {
           console.error('AuthService: Erreur de connexion:', error);
@@ -222,10 +219,6 @@ export class AuthService {
     // 5. Tester les permissions spécifiques
     console.log('🔐 Permission manage_users:', this.hasPermission('manage_users'));
     console.log('🔐 Permission manage_candidatures:', this.hasPermission('manage_candidatures'));
-    
-    // 6. Vérifier le localStorage
-    console.log('💾 Token localStorage:', localStorage.getItem('token'));
-    console.log('💾 User localStorage:', localStorage.getItem('user'));
     
     console.log('🔬 === FIN DIAGNOSTIC ===');
   }

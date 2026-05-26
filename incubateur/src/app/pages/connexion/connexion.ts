@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-connexion',
@@ -31,7 +32,8 @@ export class ConnexionComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private notify: NotificationService
   ) {
     this.connexionForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -41,56 +43,34 @@ export class ConnexionComponent {
   }
 
   onSubmit() {
-    if (this.connexionForm.valid) {
-      const { email, password } = this.connexionForm.value;
-      
-      // Debug : Afficher les données envoyées
-      console.log('Tentative de connexion avec:', { email, password: '***' });
-      
-      this.authService.login({ email, password }).subscribe({
-        next: (response) => {
-          console.log('Connexion réussie:', response);
-          
-          // Attendre un court délai pour s'assurer que le token est bien stocké
-          setTimeout(() => {
-            console.log('Redirection vers dashboard...');
-            console.log('Token stocké:', this.authService.getToken());
-            console.log('Utilisateur authentifié:', this.authService.isAuthenticated());
-            
-            this.router.navigate(['/dashboard']).then(
-              (success) => {
-                if (success) {
-                  console.log('✅ Redirection réussie vers /dashboard');
-                } else {
-                  console.log('❌ Échec de la redirection vers /dashboard');
-                  // Fallback vers accueil si dashboard ne fonctionne pas
-                  this.router.navigate(['/']);
-                }
-              }
-            ).catch(error => {
-              console.error('Erreur lors de la navigation:', error);
-              this.router.navigate(['/']);
-            });
-          }, 100);
-        },
-        error: (error) => {
-          console.error('Erreur de connexion complète:', error);
-          console.error('Status:', error.status);
-          console.error('Message:', error.message);
-          console.error('Body:', error.error);
-          
-          if (error.status === 401) {
-            alert('Email ou mot de passe incorrect.');
-          } else if (error.status === 0) {
-            alert('Impossible de contacter le serveur. Vérifiez que le backend est démarré.');
-          } else {
-            alert(`Erreur de connexion (${error.status}): ${error.error?.message || error.message || 'Erreur inconnue'}`);
-          }
-        }
-      });
-    } else {
-      alert('Veuillez remplir tous les champs correctement.');
+    if (!this.connexionForm.valid) {
+      this.notify.showWarning('Formulaire incomplet', 'Veuillez remplir tous les champs correctement.');
+      return;
     }
+
+    const { email, password } = this.connexionForm.value;
+
+    this.authService.login({ email, password }).subscribe({
+      next: () => {
+        this.router.navigate(['/dashboard']).then(success => {
+          if (!success) {
+            this.router.navigate(['/']);
+          }
+        }).catch(() => this.router.navigate(['/']));
+      },
+      error: (error) => {
+        if (error.status === 401) {
+          this.notify.showError('Connexion refusée', 'Email ou mot de passe incorrect.');
+        } else if (error.status === 0) {
+          this.notify.showError('Serveur injoignable', 'Impossible de contacter le serveur. Réessayez plus tard.');
+        } else {
+          this.notify.showError(
+            'Erreur de connexion',
+            error.error?.message || error.message || 'Une erreur est survenue. Réessayez.'
+          );
+        }
+      }
+    });
   }
 
   togglePasswordVisibility() {
@@ -99,27 +79,5 @@ export class ConnexionComponent {
 
   goToSignup() {
     this.router.navigate(['/candidature']);
-  }
-
-  // Méthode de test pour vérifier la connectivité du backend
-  testBackendConnection() {
-    console.log('Test de connexion backend...');
-    
-    // Test simple avec les identifiants
-    const testCredentials = {
-      email: this.connexionForm.get('email')?.value || 'test@example.com',
-      password: this.connexionForm.get('password')?.value || 'password123'
-    };
-
-    this.authService.login(testCredentials).subscribe({
-      next: (response) => {
-        console.log('✅ Test réussi:', response);
-        alert('Test de connexion réussi !');
-      },
-      error: (error) => {
-        console.error('❌ Test échoué:', error);
-        alert(`Test échoué: ${error.status} - ${JSON.stringify(error.error)}`);
-      }
-    });
   }
 }

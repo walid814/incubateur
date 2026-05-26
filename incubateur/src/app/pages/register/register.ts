@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
+import { NotificationService } from '../../services/notification.service';
 import { debounceTime, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -49,7 +50,8 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private notify: NotificationService
   ) {
     this.registerForm = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -128,63 +130,53 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    // Vérifier si une soumission est déjà en cours
     if (this.isSubmitting) {
-      alert('Enregistrement en cours, veuillez patienter...');
+      this.notify.showInfo('Patientez', 'Enregistrement en cours…');
       return;
     }
 
-    // Vérifier le cooldown
     if (this.submitCooldown) {
-      alert('Veuillez attendre 1 minute avant de soumettre à nouveau.');
+      this.notify.showWarning('Trop rapide', 'Veuillez attendre une minute avant de réessayer.');
       return;
     }
 
-    // Vérifier la disponibilité de l'email
     if (this.emailAvailable === false) {
-      alert('Cette adresse email est déjà utilisée.');
+      this.notify.showError('Email indisponible', 'Cette adresse email est déjà utilisée.');
       return;
     }
 
-    if (this.registerForm.valid) {
-      this.isSubmitting = true;
-      this.submitCooldown = true;
-
-      const formData = {
-        ...this.registerForm.value
-      };
-
-      this.registerService.register(formData).subscribe({
-        next: (response) => {
-          console.log('Enregistrement réussi:', response);
-          alert('Compte créé avec succès ! Vous pouvez maintenant vous connecter.');
-          this.router.navigate(['/connexion']);
-          this.resetSubmissionState();
-        },
-        error: (error) => {
-          console.error('Erreur lors de l\'enregistrement:', error);
-          if (error.status === 429) {
-            alert('Trop de tentatives. Veuillez réessayer plus tard.');
-          } else if (error.status === 409) {
-            alert('Cette adresse email est déjà utilisée.');
-          } else if (error.message) {
-            alert(error.message);
-          } else {
-            alert('Erreur lors de la création du compte. Veuillez réessayer.');
-          }
-          this.resetSubmissionState();
-        }
-      });
-
-      // Activer le cooldown pendant 1 minute
-      setTimeout(() => {
-        this.submitCooldown = false;
-      }, this.COOLDOWN_TIME);
-
-    } else {
+    if (!this.registerForm.valid) {
       this.markFormGroupTouched();
-      alert('Veuillez corriger les erreurs avant de soumettre.');
+      this.notify.showWarning('Formulaire incomplet', 'Veuillez corriger les erreurs avant de soumettre.');
+      return;
     }
+
+    this.isSubmitting = true;
+    this.submitCooldown = true;
+
+    const formData = { ...this.registerForm.value };
+
+    this.registerService.register(formData).subscribe({
+      next: () => {
+        this.notify.showSuccess('Compte créé', 'Votre compte a été créé. Vous pouvez maintenant vous connecter.');
+        this.router.navigate(['/connexion']);
+        this.resetSubmissionState();
+      },
+      error: (error) => {
+        if (error.status === 429) {
+          this.notify.showError('Trop de tentatives', 'Veuillez réessayer plus tard.');
+        } else if (error.status === 409) {
+          this.notify.showError('Email indisponible', 'Cette adresse email est déjà utilisée.');
+        } else {
+          this.notify.showError('Échec de la création', error.message || 'Une erreur est survenue. Réessayez.');
+        }
+        this.resetSubmissionState();
+      }
+    });
+
+    setTimeout(() => {
+      this.submitCooldown = false;
+    }, this.COOLDOWN_TIME);
   }
 
   private markFormGroupTouched() {

@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-contact',
@@ -68,7 +69,7 @@ export class ContactComponent {
     { name: 'YouTube', icon: 'smart_display', url: '#', color: '#ff0000' }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private notify: NotificationService) {
     this.contactForm = this.fb.group({
       nom: ['', [Validators.required, Validators.minLength(2)]],
       prenom: ['', [Validators.required, Validators.minLength(2)]],
@@ -81,10 +82,11 @@ export class ContactComponent {
 
   onSubmit() {
     if (this.contactForm.valid) {
-      console.log('Formulaire de contact soumis:', this.contactForm.value);
-      // Ici, implémenter l'envoi du formulaire
-      alert('Votre message a été envoyé ! Nous vous répondrons dans les 24h.');
+      // TODO: brancher l'envoi réel du formulaire au backend
+      this.notify.showSuccess('Message envoyé', 'Merci ! Nous vous répondrons sous 24 h.');
       this.contactForm.reset();
+    } else {
+      this.notify.showWarning('Formulaire incomplet', 'Veuillez remplir les champs obligatoires.');
     }
   }
 
