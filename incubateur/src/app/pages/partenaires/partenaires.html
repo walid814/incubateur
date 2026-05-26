@@ -1,39 +1,27 @@
 <div class="partenaires-container">
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero-section">
     <div class="hero-content">
       <h1>Nos Partenaires</h1>
       <p class="hero-subtitle">
         Un écosystème de confiance pour soutenir l'entrepreneuriat solidaire
       </p>
-      <!-- <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">{{stats.totalPartners}}</span>
-          <span class="stat-label">Partenaires</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">{{stats.totalFunding}}</span>
-          <span class="stat-label">Financements mobilisés</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">{{stats.totalProjects}}</span>
-          <span class="stat-label">Projets soutenus</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">{{stats.averageSuccess}}</span>
-          <span class="stat-label">Taux de réussite</span>
-        </div>
-      </div> -->
-    </div> 
-  </section> 
+    </div>
+  </section>
 
   <!-- Partenaires Institutionnels -->
   <section class="partners-section">
     <div class="container">
       <h2>Partenaires Institutionnels</h2>
-      <p class="section-subtitle">
-        Le soutien public au cœur de notre mission
-      </p>
+      <p class="section-subtitle">Le soutien public au cœur de notre mission</p>
+
+      <div class="partners-grid">
+        <article class="partner-card" *ngFor="let p of institutionnels">
+          <div class="partner-logo"><mat-icon>{{ p.icon }}</mat-icon></div>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.description }}</p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -41,10 +29,32 @@
   <section class="partners-section financial">
     <div class="container">
       <h2>Partenaires Financiers</h2>
-      <p class="section-subtitle">
-        L'expertise financière au service de l'innovation sociale
+      <p class="section-subtitle">L'expertise financière au service de l'innovation sociale</p>
+
+      <div class="partners-grid">
+        <article class="partner-card" *ngFor="let p of financiers">
+          <div class="partner-logo"><mat-icon>{{ p.icon }}</mat-icon></div>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Devenir partenaire -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Vous partagez notre mission ?</h2>
+      <p>
+        Collectivité, entreprise, fondation ou investisseur : rejoignez les acteurs
+        qui font grandir l'entrepreneuriat dans les quartiers populaires.
       </p>
-      
+      <div class="cta-actions">
+        <a mat-flat-button routerLink="/contact" class="cta-button">
+          <mat-icon>handshake</mat-icon>
+          Devenir partenaire
+        </a>
+      </div>
     </div>
   </section>
 </div>

@@ -1,28 +1,29 @@
 /* =====================================================
-   NAVBAR MODERNE - STYLE JAUNE COHÉRENT
+   NAVBAR — F.A.T.E
+   Barre fixe, fond blanc, accents or de la marque.
+   Tokens définis dans src/styles.scss.
    ===================================================== */
 
 mat-toolbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   z-index: 1001;
-  background: #ffffff;
-  color: var(--text-dark);
   height: 64px;
   padding: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background: var(--white);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, .06);
 }
 
+/* ---- Conteneurs ---- */
+.desktop-nav { width: 100%; }
+
 .toolbar-content {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding: 0 24px; // Augmenter le padding horizontal pour plus d'espace
-  color: var(--text-dark);
+  padding: 0 24px;
   box-sizing: border-box;
 }
 
@@ -30,735 +31,284 @@ mat-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding: 10px 8px; // Padding équilibré
-  gap: 20px; // Augmenter le gap pour plus d'espace entre les sections
-  height: 64px; // Hauteur fixe pour un alignement parfait
+  gap: 20px;
+  height: 64px;
   box-sizing: border-box;
-  min-width: 0; // Permettre aux éléments de se rétrécir
 }
 
-.desktop-nav {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 0.5rem;
-}
-
-/* Brand */
+/* ---- Marque ---- */
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-shrink: 0; // Empêcher le logo de se rétrécir
-  min-width: 120px; // Taille minimale pour le logo
+  flex-shrink: 0;
 }
 
 .brand-text {
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--jaune-primary), var(--jaune-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy);
 }
 
-/* Navigation Links */
+/* ---- Liens de navigation ---- */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 12px; // Augmenter l'espacement entre les boutons
-  flex: 1; // Prendre l'espace disponible
-  justify-content: center; // Centrer les liens
-  max-width: 600px; // Augmenter la largeur maximale pour les liens
-  min-width: 0; // Permettre aux éléments de se rétrécir
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+  min-width: 0;
 }
 
 .nav-links .mat-mdc-button {
-  color: var(--text-dark) !important;
+  color: var(--text-body) !important;
   background: transparent !important;
-  border-radius: 3px !important; // Changer le border-radius à 3px
-  margin: 0 6px !important; // Augmenter la marge horizontale
-  padding: 8px 16px !important; // Augmenter le padding horizontal
+  border-radius: 8px !important;
+  padding: 8px 14px !important;
+  font-family: var(--font-body) !important;
   font-weight: 500 !important;
-  transition: all 0.3s ease !important;
-  min-height: 36px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important; // Espacement entre icône et texte
-  flex-shrink: 1 !important; // Permettre aux boutons de se rétrécir
-  white-space: nowrap !important; // Empêcher le texte de se couper
+  font-size: 0.95rem !important;
+  min-height: 38px !important;
+  white-space: nowrap !important;
+  transition: var(--transition) !important;
 }
 
 .nav-links .mat-mdc-button:hover {
-  background: rgba(255, 215, 0, 0.1) !important;
-  color: var(--jaune-dark) !important;
-  transform: translateY(-2px) !important;
+  background: var(--bg-soft) !important;
+  color: var(--text-primary) !important;
 }
 
 .nav-links .mat-mdc-button.active {
-  background: var(--jaune-primary) !important;
-  color: var(--text-dark) !important;
+  color: var(--gold-text, #92400E) !important;
+  background: var(--gold-subtle) !important;
   font-weight: 600 !important;
-  position: relative;
 }
 
-/* Auth Section */
-.auth-section {
-  display: flex;
-  align-items: center;
-  gap: 16px; // Augmenter l'espacement entre les éléments d'auth
-  height: 100%; // Prendre toute la hauteur disponible
-  margin-right: 12px; // Augmenter l'espace par rapport au bord droit
-  flex-shrink: 0; // Empêcher la section auth de se rétrécir
-  min-width: fit-content; // S'assurer que l'auth section garde sa taille minimale
-}
-
+/* ---- Section authentification ---- */
+.auth-section,
 .auth-buttons {
   display: flex;
   align-items: center;
-  gap: 16px; // Augmenter l'espacement entre les boutons
+  gap: 12px;
   flex-shrink: 0;
-  min-width: fit-content; // S'assurer que les boutons ne se compriment pas
 }
 
-/* Bouton de connexion */
+/* Connexion — texte / contour discret */
 .login-btn {
-  background: transparent !important;
-  color: var(--text-dark) !important;
-  border: 2px solid var(--jaune-primary) !important;
-  border-radius: 3px !important; // Changer le border-radius à 3px
-  padding: 8px 20px !important; // Réduire le padding
-  font-weight: 600 !important;
-  transition: all 0.3s ease !important;
-  min-height: 40px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important; // Réduire l'espacement entre icône et texte
-  white-space: nowrap !important; // Empêcher le texte de passer à la ligne
-  flex-shrink: 0 !important; // Empêcher le bouton de se rétrécir
-}
-
-.login-btn:hover {
-  background: var(--jaune-primary) !important;
-  color: var(--text-dark) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3) !important;
-}
-
-.login-btn.active-auth {
-  background: var(--jaune-primary) !important;
-  color: var(--text-dark) !important;
-  border-color: var(--text-dark) !important;
-}
-
-/* Bouton d'inscription */
-.inscription-btn {
-  background: var(--jaune-primary) !important;
-  color: var(--text-dark) !important;
-  border: none !important;
-  border-radius: 3px !important; // Changer le border-radius à 3px
-  padding: 8px 18px !important; // Réduire encore le padding
-  font-weight: 700 !important;
-  text-decoration: none !important;
   display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important; // Réduire l'espacement entre icône et texte
-  transition: all 0.3s ease !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3) !important;
-  min-height: 38px !important; // Réduire la hauteur minimale
-  white-space: nowrap !important; // Empêcher le texte de passer à la ligne
-  flex-shrink: 0 !important; // Empêcher le bouton de se rétrécir
+  align-items: center;
+  gap: 6px;
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: var(--radius-btn) !important;
+  padding: 8px 18px !important;
+  font-weight: 600 !important;
+  min-height: 40px !important;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: var(--transition) !important;
+}
+.login-btn:hover {
+  border-color: var(--navy) !important;
+  background: var(--bg-soft) !important;
+}
+.login-btn.active-auth {
+  border-color: var(--navy) !important;
+  color: var(--navy) !important;
 }
 
-.inscription-btn:hover {
-  background: var(--jaune-light) !important;
-  transform: translateY(-3px) !important;
-  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4) !important;
-}
-
-.inscription-btn.active-auth {
-  background: var(--text-dark) !important;
-  color: #ffffff !important;
-  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.28) !important;
-}
-
-.inscription-btn.active-auth mat-icon {
-  color: #ffffff !important;
-}
-
-/* Etat actif du menu mobile */
-.mat-mdc-menu-item.active-mobile {
-  background: rgba(255, 215, 0, 0.2) !important;
-  color: var(--text-dark) !important;
+/* Inscription — plein or */
+.inscription-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold) !important;
+  color: var(--text-primary) !important;
+  border: none !important;
+  border-radius: var(--radius-btn) !important;
+  padding: 9px 18px !important;
   font-weight: 700 !important;
+  min-height: 40px !important;
+  white-space: nowrap;
+  text-decoration: none !important;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, .35) !important;
+  transition: var(--transition) !important;
 }
-
-.mat-mdc-menu-item.active-mobile mat-icon {
-  color: var(--text-dark) !important;
+.inscription-btn:hover {
+  background: var(--gold-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, .42) !important;
 }
+.inscription-btn.active-auth {
+  background: var(--navy) !important;
+  color: var(--white) !important;
+}
+.inscription-btn.active-auth mat-icon { color: var(--white) !important; }
 
-/* User Menu */
+/* ---- Menu utilisateur connecté ---- */
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 20px; // Augmenter l'espacement pour plus de respiration
-  height: 100%; // Prendre toute la hauteur pour l'alignement vertical
-  padding-right: 24px; // Augmenter le padding à droite
-  margin-left: 16px; // Ajouter une marge à gauche pour séparer du contenu principal
+  gap: 16px;
+  flex-shrink: 0;
 }
 
-/* Avatar utilisateur dans la navbar */
 .user-avatar-navbar {
-  width: 44px !important; // Augmenter légèrement la taille
-  height: 44px !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  padding: 0 !important;
   border-radius: 50% !important;
-  background: linear-gradient(135deg, var(--bleu-primary) 0%, var(--bleu-dark) 100%) !important;
+  background: var(--navy) !important;
+  border: 2px solid var(--white) !important;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, .25) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  border: 3px solid white !important; // Bordure plus visible
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25) !important; // Ombre plus marquée
-  min-width: 44px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: relative !important;
-  top: 0 !important;
-  flex-shrink: 0 !important; // Empêcher la compression
-  
-  // Ajouter un pulse subtil pour attirer l'attention
-  &::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 12px;
-    height: 12px;
-    background: var(--jaune-primary);
-    border-radius: 50%;
-    border: 2px solid white;
-    animation: avatarPulse 2s infinite;
-  }
-  
+  cursor: pointer;
+  transition: var(--transition) !important;
+
   &:hover {
-    transform: scale(1.08) !important; // Effet hover plus marqué
-    box-shadow: 0 6px 18px rgba(0, 102, 204, 0.35) !important;
-    border-color: var(--jaune-primary) !important; // Bordure jaune au hover
-    
-    &::after {
-      animation: none; // Arrêter l'animation au hover
-      background: var(--jaune-light);
-    }
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(30, 58, 138, .35) !important;
   }
 
   .avatar-initials-navbar {
-    color: white !important;
-    font-size: 1.1rem !important; // Texte légèrement plus grand
-    font-weight: bold !important;
-    text-transform: uppercase !important;
-    line-height: 1 !important;
-  }
-}
-
-@keyframes avatarPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.1);
+    color: var(--white) !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    line-height: 1;
   }
 }
 
 .welcome-text {
-  color: var(--text-dark);
+  color: var(--text-body);
   font-weight: 500;
   font-size: 0.9rem;
 }
 
-/* Bouton de déconnexion */
+/* Déconnexion (bouton dans le menu utilisateur) */
 .user-menu .mat-mdc-raised-button {
-  background: var(--danger-color) !important;
-  color: white !important;
-  border-radius: 3px !important; // Changer le border-radius à 3px
-  padding: 8px 20px !important;
+  background: var(--danger) !important;
+  color: var(--white) !important;
+  border-radius: var(--radius-btn) !important;
   font-weight: 600 !important;
-  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
   min-height: 40px !important;
 }
 
-.user-menu .mat-mdc-raised-button:hover {
-  background: #c82333 !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4) !important;
+/* ---- Menu déroulant utilisateur ---- */
+::ng-deep .user-dropdown-menu-navbar {
+  margin-top: 8px;
+
+  .mat-mdc-menu-panel {
+    border-radius: 12px !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow-lg) !important;
+    min-width: 210px !important;
+  }
+
+  .mat-mdc-menu-item {
+    padding: 12px 18px !important;
+    font-size: 14px !important;
+
+    mat-icon {
+      margin-right: 14px !important;
+      color: var(--blue) !important;
+      font-size: 20px !important;
+      width: 20px !important;
+      height: 20px !important;
+    }
+    span { color: var(--text-primary) !important; font-weight: 500 !important; }
+    &:hover { background: var(--bg-soft) !important; }
+  }
+
+  .mat-mdc-menu-item:last-child {
+    mat-icon, span { color: var(--danger) !important; }
+    &:hover { background: rgba(220, 38, 38, .08) !important; }
+  }
 }
 
-/* Search Bar */
-.search-bar-container {
-  background: linear-gradient(135deg, var(--gris-light) 0%, #e9ecef 100%);
-  border-radius: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: 20px 0;
-  margin-bottom: 0;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  min-height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 2px solid var(--jaune-primary);
-}
-
-.search-bar-content {
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px;
-  width: 100%;
-  padding: 0 24px;
-}
-
-.search-bar {
-  flex: 1;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.search-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 3px; // Changer le border-radius à 3px
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
-  padding: 8px 8px 8px 20px;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  gap: 12px;
-  width: 100%;
-}
-
-.search-wrapper:hover {
-  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.3);
-  border-color: var(--jaune-primary);
-  transform: translateY(-2px);
-}
-
-.search-wrapper:focus-within {
-  border-color: var(--jaune-primary);
-  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-}
-
-.search-field {
-  flex: 1;
-  margin: 0;
-}
-
-.search-field .mat-mdc-form-field-wrapper {
-  padding: 0;
-}
-
-.search-field .mat-mdc-form-field-flex {
-  padding: 0;
-  align-items: center;
-}
-
-.search-field .mat-mdc-form-field-outline {
-  display: none;
-}
-
-.search-input {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 16px;
-  color: var(--text-dark);
-  padding: 8px 0;
-  width: 100%;
-}
-
-.search-input::placeholder {
-  color: var(--gris-medium);
-  opacity: 0.7;
-}
-
-.search-btn {
-  background: var(--jaune-primary) !important;
-  color: var(--text-dark) !important;
-  border-radius: 3px !important; // Changer le border-radius à 3px
-  width: 40px !important;
-  height: 40px !important;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3) !important;
-  transition: all 0.3s ease !important;
-}
-
-.search-btn:hover {
-  background: var(--jaune-light) !important;
-  transform: scale(1.1) !important;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
-}
-
-.search-icon-left {
-  color: var(--jaune-primary);
-  font-size: 24px;
-  opacity: 0.8;
-}
-
-/* Mobile Navigation */
+/* ---- Navigation mobile ---- */
 .mobile-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px; // Augmenter le padding horizontal
+  padding: 0 20px;
   width: 100%;
-  height: 64px; // Même hauteur que desktop
+  height: 64px;
   box-sizing: border-box;
 }
 
 .mobile-user-info {
-  flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-.mobile-welcome {
-  color: var(--text-dark);
-  font-weight: 500;
-  font-size: 0.9rem;
+.user-avatar-mobile {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 2px solid var(--white);
+  box-shadow: 0 2px 8px rgba(30, 58, 138, .2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .avatar-initials-mobile {
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+  }
 }
 
-/* Mobile Menu Button */
 .mobile-nav .mat-mdc-icon-button {
-  color: var(--jaune-primary) !important;
-  background: rgba(255, 215, 0, 0.1) !important;
-  border-radius: 3px !important; // Changer le border-radius à 3px
+  color: var(--navy) !important;
 }
 
-.mobile-nav .mat-mdc-icon-button:hover {
-  background: rgba(255, 215, 0, 0.2) !important;
-  transform: scale(1.1) !important;
+/* Items du menu mobile */
+.mat-mdc-menu-item.active-mobile {
+  background: var(--gold-subtle) !important;
+  font-weight: 600 !important;
 }
 
-/* Menu Items */
-.mat-mdc-menu-item {
-  color: var(--text-dark) !important;
-  transition: all 0.3s ease !important;
-}
-
-.mat-mdc-menu-item:hover {
-  background: rgba(255, 215, 0, 0.1) !important;
-  color: var(--jaune-dark) !important;
-}
-
-.mat-mdc-menu-item mat-icon {
-  color: var(--jaune-primary) !important;
-}
-
-/* Styles pour le menu déroulant utilisateur navbar */
-::ng-deep .user-dropdown-menu-navbar {
-  margin-top: 8px;
-  
-  .mat-mdc-menu-panel {
-    border-radius: 3px !important; // Changer le border-radius à 3px
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-    border: 1px solid #e0e0e0 !important;
-    min-width: 200px !important;
-  }
-
-  .mat-mdc-menu-item {
-    padding: 14px 20px !important; // Augmenter le padding
-    font-size: 14px !important;
-    transition: all 0.2s ease !important;
-
-    &:hover {
-      background-color: #f5f5f5 !important;
-    }
-
-    mat-icon {
-      margin-right: 16px !important; // Augmenter l'espacement après l'icône
-      color: var(--bleu-primary) !important;
-      font-size: 20px !important;
-      width: 20px !important;
-      height: 20px !important;
-    }
-
-    span {
-      color: var(--text-dark) !important;
-      font-weight: 500 !important;
-    }
-  }
-
-  .mat-mdc-menu-item.mat-mdc-menu-item:last-child {
-    mat-icon {
-      color: #dc3545 !important;
-    }
-    
-    span {
-      color: #dc3545 !important;
-    }
-
-    &:hover {
-      background-color: rgba(220, 53, 69, 0.1) !important;
-    }
-  }
-}
-
-/* Responsive Design pour écrans moyens */
-@media (max-width: 1200px) {
-  .nav-links {
-    gap: 6px; // Réduire encore l'espacement
-  }
-  
-  .nav-links .mat-mdc-button {
-    padding: 6px 12px !important; // Réduire le padding
-    margin: 0 2px !important;
-    font-size: 0.9rem !important;
-  }
-  
-  .login-btn {
-    padding: 6px 16px !important;
-    font-size: 0.9rem !important;
-  }
-  
-  .inscription-btn {
-    padding: 6px 14px !important;
-    font-size: 0.9rem !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .main-nav-row {
-    padding: 8px 0;
-  }
-  
-  .brand-text {
-    font-size: 1.5rem;
-  }
-  
-  .search-bar-container {
-    padding: 15px 0;
-    min-height: 60px;
-  }
-  
-  .search-wrapper {
-    padding: 6px 6px 6px 16px;
-  }
-  
-  .search-btn {
-    width: 36px !important;
-    height: 36px !important;
-  }
-
-  /* Avatar mobile */
-  .mobile-user-info {
-    display: flex;
-    align-items: center;
-    height: 100%; // Alignement vertical parfait
-  }
-
-  .user-avatar-mobile {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--bleu-primary) 0%, var(--bleu-dark) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid white;
-    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
-    margin: 0;
-    padding: 0;
-    
-    .avatar-initials-mobile {
-      color: white;
-      font-size: 0.8rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      line-height: 1;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .auth-buttons {
-    gap: 12px; // Maintenir un bon espacement même sur mobile
-  }
-  
-  .login-btn,
-  .inscription-btn {
-    padding: 6px 16px !important; // Réduire le padding sur mobile
-    font-size: 0.9rem !important;
-  }
-  
-  .inscription-btn mat-icon,
-  .login-btn mat-icon {
-    font-size: 1rem !important;
-    margin-right: 6px !important; // Ajouter un espacement après l'icône
-  }
-  
-  /* Bouton retour en haut - version mobile */
-  .scroll-to-top-btn {
-    bottom: 20px !important;
-    right: 20px !important;
-    width: 48px !important;
-    height: 48px !important;
-    
-    mat-icon {
-      font-size: 20px !important;
-      width: 20px !important;
-      height: 20px !important;
-    }
-  }
-}
-
-/* Bouton retour en haut */
+/* ---- Bouton « retour en haut » ---- */
 .scroll-to-top-btn {
   position: fixed;
   bottom: 30px;
   right: 30px;
   z-index: 1000;
-  background: var(--jaune-primary) !important;
-  color: var(--text-dark) !important;
-  width: 56px !important;
-  height: 56px !important;
-  border-radius: 3px !important; // Changer le border-radius à 3px
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3) !important;
-  transition: all 0.3s ease !important;
-  transform: translateY(100px) !important; // Caché par défaut
-  opacity: 0 !important;
-  
-  &.visible {
-    transform: translateY(0) !important; // Visible
-    opacity: 1 !important;
-  }
-  
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: var(--gold) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, .35) !important;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: var(--transition) !important;
+
+  &.visible { opacity: 1; transform: translateY(0); }
   &:hover {
-    background: var(--jaune-light) !important;
-    transform: translateY(-5px) scale(1.1) !important;
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4) !important;
+    background: var(--gold-light) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 26px rgba(245, 158, 11, .45) !important;
   }
-  
-  &:active {
-    transform: translateY(-2px) scale(1.05) !important;
-  }
-  
-  mat-icon {
-    font-size: 24px !important;
-    width: 24px !important;
-    height: 24px !important;
-    color: var(--text-dark) !important;
-  }
+  mat-icon { color: var(--text-primary) !important; }
 }
 
-// Animation pulse pour le bouton retour en haut
-@keyframes scrollButtonPulse {
-  0%, 100% {
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
-  }
-  50% {
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
-  }
+/* ---- Responsive ---- */
+@media (max-width: 1100px) {
+  .nav-links .mat-mdc-button { padding: 8px 10px !important; font-size: 0.9rem !important; }
+  .toolbar-content { padding: 0 16px; }
 }
 
-/* =====================================================
-   RESPONSIVE ET OPTIMISATIONS ESPACEMENT
-   ===================================================== */
-
-/* Optimisation pour écrans moyens */
-@media (max-width: 1200px) {
-  .nav-links {
-    gap: 8px; // Réduire l'espacement pour les écrans moyens
-    max-width: 500px;
-  }
-  
-  .nav-links .mat-mdc-button {
-    margin: 0 4px !important;
-    padding: 8px 12px !important;
-    font-size: 0.9rem !important;
-  }
-  
-  .user-menu {
-    gap: 16px;
-    padding-right: 16px;
-    margin-left: 12px;
-  }
-  
-  .auth-section {
-    gap: 12px;
-    margin-right: 8px;
-  }
-}
-
-/* Optimisation pour écrans petits */
-@media (max-width: 992px) {
-  .toolbar-content {
-    padding: 0 16px;
-  }
-  
-  .main-nav-row {
-    gap: 12px;
-  }
-  
-  .nav-links {
-    gap: 6px;
-    max-width: 400px;
-  }
-  
-  .nav-links .mat-mdc-button {
-    margin: 0 2px !important;
-    padding: 6px 10px !important;
-    font-size: 0.85rem !important;
-  }
-  
-  .user-menu {
-    gap: 12px;
-    padding-right: 12px;
-    margin-left: 8px;
-  }
-  
-  .user-avatar-navbar {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-  }
-}
-
-/* Optimisation pour très petits écrans */
 @media (max-width: 768px) {
-  .main-nav-row {
-    gap: 8px;
-  }
-  
-  .nav-links {
-    gap: 4px;
-    max-width: 300px;
-  }
-  
-  .nav-links .mat-mdc-button {
-    margin: 0 1px !important;
-    padding: 6px 8px !important;
-    font-size: 0.8rem !important;
-  }
-  
-  .user-menu {
-    gap: 8px;
-    padding-right: 8px;
-    margin-left: 4px;
-  }
-  
-  .auth-section {
-    gap: 8px;
-    margin-right: 4px;
-  }
-}
-
-.scroll-to-top-btn.visible {
-  animation: scrollButtonPulse 3s infinite;
+  .brand-text { font-size: 1.4rem; }
 }

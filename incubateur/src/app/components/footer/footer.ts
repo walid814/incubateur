@@ -32,7 +32,7 @@ export class FooterComponent {
     { label: 'Formation', route: '/apropos' },
     { label: 'Financement', route: '/apropos' },
     { label: 'Réseau', route: '/apropos' },
-    { label: 'Ressources', route: '/ressources' }
+    { label: 'Ressources', route: '/apropos' }
   ];
 
   socialLinks = [

@@ -41,20 +41,6 @@
         </app-dashboard-user-projects>
       }
 
-      <!-- Bloc mes anciens projets (pour référence) -->
-      <section class="dashboard-candidatures">
-        <mat-card>
-          <mat-card-title>Mes projets (ancien affichage)</mat-card-title>
-          <mat-card-content>
-            <div class="candidature-empty">
-              <mat-icon class="candidature-icon" color="primary" style="font-size: 64px;">flight_takeoff</mat-icon>
-              <p>Vous n'avez pas encore créé de projet.<br>Soumettez votre idée et bénéficiez de notre accompagnement pour la développer !</p>
-              <a class="candidature-link" routerLink="/candidature">Créer mon premier projet</a>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </section>
-
       <app-dashboard-activity-tasks
         [activities]="getRecentActivities()"
         [tasks]="getPendingTasks()">

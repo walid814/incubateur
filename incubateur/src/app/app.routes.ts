@@ -11,18 +11,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/candidature/candidature').then(m => m.CandidatureComponent)
   },
   {
-    path: 'projets',
-    loadComponent: () => import('./pages/accueil/accueil').then(m => m.AccueilComponent) // Temporaire
-  },
-  {
-    path: 'porteurs',
-    loadComponent: () => import('./pages/accueil/accueil').then(m => m.AccueilComponent) // Temporaire
-  },
-  {
-    path: 'ressources',
-    loadComponent: () => import('./pages/accueil/accueil').then(m => m.AccueilComponent) // Temporaire
-  },
-  {
     path: 'partenaires',
     loadComponent: () => import('./pages/partenaires/partenaires').then(m => m.PartenairesComponent)
   },

@@ -1,9 +1,9 @@
-<h1>CRÉER UN COMPTE</h1>
+<h1>Créer un compte</h1>
 <div class="register-form-wrapper">
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
     <div class="form-grid">
       <!-- Prénom et Nom -->
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Prénom</mat-label>
         <input matInput formControlName="firstname" required>
         <mat-icon matSuffix>person</mat-icon>
@@ -18,7 +18,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
         <input matInput formControlName="lastname" required>
         <mat-icon matSuffix>person</mat-icon>
@@ -34,7 +34,7 @@
       </mat-form-field>
 
       <!-- Email avec vérification en temps réel -->
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" required>
         <mat-icon matSuffix *ngIf="!emailAvailabilityChecking && emailAvailable === null">email</mat-icon>
@@ -57,7 +57,7 @@
       </mat-form-field>
 
       <!-- Rôle -->
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Rôle</mat-label>
         <mat-select formControlName="role">
           <mat-option *ngFor="let role of roles" [value]="role.value">
@@ -68,7 +68,7 @@
       </mat-form-field>
 
       <!-- Mot de passe -->
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Mot de passe</mat-label>
         <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
         <button mat-icon-button matSuffix (click)="togglePasswordVisibility('password')" type="button">
@@ -89,7 +89,7 @@
       </mat-form-field>
 
       <!-- Confirmation mot de passe -->
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Confirmer le mot de passe</mat-label>
         <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" required>
         <button mat-icon-button matSuffix (click)="togglePasswordVisibility('confirmPassword')" type="button">
@@ -117,13 +117,14 @@
 
     <!-- Bouton de soumission -->
     <div class="form-actions">
-      <button 
-        mat-fab 
-        color="primary" 
-        type="submit" 
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
         [disabled]="!registerForm.valid || isSubmitting || emailAvailable === false"
         class="register-button">
         <mat-icon>{{isSubmitting ? 'hourglass_empty' : 'person_add'}}</mat-icon>
+        {{isSubmitting ? 'Création…' : 'Créer mon compte'}}
       </button>
     </div>
 

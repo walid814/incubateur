@@ -1,9 +1,9 @@
 <div class="connexion-page-wrapper page-content">
-<h1>SE CONNECTER</h1>
+<h1>Se connecter</h1>
 <div class="connexion-form-wrapper">
   <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()" class="connexion-form">
     <div class="form-grid">
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" required>
         <mat-icon matSuffix>email</mat-icon>
@@ -15,7 +15,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Mot de passe</mat-label>
         <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
         <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
@@ -39,8 +39,9 @@
     </div>
 
     <div class="form-actions">
-      <button mat-fab color="primary" type="submit" [disabled]="!connexionForm.valid" class="login-button">
+      <button mat-flat-button color="primary" type="submit" [disabled]="!connexionForm.valid" class="login-button">
         <mat-icon>login</mat-icon>
+        Se connecter
       </button>
     </div>
 
@@ -50,6 +51,7 @@
         <button mat-button color="accent" (click)="goToSignup()" type="button">
           Créer un compte
         </button>
+      </p>
     </div>
   </form>
 </div>
