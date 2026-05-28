@@ -107,11 +107,6 @@ export class AdminUsersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('🚀 Initialisation du composant admin-users');
-    
-    // Diagnostic complet de l'authentification
-    this.authService.diagnoseAuthState();
-    
     // Vérifier d'abord l'authentification et les permissions
     if (!this.checkAuthentication()) {
       return; // Arrêter l'initialisation si pas autorisé
@@ -299,17 +294,6 @@ export class AdminUsersComponent implements OnInit {
     this.users = [];
     this.dataSource.data = [];
     this.loadUsers();
-  }
-
-  // Méthode pour simuler une connexion admin
-  simulateAdmin() {
-    console.log('🧪 Simulation connexion admin...');
-    this.authService.simulateAdminLogin();
-    
-    // Attendre un peu puis recharger
-    setTimeout(() => {
-      this.forceReload();
-    }, 1000);
   }
 
   loadStatistics() {

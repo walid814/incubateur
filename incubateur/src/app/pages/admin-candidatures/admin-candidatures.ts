@@ -94,11 +94,6 @@ export class AdminCandidaturesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('🚀 Initialisation du composant admin-candidatures');
-    
-    // Diagnostic complet de l'authentification
-    this.authService.diagnoseAuthState();
-    
     // Vérifier d'abord l'authentification et les permissions
     if (!this.checkAuthentication()) {
       return; // Arrêter l'initialisation si pas autorisé

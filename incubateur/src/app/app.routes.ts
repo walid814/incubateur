@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
+import { AdminGuard } from './services/admin.guard';
 
 export const routes: Routes = [
   {
@@ -37,8 +38,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => import('./pages/dashboard/dashboard').then(m => m.DashboardComponent),
-    // Bloc de garde désactivé temporairement pour autoriser l'accès public au dashboard.
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'financement',
@@ -48,12 +48,12 @@ export const routes: Routes = [
   {
     path: 'admin/candidatures',
     loadComponent: () => import('./pages/admin-candidatures/admin-candidatures').then(m => m.AdminCandidaturesComponent),
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'admin/users',
     loadComponent: () => import('./pages/admin-users/admin-users').then(m => m.AdminUsersComponent),
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: '**',
