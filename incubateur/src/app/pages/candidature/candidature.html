@@ -4,7 +4,7 @@
     <div class="container">
       <div class="page-header">
         <h1>Candidature</h1>
-        <p>Rejoignez notre incubateur et transformez votre idée en projet d'impact social</p>
+        <p>Rejoignez Envol Impact et transformez votre idée en projet à impact social</p>
       </div>
       <div class="candidature-form-wrapper">
         <mat-stepper [linear]="true" #stepper orientation="vertical" class="modern-stepper">
@@ -119,7 +119,7 @@
                   [ngClass]="getMotivationFieldClass()">
                   <mat-label>Votre motivation</mat-label>
                   <textarea matInput formControlName="motivation" rows="8" required
-                    placeholder="Expliquez-nous pourquoi vous souhaitez rejoindre notre incubateur. Quels sont vos objectifs ? Comment notre accompagnement peut-il vous aider à réussir votre projet d'impact social ?">
+                    placeholder="Expliquez-nous pourquoi vous souhaitez rejoindre Envol Impact. Quels sont vos objectifs ? Comment notre accompagnement peut-il vous aider à réussir votre projet à impact social ?">
                   </textarea>
                   <mat-icon matSuffix>description</mat-icon>
                   <mat-hint>{{ getCharacterCountMessage(getMotivationCharacterCount(), 200, 255) }}</mat-hint>

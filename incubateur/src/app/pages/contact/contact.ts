@@ -38,7 +38,7 @@ export class ContactComponent {
       schedule: 'Lundi au vendredi : 9h00 - 17h00',
       icon: 'location_on',
       phone: '01 23 45 67 89',
-      email: 'contact@incubateur-solidaire.fr'
+      email: 'contact@envolimpact.fr'
     },
     {
       title: 'Antenne Sud',
@@ -47,7 +47,7 @@ export class ContactComponent {
       schedule: 'Lundi, mercredi, vendredi : 14h00 - 18h00',
       icon: 'location_on',
       phone: '04 91 23 45 67',
-      email: 'marseille@incubateur-solidaire.fr'
+      email: 'marseille@envolimpact.fr'
     }
   ];
 

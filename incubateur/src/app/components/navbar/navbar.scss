@@ -1,5 +1,5 @@
 /* =====================================================
-   NAVBAR — F.A.T.E
+   NAVBAR — Envol Impact
    Barre fixe, fond blanc, accents or de la marque.
    Tokens définis dans src/styles.scss.
    ===================================================== */
@@ -38,15 +38,25 @@ mat-toolbar {
 
 /* ---- Marque ---- */
 .brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+  line-height: 1;
+}
+
+.brand-mark {
+  height: 40px;
+  width: auto;
+  display: block;
   flex-shrink: 0;
 }
 
 .brand-text {
   font-family: var(--font-display);
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--navy);

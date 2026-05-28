@@ -6,9 +6,10 @@
     <div class="toolbar-content">
       <div class="main-nav-row">
         <!-- Logo -->
-        <div class="brand">
-          <span class="brand-text">F.A.T.E</span>
-        </div>
+        <a class="brand" routerLink="/" aria-label="Envol Impact — accueil">
+          <img class="brand-mark" src="/brand/envol-impact-mark.png" alt="" width="138" height="107" />
+          <span class="brand-text">Envol Impact</span>
+        </a>
 
         <!-- Navigation principale -->
         <div class="nav-links">
@@ -100,9 +101,10 @@
  
   <!-- Mobile Navigation -->
   <div class="mobile-nav" *ngIf="isHandset$ | async">
-    <div class="brand">
-      <span class="brand-text">F.A.T.E</span>
-    </div>
+    <a class="brand" routerLink="/" aria-label="Envol Impact — accueil">
+      <img class="brand-mark" src="/brand/envol-impact-mark.png" alt="" width="138" height="107" />
+      <span class="brand-text">Envol Impact</span>
+    </a>
 
     <!-- Utilisateur connecté sur mobile -->
     <div *ngIf="isAuthenticated()" class="mobile-user-info">

@@ -48,21 +48,18 @@ $footer-text: #e0e0e0;
 // Brand Section
 .footer-brand {
   .brand-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
     margin-bottom: 20px;
-    
-    .brand-icon {
-      font-size: 32px;
-      color: $primary-color;
-    }
-    
-    h3 {
-      color: $white;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin: 0;
+
+    .footer-wordmark {
+      display: block;
+      height: 96px;
+      width: auto;
+      max-width: 100%;
+      // Sortir le logo sur fond clair en l'inversant légèrement : le footer est sombre,
+      // le PNG a un fond blanc qui détonne. On compose avec un encart blanc arrondi.
+      background: $white;
+      padding: 10px 14px;
+      border-radius: 12px;
     }
   }
   

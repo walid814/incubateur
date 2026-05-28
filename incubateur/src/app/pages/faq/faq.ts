@@ -27,7 +27,7 @@ export class FaqComponent {
       icon: 'app_registration',
       questions: [
         {
-          question: 'Qui peut candidater à l\'incubateur ?',
+          question: 'Qui peut candidater à Envol Impact ?',
           answer: 'Toute personne majeure portant un projet à impact social, en particulier les habitants des quartiers prioritaires, les demandeurs d\'emploi et les créateurs d\'entreprises sociales. Aucun diplôme spécifique n\'est requis.'
         },
         {
