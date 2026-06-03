@@ -295,86 +295,32 @@
       font-weight: 600;
       margin-left: 4px;
       color: #9a6a16 !important;
-      min-height: 44px;
     }
   }
 }
 
 /* =====================================================
-   RESPONSIVE — l'aside devient un bandeau de marque compact,
-   le formulaire passe prioritaire (peu de scroll avant le 1er champ)
+   RESPONSIVE — l'aside passe en bandeau compact
    ===================================================== */
-
-/* --- Tablette & mobile : on empile, aside = bandeau maîtrisé --- */
 @media (max-width: 880px) {
-  .ei-auth {
-    grid-template-columns: 1fr;
-    min-height: 100vh;
-  }
+  .ei-auth { grid-template-columns: 1fr; }
 
-  /* Bandeau de marque : hauteur contenue, contenu calé en bas-gauche,
-     plus de chevauchement. L'oiseau décoratif est retiré (il croisait
-     la marque sur colonne étroite), le halo est adouci. */
   .ei-auth__aside {
-    min-height: 0;
+    min-height: 230px;
     align-items: flex-end;
-    padding: clamp(20px, 6vw, 36px);
-    padding-top: clamp(28px, 8vw, 44px);
+    padding: clamp(24px, 6vw, 40px);
   }
-  .aside-bird { display: none; }
-  .aside-halo {
-    top: -22%;
-    right: -28%;
-    width: min(52%, 280px);
-  }
-
-  .aside-inner { max-width: none; }
-  .aside-brand {
-    margin-bottom: var(--ei-s-8);
-    font-size: clamp(1.25rem, 5vw, 1.6rem);
-  }
-  /* Sur le bandeau, la citation devient une accroche courte et discrète */
-  .aside-quote {
-    margin-bottom: 0;
-    font-size: clamp(1.05rem, 3.6vw, 1.35rem);
-    line-height: 1.3;
-  }
-  .aside-meta { display: none; }
+  .aside-quote { font-size: clamp(1.15rem, 4vw, 1.5rem); }
 
   .ei-auth__panel {
     min-height: auto;
-    padding: clamp(32px, 8vw, 56px) clamp(20px, 7vw, 40px) clamp(56px, 12vw, 80px);
+    padding: clamp(40px, 9vw, 64px) clamp(20px, 7vw, 40px) clamp(64px, 12vw, 88px);
   }
   .ei-auth__form-shell { max-width: 480px; margin: 0 auto; }
 }
 
-/* --- Tablette portrait (≤768px) : bandeau encore plus contenu --- */
-@media (max-width: 768px) {
-  .ei-auth__aside { padding-block: clamp(24px, 7vw, 36px); }
-}
-
-/* --- Mobile : bandeau minimal, formulaire immédiat --- */
 @media (max-width: 480px) {
-  .ei-auth__aside {
-    padding: 22px 20px 18px;
-  }
-  .aside-quote { display: none; } /* on garde marque seule, accroche dans le panneau */
-  .ei-auth__panel { padding: 24px 20px 48px; }
-
-  .form-options {
-    flex-direction: column;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .forgot-password { padding: 4px 0; } /* cible tactile confortable */
-}
-
-/* --- Très petit (≤360px) : on resserre sans rien casser --- */
-@media (max-width: 360px) {
-  .ei-auth__aside { padding: 18px 16px 16px; }
-  .aside-brand { font-size: 1.2rem; }
-  .ei-auth__panel { padding: 22px 16px 40px; }
-  .ei-auth__title { font-size: 1.95rem; }
+  .form-options { flex-direction: column; gap: 12px; align-items: flex-start; }
 }
 
 /* =====================================================

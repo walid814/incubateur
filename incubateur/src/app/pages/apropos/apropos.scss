@@ -443,9 +443,8 @@
    ===================================================== */
 @media (max-width: 900px) {
   .trajectory-spine { display: none; }
-  /* spine retirée → on aligne le flux sur le padding latéral standard */
-  .story, .values { padding-left: clamp(var(--ei-s-24), 6vw, var(--ei-s-48)); }
-  .hero-title { font-size: clamp(2.4rem, 10vw, 4rem); }
+  .story, .values { padding-left: clamp(20px, 6vw, 40px); }
+  .hero-title { font-size: clamp(2.4rem, 12vw, 4rem); }
   .figures { clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 calc(100% - 3vw)); }
 }
 
@@ -454,15 +453,6 @@
   .ei-btn { flex: 1 1 auto; justify-content: center; }
   .value-node { grid-template-columns: 1fr; gap: 10px; }
   .value-num { font-size: 2.4rem; }
-}
-
-/* --- très petits écrans (360/390) : titres qui tiennent sans rogner --- */
-@media (max-width: 400px) {
-  /* le mot accentué « décoller. » peut dépasser la ligne → on autorise
-     le retour à la ligne dans .line sans casser l'effet de reveal vertical */
-  .hero-title { font-size: clamp(2rem, 8.8vw, 2.6rem); }
-  .hero-title .line { overflow: clip visible; }
-  .hero-title .line-inner { white-space: normal; }
 }
 
 /* =====================================================

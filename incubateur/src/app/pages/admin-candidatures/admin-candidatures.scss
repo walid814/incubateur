@@ -265,21 +265,10 @@
   ::ng-deep mat-card-content { padding: var(--ei-s-16) !important; }
 
   .table-container {
-    position: relative;
     overflow-x: auto;
     max-height: 800px;
     border-radius: var(--ei-r-8);
     border: 1px solid rgba(237, 230, 216, 0.08);
-    /* defilement tactile fluide + ancrage colonnes a gauche */
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(244, 201, 93, 0.4) transparent;
-
-    &::-webkit-scrollbar { height: 8px; }
-    &::-webkit-scrollbar-thumb {
-      background: rgba(244, 201, 93, 0.4);
-      border-radius: 999px;
-    }
   }
 
   .candidatures-table {
@@ -435,25 +424,6 @@
   p { margin: 0; font-size: 1rem; }
 }
 
-/* Indice de defilement horizontal — affiche seulement sur mobile,
-   quand le tableau deborde. Discret, dore, non bloquant. */
-.scroll-hint {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 var(--ei-s-8);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: var(--ei-haze);
-
-  mat-icon {
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
-    color: var(--ei-gold-2);
-  }
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .admin-candidatures-container { padding: var(--ei-s-16); }
@@ -464,7 +434,6 @@
     align-items: stretch;
 
     .header-title h1 { font-size: 1.5rem; }
-    .header-actions button { width: 100%; justify-content: center; }
   }
 
   .stats-overview {
@@ -477,21 +446,6 @@
     align-items: stretch;
 
     mat-form-field { min-width: unset; }
-    button { width: 100%; justify-content: center; }
-  }
-
-  /* le tableau reste lisible : on garde toutes les colonnes mais
-     on autorise le defilement horizontal (largeur mini imposee). */
-  .scroll-hint { display: flex; }
-
-  .candidatures-table-card {
-    .candidatures-table { min-width: 640px; }
-
-    /* cible tactile du menu d'actions */
-    .candidatures-table ::ng-deep .mat-mdc-icon-button {
-      width: 44px;
-      height: 44px;
-    }
   }
 
   .table-container { font-size: 0.85rem; }
@@ -505,12 +459,4 @@
       display: none;
     }
   }
-  /* moins de colonnes visibles → largeur mini plus basse */
-  .candidatures-table-card .candidatures-table { min-width: 460px; }
-}
-
-@media (max-width: 390px) {
-  .admin-candidatures-container { padding: var(--ei-s-12); }
-  .candidatures-header .header-title h1 { font-size: 1.35rem; }
-  .candidatures-table-card .candidatures-table { min-width: 380px; }
 }

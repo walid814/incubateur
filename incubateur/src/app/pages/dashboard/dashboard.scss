@@ -64,23 +64,9 @@
   }
 }
 
-/* ---- Responsive ----
-   Sur mobile la sidebar passe en tiroir off-canvas (cf.
-   dashboard-sidebar) : on supprime le decalage de 250px.
-   On reserve de l'espace en bas pour le lanceur flottant. */
+/* ---- Responsive ---- */
 @media (max-width: 768px) {
-  .dashboard-main {
-    margin-left: 0;
-  }
-  .dashboard-main-grid {
-    padding: var(--ei-s-16);
-    /* marge basse pour ne pas masquer le contenu derriere le
-       bouton « Menu » flottant (48px + retrait + respiration) */
-    padding-bottom: calc(var(--ei-s-16) + 72px);
-    gap: var(--ei-s-16);
-  }
-}
-
-@media (max-width: 390px) {
-  .dashboard-main-grid { padding: var(--ei-s-12); padding-bottom: calc(var(--ei-s-12) + 72px); }
+  .dashboard-adecco-layout { flex-direction: column; }
+  .dashboard-main { margin-left: 0; }
+  .dashboard-main-grid { padding: var(--ei-s-16); }
 }

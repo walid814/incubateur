@@ -310,82 +310,35 @@
       font-weight: 600;
       margin-left: 4px;
       color: #9a6a16 !important;
-      min-height: 44px;
     }
   }
 }
 
 /* =====================================================
-   RESPONSIVE — aside en bandeau de marque + grille champs en colonne.
-   Raccord avec la page connexion : même traitement du bandeau.
+   RESPONSIVE — aside en bandeau + grille champs en colonne
    ===================================================== */
-
-/* --- Tablette & mobile : empilement, aside = bandeau maîtrisé --- */
 @media (max-width: 880px) {
-  .ei-auth {
-    grid-template-columns: 1fr;
-    min-height: 100vh;
-  }
+  .ei-auth { grid-template-columns: 1fr; }
 
-  /* Bandeau de marque : hauteur contenue, contenu en bas-gauche,
-     oiseau décoratif retiré (croisait la marque), halo adouci. */
   .ei-auth__aside {
-    min-height: 0;
+    min-height: 230px;
     align-items: flex-end;
-    padding: clamp(20px, 6vw, 36px);
-    padding-top: clamp(28px, 8vw, 44px);
+    padding: clamp(24px, 6vw, 40px);
   }
-  .aside-bird { display: none; }
-  .aside-halo {
-    top: -22%;
-    right: -28%;
-    width: min(52%, 280px);
-  }
-
-  .aside-inner { max-width: none; }
-  .aside-brand {
-    margin-bottom: var(--ei-s-8);
-    font-size: clamp(1.25rem, 5vw, 1.6rem);
-  }
-  .aside-quote {
-    margin-bottom: 0;
-    font-size: clamp(1.05rem, 3.6vw, 1.35rem);
-    line-height: 1.3;
-  }
-  .aside-meta { display: none; }
+  .aside-quote { font-size: clamp(1.15rem, 4vw, 1.5rem); }
 
   .ei-auth__panel {
     min-height: auto;
-    padding: clamp(32px, 8vw, 56px) clamp(20px, 7vw, 40px) clamp(56px, 12vw, 80px);
+    padding: clamp(40px, 9vw, 64px) clamp(20px, 7vw, 40px) clamp(64px, 12vw, 88px);
   }
-  .ei-auth__form-shell { max-width: 540px; margin: 0 auto; }
+  .ei-auth__form-shell { max-width: 560px; margin: 0 auto; }
 }
 
-/* --- Tablette portrait (≤768px) : champs en une colonne dès ici
-       (deux champs Material côte à côte deviennent trop serrés) --- */
-@media (max-width: 768px) {
-  .ei-auth__aside { padding-block: clamp(24px, 7vw, 36px); }
-
+@media (max-width: 560px) {
   .ei-form .form-grid {
     grid-template-columns: 1fr;
-    gap: var(--ei-s-4);
     .full-width { grid-column: 1; }
   }
-}
-
-/* --- Mobile : bandeau minimal, formulaire immédiat --- */
-@media (max-width: 480px) {
-  .ei-auth__aside { padding: 22px 20px 18px; }
-  .aside-quote { display: none; }
-  .ei-auth__panel { padding: 24px 20px 48px; }
-}
-
-/* --- Très petit (≤360px) : on resserre sans rien casser --- */
-@media (max-width: 360px) {
-  .ei-auth__aside { padding: 18px 16px 16px; }
-  .aside-brand { font-size: 1.2rem; }
-  .ei-auth__panel { padding: 22px 16px 40px; }
-  .ei-auth__title { font-size: 1.95rem; }
 }
 
 /* =====================================================

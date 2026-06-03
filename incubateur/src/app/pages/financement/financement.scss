@@ -529,27 +529,8 @@
 /* =====================================================
    TABLEAU · toutes les sources
    ===================================================== */
-.table-scroll-hint {
-  display: none; /* visible uniquement en scroll tablette, cf. media query */
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 12px;
-  font-size: 0.82rem;
-  letter-spacing: 0.01em;
-  color: var(--ei-haze);
-
-  mat-icon {
-    font-size: 1.1rem;
-    width: 1.1rem;
-    height: 1.1rem;
-    color: var(--ei-gold-2);
-  }
-}
-
 .table-wrap {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
   border: 1px solid rgba(237, 230, 216, 0.10);
   border-radius: var(--ei-r-8);
 }
@@ -557,12 +538,6 @@
 .funding-table {
   width: 100%;
   background: transparent;
-
-  /* garde les colonnes lisibles pendant le scroll horizontal (tablette) */
-  ::ng-deep .mat-mdc-header-cell,
-  ::ng-deep .mat-mdc-cell {
-    white-space: nowrap;
-  }
 
   ::ng-deep .mat-mdc-header-row {
     background: rgba(17, 40, 61, 0.8);
@@ -691,108 +666,19 @@
 }
 
 /* =====================================================
-   RESPONSIVE — tablette : composition colonne + tableau scrollable
+   RESPONSIVE — composition propre en colonne
    ===================================================== */
 @media (max-width: 768px) {
   .project-head {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-
-    button { align-self: flex-start; }
   }
   .source-card .source-header {
     flex-direction: column;
-    .source-status-amount {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-    }
+    .source-status-amount { align-items: flex-start; }
   }
-  .financing-summary { gap: 20px 32px; }
-
-  /* en-tête d'onglets : scroll horizontal plutôt que débordement */
-  .funding-tabs ::ng-deep .mat-mdc-tab-header { overflow: visible; }
-  .funding-tabs ::ng-deep .mat-mdc-tab-label-container { overflow-x: auto; }
-
-  /* tableau : scroll horizontal assumé, colonnes non écrasées */
-  .table-scroll-hint { display: inline-flex; }
-  .funding-table {
-    font-size: 0.88rem;
-    min-width: 640px; /* empêche l'écrasement des 6 colonnes */
-  }
-}
-
-/* =====================================================
-   RESPONSIVE — mobile : le tableau devient des cartes empilées
-   (label/valeur via data-label, aucune logique TS modifiée)
-   ===================================================== */
-@media (max-width: 560px) {
-  .table-scroll-hint { display: none; }
-
-  .table-wrap {
-    overflow-x: visible;
-    border: 0;
-    border-radius: 0;
-  }
-
-  .funding-table {
-    min-width: 0;
-    font-size: 0.92rem;
-
-    /* on neutralise la structure tabulaire */
-    ::ng-deep .mat-mdc-header-row { display: none; }
-
-    ::ng-deep .mat-mdc-row {
-      display: block;
-      padding: 16px 18px;
-      margin-bottom: 12px;
-      background: rgba(11, 27, 43, 0.5) !important;
-      border: 1px solid rgba(237, 230, 216, 0.10);
-      border-radius: var(--ei-r-8);
-    }
-    ::ng-deep .mat-mdc-row:hover { background: rgba(17, 40, 61, 0.6) !important; }
-
-    ::ng-deep .mat-mdc-cell {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      width: 100%;
-      min-height: 44px; /* touch target confortable */
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(237, 230, 216, 0.07);
-      white-space: normal;
-    }
-    ::ng-deep .mat-mdc-cell:last-of-type { border-bottom: 0; }
-
-    /* libellé de colonne injecté à gauche */
-    ::ng-deep .mat-mdc-cell::before {
-      content: attr(data-label);
-      flex-shrink: 0;
-      font-family: var(--ei-font-text);
-      font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--ei-gold-2);
-    }
-
-    /* la cellule "Source" : libellé au-dessus, contenu pleine largeur */
-    ::ng-deep .mat-mdc-cell:first-of-type {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .source-cell { width: 100%; }
-
-    /* la cellule Actions : bouton aligné à droite, touch ≥ 44px */
-    ::ng-deep .mat-mdc-cell:last-of-type .mat-mdc-icon-button {
-      width: 44px;
-      height: 44px;
-    }
-  }
+  .funding-table { font-size: 0.86rem; }
 }
 
 /* =====================================================

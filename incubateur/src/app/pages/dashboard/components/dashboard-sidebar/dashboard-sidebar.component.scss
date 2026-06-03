@@ -2,13 +2,6 @@
   display: block;
 }
 
-/* ---- Lanceur mobile + scrim + en-tete tiroir ----
-   Tous masques sur desktop : le drawer mobile n'existe
-   qu'a partir de la media query <=768px plus bas. */
-.sidebar-launcher,
-.sidebar-scrim,
-.sidebar-mobile-head { display: none; }
-
 /* =====================================================
    SIDEBAR — chrome nuit d'encre, navigation latérale.
    DA « Envol » : surface ardoise sur fond encre, item
@@ -143,143 +136,12 @@
   }
 }
 
-/* =====================================================
-   MOBILE / TABLETTE (<=768px) — tiroir off-canvas.
-   La sidebar quitte le flux, glisse depuis la gauche ;
-   un lanceur flottant et un scrim assurent l'ouverture
-   et la fermeture. Le contenu n'est plus ecrase.
-   ===================================================== */
 @media (max-width: 768px) {
-  /* Lanceur flottant — bouton « Menu » en bas a gauche,
-     hors de la navbar fixe, cible tactile confortable. */
-  .sidebar-launcher {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--ei-s-8);
-    position: fixed;
-    left: var(--ei-s-16);
-    bottom: var(--ei-s-16);
-    z-index: 1001;
-    min-height: 48px;
-    padding: 0 18px;
-    border: 1px solid rgba(244, 201, 93, 0.4);
-    border-radius: 999px;
-    background: var(--ei-slate);
-    color: var(--ei-on-dark);
-    font-family: var(--ei-font-text);
-    font-size: 0.92rem;
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(5, 12, 20, 0.55);
-    transition: transform 180ms var(--ei-ease-launch),
-                opacity 180ms var(--ei-ease-soft),
-                border-color 160ms var(--ei-ease-soft);
-
-    mat-icon {
-      color: var(--ei-gold-2);
-      font-size: 22px;
-      width: 22px;
-      height: 22px;
-    }
-
-    &:active { transform: scale(0.96); }
-    &:focus-visible {
-      outline: none;
-      border-color: var(--ei-elan);
-      box-shadow: 0 0 0 3px rgba(30, 91, 255, 0.4);
-    }
-
-    /* masque pendant que le tiroir est ouvert */
-    &.is-hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(8px) scale(0.96);
-    }
-  }
-
-  /* Scrim — voile sous le tiroir, ferme au clic. */
-  .sidebar-scrim {
-    display: block;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(5, 12, 20, 0.6);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 220ms var(--ei-ease-soft);
-
-    &.is-visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
-
-  /* Tiroir — hors ecran par defaut, glisse a l'ouverture. */
   .sidebar {
-    position: fixed;
+    width: 100%;
+    position: relative;
     top: 0;
     left: 0;
-    width: min(82vw, 300px);
-    height: 100vh;
-    height: 100dvh;
-    transform: translateX(-100%);
-    z-index: 1000;
-    box-shadow: 8px 0 40px rgba(5, 12, 20, 0.6);
-    transition: transform 280ms var(--ei-ease-launch);
-
-    &.is-open { transform: translateX(0); }
-
-    .sidebar-nav { padding-top: var(--ei-s-8); }
-
-    /* cibles tactiles plus genereuses au pouce */
-    .sidebar-nav button { padding: 15px 22px; }
+    height: auto;
   }
-
-  /* En-tete du tiroir : titre + croix de fermeture. */
-  .sidebar-mobile-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--ei-s-16) var(--ei-s-16) var(--ei-s-12) 22px;
-    border-bottom: 1px solid rgba(237, 230, 216, 0.1);
-
-    .sidebar-mobile-title {
-      font-family: var(--ei-font-display);
-      font-weight: 600;
-      font-size: 1.05rem;
-      letter-spacing: -0.01em;
-      color: var(--ei-on-dark);
-    }
-
-    .sidebar-close {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border: none;
-      background: none;
-      border-radius: var(--ei-r-8);
-      color: var(--ei-on-dark-dim);
-      cursor: pointer;
-      transition: background-color 160ms var(--ei-ease-soft),
-                  color 160ms var(--ei-ease-soft);
-
-      mat-icon { font-size: 24px; width: 24px; height: 24px; }
-
-      &:hover { background: rgba(237, 230, 216, 0.06); color: var(--ei-on-dark); }
-      &:focus-visible {
-        outline: none;
-        box-shadow: inset 0 0 0 1px var(--ei-elan);
-      }
-    }
-  }
-}
-
-/* Mouvement reduit : le tiroir apparait/disparait sans glissement. */
-@media (prefers-reduced-motion: reduce) {
-  .sidebar,
-  .sidebar-scrim,
-  .sidebar-launcher { transition: none; }
 }

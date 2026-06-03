@@ -18,8 +18,6 @@
     border-radius: var(--ei-r-8);
     color: var(--ei-on-dark);
     padding: var(--ei-s-24);
-
-    @media (max-width: 390px) { padding: var(--ei-s-16); }
   }
 
   mat-card-title {
@@ -40,12 +38,6 @@
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: var(--ei-s-16);
     margin-top: var(--ei-s-16);
-
-    /* tres petit ecran : deux colonnes restent lisibles avec 110px mini */
-    @media (max-width: 390px) {
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: var(--ei-s-12);
-    }
 
     .stat-item {
       text-align: left;

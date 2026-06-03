@@ -520,13 +520,8 @@
 }
 
 /* =====================================================
-   RESPONSIVE — tablette
+   RESPONSIVE — composition propre en colonne
    ===================================================== */
-@media (max-width: 768px) {
-  /* accès rapides : une colonne, cartouches empilées */
-  .faq-quick { grid-template-columns: 1fr; }
-}
-
 @media (max-width: 760px) {
   .faq-cat-head {
     grid-template-columns: 1fr;
@@ -535,43 +530,9 @@
   .faq-cat-num { font-size: 2.2rem; }
 }
 
-/* =====================================================
-   RESPONSIVE — mobile
-   ===================================================== */
 @media (max-width: 540px) {
   .faq-cta-actions { width: 100%; }
   .faq-cta-actions .ei-btn { flex: 1 1 auto; justify-content: center; }
-
-  /* accordéon : padding resserré mais touch target conservé */
-  .faq-accordion ::ng-deep .mat-expansion-panel-header {
-    padding: 16px 4px;
-    min-height: 56px; /* touch confortable */
-  }
-  .faq-accordion ::ng-deep .mat-panel-title {
-    margin-right: 8px;
-    font-size: 1.04rem;
-    line-height: 1.35;
-  }
-  /* l'icône question prend de la place inutile en mobile : on l'enlève */
-  .faq-accordion .question-icon { display: none; }
-
-  .faq-accordion ::ng-deep .mat-expansion-panel-body {
-    padding: 0 4px 20px;
-  }
-
-  /* cartouches d'accès rapide : flèche conservée, desc lisible */
-  .faq-quick-link {
-    padding: 16px;
-    gap: 14px;
-    min-height: 64px;
-  }
-  .faq-quick-icon { width: 40px; height: 40px; }
-  .faq-quick-desc { line-height: 1.4; }
-}
-
-@media (max-width: 390px) {
-  /* évite tout débordement du titre Clash Display sur petits mobiles */
-  .faq-hero-title { font-size: clamp(2.2rem, 11vw, 2.8rem); }
 }
 
 /* =====================================================

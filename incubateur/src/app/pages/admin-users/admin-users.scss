@@ -179,19 +179,9 @@
   }
 
   .table-container {
-    position: relative;
     overflow-x: auto;
     border-radius: var(--ei-r-8);
     border: 1px solid rgba(237, 230, 216, 0.08);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(244, 201, 93, 0.4) transparent;
-
-    &::-webkit-scrollbar { height: 8px; }
-    &::-webkit-scrollbar-thumb {
-      background: rgba(244, 201, 93, 0.4);
-      border-radius: 999px;
-    }
 
     .users-table {
       width: 100%;
@@ -345,24 +335,6 @@
   }
 }
 
-/* Indice de defilement horizontal — mobile uniquement. */
-.scroll-hint {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 var(--ei-s-8);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: var(--ei-haze);
-
-  mat-icon {
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
-    color: var(--ei-gold-2);
-  }
-}
-
 @media (max-width: 768px) {
   .admin-users-container { padding: var(--ei-s-16); }
 
@@ -372,48 +344,15 @@
     align-items: stretch;
 
     .header-actions { justify-content: center; }
-    .header-actions button { width: 100%; justify-content: center; }
   }
 
   .stats-overview { grid-template-columns: 1fr; }
-  .filters-grid {
-    grid-template-columns: 1fr;
-    button.clear-filters-btn { width: 100%; justify-self: stretch; }
-  }
-
-  .scroll-hint { display: flex; }
-
-  .table-card {
-    .users-table { min-width: 680px; }
-    .table-container ::ng-deep .mat-mdc-icon-button {
-      width: 44px;
-      height: 44px;
-    }
-  }
+  .filters-grid { grid-template-columns: 1fr; }
 
   .table-container {
     font-size: 0.9rem;
     th, td { padding: var(--ei-s-12) var(--ei-s-8); }
   }
-}
-
-@media (max-width: 480px) {
-  /* colonnes secondaires masquees : email et date moins critiques
-     que nom / role / statut / actions sur tres petit ecran. */
-  .users-table {
-    .mat-column-email,
-    .mat-column-dateCreation,
-    .mat-column-profileComplete {
-      display: none;
-    }
-  }
-  .table-card .users-table { min-width: 420px; }
-}
-
-@media (max-width: 390px) {
-  .admin-users-container { padding: var(--ei-s-12); }
-  .users-header .header-title h1 { font-size: 1.4rem; }
-  .table-card .table-header h3 { font-size: 1rem; }
 }
 
 /* Apparition douce des cartes (réservé, désactivé si

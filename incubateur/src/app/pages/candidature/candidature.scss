@@ -145,13 +145,6 @@
         font-family: var(--ei-font-text);
         font-size: 1.05rem;
         color: #4a5b69;
-
-        /* Material tronque le libellé par défaut (overflow:hidden + ellipsis).
-           On laisse respirer : le texte wrap au lieu d'être coupé au bord. */
-        overflow: visible;
-        text-overflow: clip;
-        white-space: normal;
-        min-width: 0;
       }
     }
 
@@ -190,15 +183,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 0;
-  white-space: normal;
-  line-height: 1.25;
 
-  mat-icon {
-    font-size: 20px;
-    color: #9a6a16;
-    flex: 0 0 auto;
-  }
+  mat-icon { font-size: 20px; color: #9a6a16; }
 }
 
 /* ---- Grille de champs ---- */
@@ -345,15 +331,7 @@
     &:last-child { border-bottom: none; }
 
     strong { color: var(--ei-on-light); font-weight: 600; min-width: 120px; }
-    span { color: #4a5b69; text-align: right; flex: 1; margin-left: 16px; overflow-wrap: anywhere; }
-
-    @media (max-width: 560px) {
-      flex-direction: column;
-      gap: 4px;
-
-      strong { min-width: 0; }
-      span { text-align: left; margin-left: 0; }
-    }
+    span { color: #4a5b69; text-align: right; flex: 1; margin-left: 16px; }
   }
 }
 
@@ -458,80 +436,8 @@
 }
 
 @media (max-width: 768px) {
-  .form-section {
-    padding: 64px 0 56px;
-
-    .container { padding: 0 16px; }
-  }
+  .form-section { padding: 64px 0 56px; }
   .candidature-form-wrapper .modern-stepper { border-radius: var(--ei-r-16); }
-
-  /* ---- Stepper en mode compact lisible (header non coupé) ---- */
-  ::ng-deep .mat-stepper-vertical .mat-step {
-    .mat-step-header {
-      padding: 18px 0;
-      /* le header est un bouton : on autorise une hauteur qui suit
-         le libellé multi-lignes au lieu de le rogner */
-      height: auto;
-      min-height: 48px;
-      overflow: visible;
-      white-space: normal;
-      align-items: flex-start;
-
-      .mat-step-icon {
-        width: 36px;
-        height: 36px;
-        flex: 0 0 auto;
-      }
-      .mat-step-label {
-        margin-left: 12px;
-        font-size: 0.98rem;
-        line-height: 1.3;
-      }
-    }
-
-    /* la colonne de contenu suit l'icône réduite, marges resserrées
-       pour laisser respirer les champs au pouce */
-    .mat-step-content {
-      margin-left: 18px;
-      padding-left: 18px;
-      padding-bottom: 28px;
-    }
-  }
-
-  .step-content {
-    h3 { font-size: clamp(1.35rem, 6vw, 1.6rem); }
-    .step-description { margin-bottom: 24px; }
-  }
-
-  /* ---- Boutons de navigation d'étape : confort pouce ---- */
-  .step-actions {
-    gap: 12px;
-    margin-top: 24px;
-
-    .next-button,
-    .prev-button {
-      min-width: 52px;
-      min-height: 52px;
-    }
-  }
-
-  .final-actions .prev-button {
-    align-self: flex-start;
-    min-width: 52px;
-    min-height: 52px;
-  }
-}
-
-/* Très petits écrans (360px) : marge supplémentaire pour le libellé */
-@media (max-width: 400px) {
-  .candidature-form-wrapper .modern-stepper { padding: 16px 14px; margin: 0; }
-
-  ::ng-deep .mat-stepper-vertical .mat-step .mat-step-header {
-    .mat-step-icon { width: 32px; height: 32px; }
-    .mat-step-label { margin-left: 10px; font-size: 0.92rem; }
-  }
-
-  .form-field ::ng-deep .mat-mdc-form-field-icon-suffix { padding-left: 4px; }
 }
 
 /* =====================================================
