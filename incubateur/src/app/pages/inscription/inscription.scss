@@ -1,20 +1,26 @@
-// Variables couleur — Envol Impact (navy/orange), repointées sur la marque
-$jaune-primary: #FE8701;
-$jaune-light: #FFA133;
-$jaune-dark: #E5740A;
-$jaune-secondary: #FFD8A8;
-$bleu-primary: #01306F;
-$bleu-dark: #02245A;
-$text-dark: #2c3e50;
-$text-light: #6c757d;
-$bg-light: #f8f9fa;
-$white: #ffffff;
-$success-color: #28a745;
-$danger-color: #dc3545;
-$border-color: #e1e5e9;
+/* =====================================================
+   ENVOL IMPACT · INSCRIPTION
+   Stub aligné sur la DA « Envol » (tokens --ei-* de
+   styles.scss). Variables locales repointées sur la marque
+   pour rester cohérent avec connexion / register le jour où
+   ce gabarit recevra un contenu.
+   ===================================================== */
 
-// Styles de base pour la page inscription
+// Couleurs locales — alignées sur la DA Envol (or / nuit d'encre / craie)
+$ei-gold-1:   #E8A23D;
+$ei-gold-2:   #F4C95D;
+$ei-ink:      #0B1B2B;
+$ei-chalk:    #F7F4ED;
+$ei-on-light: #1A2A38;
+$ei-elan:     #1E5BFF;
+$ei-sprout:   #3FA88A;
+$ei-danger:   #DC2626;
+$ei-border:   rgba(26, 42, 56, 0.12);
+
+// Conteneur de page — base craie, typo de marque
 .inscription-container {
   min-height: 100vh;
-  background: $bg-light;
+  background: var(--ei-chalk);
+  color: var(--ei-on-light);
+  font-family: var(--ei-font-text);
 }

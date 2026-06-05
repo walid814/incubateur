@@ -1,60 +1,110 @@
-<div class="partenaires-container">
-  <!-- Hero -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1>Nos Partenaires</h1>
+<div class="ei-partners">
+
+  <!-- ===================================================== -->
+  <!--  HERO · l'écosystème qui porte l'envol                 -->
+  <!-- ===================================================== -->
+  <section class="hero" aria-label="Nos partenaires">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-halo" aria-hidden="true"></div>
+
+    <!-- Trajectoire d'or : plusieurs filets qui convergent (l'écosystème) -->
+    <svg class="hero-traj-svg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldPartners" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E8A23D" stop-opacity="0.3" />
+          <stop offset="60%" stop-color="#E8A23D" />
+          <stop offset="100%" stop-color="#F4C95D" />
+        </linearGradient>
+      </defs>
+      <path class="hero-trajectory trajectory-path"
+            d="M -40 720 C 360 640, 560 520, 760 420 S 1140 240, 1500 110"
+            fill="none" stroke="url(#goldPartners)" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Notre écosystème</p>
+      <h1 class="hero-title">
+        <span class="line"><span class="line-inner">Seuls on va vite,</span></span>
+        <span class="line"><span class="line-inner">ensemble on va <em>plus haut.</em></span></span>
+      </h1>
       <p class="hero-subtitle">
-        Un écosystème de confiance pour soutenir l'entrepreneuriat solidaire
+        Aucun projet ne décolle isolé. Collectivités, financeurs et acteurs de terrain
+        forment la trajectoire qui porte les entrepreneurs des quartiers populaires.
       </p>
     </div>
   </section>
 
-  <!-- Partenaires Institutionnels -->
-  <section class="partners-section">
-    <div class="container">
-      <h2>Partenaires Institutionnels</h2>
-      <p class="section-subtitle">Le soutien public au cœur de notre mission</p>
+  <!-- ===================================================== -->
+  <!--  INSTITUTIONNELS · registre éditorial nuit             -->
+  <!-- ===================================================== -->
+  <section class="partners-block" data-reveal aria-labelledby="inst-title">
+    <header class="block-head" data-reveal-child>
+      <p class="eyebrow">01 — Le socle public</p>
+      <h2 class="block-title" id="inst-title">
+        Les institutions qui ouvrent
+        <span class="title-em">le terrain de jeu.</span>
+      </h2>
+    </header>
 
-      <div class="partners-grid">
-        <article class="partner-card" *ngFor="let p of institutionnels">
-          <div class="partner-logo"><mat-icon>{{ p.icon }}</mat-icon></div>
-          <h3>{{ p.title }}</h3>
-          <p>{{ p.description }}</p>
+    <div class="partners-rows">
+      <article class="partner-row" *ngFor="let p of institutionnels; let i = index" data-reveal-child>
+        <span class="partner-index">{{ (i + 1).toString().padStart(2, '0') }}</span>
+        <div class="partner-emblem" aria-hidden="true">
+          <mat-icon>{{ p.icon }}</mat-icon>
+        </div>
+        <div class="partner-body">
+          <h3 class="partner-title">{{ p.title }}</h3>
+          <p class="partner-text">{{ p.description }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================================================== -->
+  <!--  FINANCIERS · bandeau craie (full-bleed clair)         -->
+  <!-- ===================================================== -->
+  <section class="partners-light" data-reveal aria-labelledby="fin-title">
+    <div class="partners-light-inner">
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow eyebrow--ink">02 — Le carburant</p>
+        <h2 class="block-title block-title--ink" id="fin-title">
+          Les financeurs qui transforment
+          <span class="title-em title-em--ink">l'élan en moyens.</span>
+        </h2>
+      </header>
+
+      <div class="finance-grid">
+        <article class="finance-cell" *ngFor="let p of financiers; let i = index" data-reveal-child>
+          <span class="finance-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <div class="finance-head">
+            <mat-icon class="finance-icon" aria-hidden="true">{{ p.icon }}</mat-icon>
+            <h3 class="finance-title">{{ p.title }}</h3>
+          </div>
+          <p class="finance-text">{{ p.description }}</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Partenaires Financiers -->
-  <section class="partners-section financial">
-    <div class="container">
-      <h2>Partenaires Financiers</h2>
-      <p class="section-subtitle">L'expertise financière au service de l'innovation sociale</p>
-
-      <div class="partners-grid">
-        <article class="partner-card" *ngFor="let p of financiers">
-          <div class="partner-logo"><mat-icon>{{ p.icon }}</mat-icon></div>
-          <h3>{{ p.title }}</h3>
-          <p>{{ p.description }}</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Devenir partenaire -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>Vous partagez notre mission ?</h2>
-      <p>
-        Collectivité, entreprise, fondation ou investisseur : rejoignez les acteurs
+  <!-- ===================================================== -->
+  <!--  CTA · rejoindre la trajectoire                        -->
+  <!-- ===================================================== -->
+  <section class="summit" data-reveal aria-labelledby="cta-title">
+    <div class="summit-halo" aria-hidden="true"></div>
+    <div class="summit-inner" data-reveal-child>
+      <p class="eyebrow">Au cœur de la trajectoire</p>
+      <h2 class="summit-title" id="cta-title">Vous partagez notre mission&nbsp;?</h2>
+      <p class="summit-quote">
+        Collectivité, entreprise, fondation ou investisseur&nbsp;: rejoignez les acteurs
         qui font grandir l'entrepreneuriat dans les quartiers populaires.
       </p>
-      <div class="cta-actions">
-        <a mat-flat-button routerLink="/contact" class="cta-button">
+      <div class="summit-actions">
+        <a routerLink="/contact" class="ei-btn ei-btn--gold" data-magnetic>
           <mat-icon>handshake</mat-icon>
           Devenir partenaire
         </a>
       </div>
     </div>
   </section>
+
 </div>

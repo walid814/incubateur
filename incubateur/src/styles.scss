@@ -63,6 +63,44 @@
   /* Typographie */
   --font-display:  'Syne', sans-serif;
   --font-body:     'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* =====================================================
+     DA « ENVOL » — direction artistique signature de la home.
+     Trajectoire d'or, nuit d'encre → lumière. Tokens posés
+     ici pour resservir aux autres pages ensuite.
+     Contraste AA respecté sur chaque paire fond/texte.
+     ===================================================== */
+  /* Couleurs */
+  --ei-ink:        #0B1B2B;  /* nuit d'encre — fond dominant */
+  --ei-slate:      #11283D;  /* ardoise — surfaces sur sombre */
+  --ei-chalk:      #F7F4ED;  /* craie chaude — sections lecture (jamais blanc pur) */
+  --ei-gold-1:     #E8A23D;  /* or — départ du dégradé */
+  --ei-gold-2:     #F4C95D;  /* or clair — arrivée du dégradé / lumière */
+  --ei-elan:       #1E5BFF;  /* bleu élan — CTA secondaire, focus */
+  --ei-on-dark:    #EDE6D8;  /* texte sur fond sombre */
+  --ei-on-dark-dim:#C2BBAE;  /* texte secondaire sur sombre (AA sur ink) */
+  --ei-on-light:   #1A2A38;  /* encre — texte sur fond clair */
+  --ei-haze:       #8A9AA8;  /* brume — légendes, méta */
+  --ei-sprout:     #3FA88A;  /* vert pousse — succès */
+
+  --ei-gold-grad:  linear-gradient(120deg, var(--ei-gold-1) 0%, var(--ei-gold-2) 100%);
+
+  /* Typo DA Envol */
+  --ei-font-display: 'Clash Display', 'Syne', sans-serif;
+  --ei-font-text:    'Supreme', 'DM Sans', system-ui, sans-serif;
+  --ei-font-accent:  'Gambetta', Georgia, serif;
+
+  /* Échelle d'espacement — multiples de 4, jusqu'à 192 */
+  --ei-s-4:   4px;   --ei-s-8:   8px;   --ei-s-12: 12px;  --ei-s-16: 16px;
+  --ei-s-24:  24px;  --ei-s-32:  32px;  --ei-s-48: 48px;  --ei-s-64: 64px;
+  --ei-s-96:  96px;  --ei-s-128: 128px; --ei-s-192: 192px;
+
+  /* Rayons réduits — éditorial, pas soft-SaaS */
+  --ei-r-0: 0;  --ei-r-4: 4px;  --ei-r-8: 8px;  --ei-r-16: 16px;
+
+  /* Motion */
+  --ei-ease-launch: cubic-bezier(.22, 1, .36, 1);
+  --ei-ease-soft:   cubic-bezier(.4, 0, .2, 1);
 }
 
 /* -----------------------------------------------------

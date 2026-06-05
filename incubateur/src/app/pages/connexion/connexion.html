@@ -1,58 +1,101 @@
-<div class="connexion-page-wrapper page-content">
-<h1>Se connecter</h1>
-<div class="connexion-form-wrapper">
-  <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()" class="connexion-form">
-    <div class="form-grid">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" required>
-        <mat-icon matSuffix>email</mat-icon>
-        <mat-error *ngIf="connexionForm.get('email')?.hasError('required')">
-          L'email est requis
-        </mat-error>
-        <mat-error *ngIf="connexionForm.get('email')?.hasError('email')">
-          Format d'email invalide
-        </mat-error>
-      </mat-form-field>
+<div class="ei-auth">
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Mot de passe</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
-          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        <mat-error *ngIf="connexionForm.get('password')?.hasError('required')">
-          Le mot de passe est requis
-        </mat-error>
-        <mat-error *ngIf="connexionForm.get('password')?.hasError('minlength')">
-          Le mot de passe doit contenir au moins 6 caractères
-        </mat-error>
-      </mat-form-field>
-    </div>
+  <!-- ===================================================== -->
+  <!--  PANNEAU GAUCHE · nuit d'encre, trajectoire d'envol   -->
+  <!-- ===================================================== -->
+  <aside class="ei-auth__aside" aria-hidden="true">
+    <div class="aside-grain"></div>
+    <div class="aside-halo"></div>
 
-    <div class="form-options">
-      <mat-checkbox formControlName="rememberMe" class="remember-checkbox">
-        <mat-icon>verified_user</mat-icon>
-        Se souvenir de moi
-      </mat-checkbox>
-      <a href="#" class="forgot-password">Mot de passe oublié ?</a>
-    </div>
+    <svg class="aside-traj" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="goldAuthLogin" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E8A23D" stop-opacity="0.30" />
+          <stop offset="55%" stop-color="#E8A23D" />
+          <stop offset="100%" stop-color="#F4C95D" />
+        </linearGradient>
+      </defs>
+      <path class="aside-path"
+            d="M -20 920 C 160 760, 230 640, 300 480 S 470 220, 640 40"
+            fill="none" stroke="url(#goldAuthLogin)" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
 
-    <div class="form-actions">
-      <button mat-flat-button color="primary" type="submit" [disabled]="!connexionForm.valid" class="login-button">
-        <mat-icon>login</mat-icon>
-        Se connecter
-      </button>
-    </div>
+    <svg class="aside-bird" viewBox="0 0 48 48">
+      <path d="M4 40 C 16 34, 22 24, 30 14 L 24 16 L 40 6 L 38 24 L 34 18 C 26 28, 18 36, 4 40 Z"
+            fill="#F4C95D" />
+    </svg>
 
-    <div class="signup-section">
-      <p class="signup-text">
-        Pas encore de compte ?
-        <button mat-button color="accent" (click)="goToSignup()" type="button">
-          Créer un compte
-        </button>
-      </p>
+    <div class="aside-inner">
+      <p class="aside-brand">Envol&nbsp;Impact</p>
+      <p class="aside-quote">« Donner à chacun les moyens de prendre de la hauteur. »</p>
+      <p class="aside-meta">L'incubateur solidaire de l'association F.A.T.E.</p>
     </div>
-  </form>
-</div>
+  </aside>
+
+  <!-- ===================================================== -->
+  <!--  PANNEAU DROIT · formulaire (craie, lisibilité)        -->
+  <!-- ===================================================== -->
+  <main class="ei-auth__panel page-content">
+    <div class="ei-auth__form-shell">
+      <header class="ei-auth__head">
+        <p class="ei-auth__eyebrow">Heureux de vous revoir</p>
+        <h1 class="ei-auth__title">Se connecter</h1>
+        <p class="ei-auth__lede">Reprenez votre trajectoire là où vous l'avez laissée.</p>
+      </header>
+
+      <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()" class="connexion-form ei-form">
+        <div class="form-grid">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="connexionForm.get('email')?.hasError('required')">
+              L'email est requis
+            </mat-error>
+            <mat-error *ngIf="connexionForm.get('email')?.hasError('email')">
+              Format d'email invalide
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="connexionForm.get('password')?.hasError('required')">
+              Le mot de passe est requis
+            </mat-error>
+            <mat-error *ngIf="connexionForm.get('password')?.hasError('minlength')">
+              Le mot de passe doit contenir au moins 6 caractères
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-options">
+          <mat-checkbox formControlName="rememberMe" class="remember-checkbox">
+            Se souvenir de moi
+          </mat-checkbox>
+          <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+        </div>
+
+        <div class="form-actions">
+          <button mat-flat-button color="primary" type="submit" [disabled]="!connexionForm.valid" class="ei-submit login-button">
+            <mat-icon>login</mat-icon>
+            Se connecter
+          </button>
+        </div>
+
+        <div class="signup-section">
+          <p class="signup-text">
+            Pas encore de compte ?
+            <button mat-button color="accent" (click)="goToSignup()" type="button">
+              Créer un compte
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </main>
+
 </div>

@@ -1,119 +1,188 @@
 /* =====================================================
-   CANDIDATURE — formulaire multi-étapes (stepper)
-   Aligné sur les design tokens de src/styles.scss.
-   États de champ (défaut / warning / success / error)
-   et barres de progression conservés.
+   ENVOL IMPACT · Candidature (formulaire multi-étapes)
+   RESTYLE de la DA « Décollage » — voir accueil.scss.
+   Le HTML, les bindings, le stepper, les barres de
+   progression et les états de champ sont INCHANGÉS :
+   on ne fait qu'habiller. Tokens --ei-*.
+
+   Parti pris : page en nuit d'encre (entrée du parcours),
+   formulaire posé sur une surface craie pour garantir la
+   lisibilité AA des champs de saisie. États sémantiques
+   (succès / alerte / erreur) conservés et calés sur la DA.
    ===================================================== */
 
+:host {
+  display: block;
+  background: var(--ei-ink);
+  color: var(--ei-on-dark);
+  font-family: var(--ei-font-text);
+}
+
 .candidature-container {
+  position: relative;
   min-height: 100vh;
-  background: var(--bg-page);
+  overflow-x: clip;
+  background:
+    radial-gradient(120% 60% at 86% 0%, rgba(244, 201, 93, 0.10), transparent 55%),
+    var(--ei-ink);
+}
+
+/* Grain léger, cohérent avec le hero de l'accueil */
+.candidature-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
 }
 
 /* ---- Section formulaire ---- */
 .form-section {
-  padding: 80px 0;
+  position: relative;
+  z-index: 1;
+  padding: clamp(80px, 12vh, 140px) 0 clamp(72px, 10vh, 120px);
 
   .container {
-    max-width: 1000px;
+    max-width: 980px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
+  /* En-tête : grammaire éditoriale de l'accueil (eyebrow + gros titre) */
   .page-header {
-    text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: clamp(40px, 6vh, 72px);
+    max-width: 60ch;
 
     h1 {
-      font-family: var(--font-display);
-      color: var(--text-primary);
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
+      font-family: var(--ei-font-display);
+      color: var(--ei-on-dark);
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 0.98;
+      margin: 0 0 clamp(16px, 2.5vh, 24px);
+
+      /* mot-clé en or via ::after décoratif — titre simple, on souligne */
+      &::after {
+        content: '';
+        display: block;
+        width: clamp(56px, 7vw, 96px);
+        height: 3px;
+        margin-top: clamp(16px, 2vh, 22px);
+        background: var(--ei-gold-grad);
+        border-radius: 2px;
+      }
     }
 
     p {
-      color: var(--text-body);
-      font-size: 1.1rem;
+      color: var(--ei-on-dark-dim);
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
       line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
+      max-width: 54ch;
+      margin: 0;
     }
   }
 }
 
+/* ---- Surface du formulaire : craie (lisibilité AA) ---- */
 .candidature-form-wrapper {
   .modern-stepper {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-md);
-    padding: 40px;
+    background: var(--ei-chalk);
+    border: 1px solid rgba(26, 42, 56, 0.1);
+    border-radius: var(--ei-r-16);
+    box-shadow: 0 24px 70px rgba(8, 18, 30, 0.5);
+    padding: clamp(24px, 4vw, 48px);
 
     @media (max-width: 768px) {
-      padding: 24px;
-      margin: 0 16px;
+      padding: 20px;
+      margin: 0 4px;
     }
   }
 }
 
 /* ---- Stepper Material ---- */
-::ng-deep .mat-stepper-vertical .mat-step {
-  &.mat-step-selected .mat-step-header {
-    .mat-step-icon {
-      background-color: var(--gold) !important;
-      color: var(--text-primary) !important;
-    }
-    .mat-step-label {
-      color: var(--gold-text, #92400E) !important;
-      font-weight: 600 !important;
-    }
-  }
+::ng-deep .mat-stepper-vertical {
+  background: transparent;
 
-  .mat-step-header {
-    padding: 24px 0;
-
-    .mat-step-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  .mat-step {
+    &.mat-step-selected .mat-step-header {
+      .mat-step-icon {
+        background: var(--ei-gold-grad) !important;
+        color: #2a1a04 !important;
+        box-shadow: 0 6px 18px rgba(232, 162, 61, 0.32) !important;
+      }
+      .mat-step-label {
+        color: var(--ei-on-light) !important;
+        font-weight: 600 !important;
+      }
     }
-    .mat-step-label {
-      margin-left: 16px;
-      font-size: 1.1rem;
-    }
-  }
 
-  .mat-step-content {
-    margin-left: 20px;
-    border-left: 2px solid var(--border);
-    padding-left: 40px;
-    padding-bottom: 40px;
+    /* étape déjà validée */
+    .mat-step-header .mat-step-icon-state-done,
+    .mat-step-header .mat-step-icon-selected {
+      background: var(--ei-gold-grad);
+    }
+
+    .mat-step-header {
+      padding: 22px 0;
+
+      .mat-step-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: var(--ei-r-8);
+        background: rgba(26, 42, 56, 0.1);
+        color: var(--ei-on-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--ei-font-display);
+        font-weight: 600;
+      }
+      .mat-step-label {
+        margin-left: 16px;
+        font-family: var(--ei-font-text);
+        font-size: 1.05rem;
+        color: #4a5b69;
+
+        /* Material tronque le libellé par défaut (overflow:hidden + ellipsis).
+           On laisse respirer : le texte wrap au lieu d'être coupé au bord. */
+        overflow: visible;
+        text-overflow: clip;
+        white-space: normal;
+        min-width: 0;
+      }
+    }
+
+    .mat-step-content {
+      margin-left: 21px;
+      border-left: 2px solid rgba(26, 42, 56, 0.14);
+      padding-left: clamp(24px, 4vw, 44px);
+      padding-bottom: 40px;
+    }
   }
 }
 
 /* ---- Contenu d'étape ---- */
 .step-content {
-  animation: fadeInUp 0.5s ease-out;
+  animation: fadeInUp 0.5s var(--ei-ease-launch);
 
   h3 {
-    font-family: var(--font-display);
-    color: var(--text-primary);
-    font-size: 1.6rem;
-    font-weight: 700;
+    font-family: var(--ei-font-display);
+    color: var(--ei-on-light);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 600;
     letter-spacing: -0.02em;
-    margin-bottom: 12px;
+    margin: 0 0 12px;
   }
 
   .step-description {
-    color: var(--text-body);
+    color: #4a5b69;
     font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 32px;
+    margin: 0 0 32px;
+    max-width: 60ch;
   }
 }
 
@@ -121,8 +190,15 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.25;
 
-  mat-icon { font-size: 20px; }
+  mat-icon {
+    font-size: 20px;
+    color: #9a6a16;
+    flex: 0 0 auto;
+  }
 }
 
 /* ---- Grille de champs ---- */
@@ -144,16 +220,19 @@
   width: 100%;
 
   ::ng-deep {
-    .mat-mdc-form-field-outline { color: var(--border); }
+    .mat-mdc-text-field-wrapper { background-color: #fffdf7; }
+    .mat-mdc-form-field-outline { color: rgba(26, 42, 56, 0.22); }
     .mat-mdc-form-field-focus-overlay { background-color: transparent; }
-    &.mat-focused .mat-mdc-form-field-outline-thick { color: var(--gold); }
-    .mat-mdc-form-field-label { color: var(--text-muted); }
-    .mat-mdc-form-field-input { color: var(--text-primary); }
-    .mat-mdc-form-field-hint { color: var(--text-muted); font-size: 0.85rem; }
+    &.mat-focused .mat-mdc-form-field-outline-thick { color: var(--ei-gold-1); }
+    .mat-mdc-form-field-label { color: #5a6b79; }
+    .mdc-floating-label--float-above { color: #8a5e12; }
+    .mat-mdc-input-element { color: var(--ei-on-light); caret-color: var(--ei-gold-1); }
+    .mat-mdc-form-field-hint { color: #6a7b89; font-size: 0.85rem; }
+    .mat-mdc-form-field-icon-suffix mat-icon { color: var(--ei-haze); }
   }
 }
 
-/* ---- Actions d'étape ---- */
+/* ---- Actions d'étape (mat-fab / mat-mini-fab) ---- */
 .step-actions {
   display: flex;
   justify-content: flex-end;
@@ -162,33 +241,38 @@
 
   .next-button,
   .prev-button {
-    border-radius: var(--radius-btn) !important;
-    padding: 12px 26px !important;
-    font-weight: 600 !important;
-    min-height: 48px !important;
-    transition: var(--transition) !important;
+    border-radius: var(--ei-r-8) !important;
+    transition: transform 160ms var(--ei-ease-launch),
+                box-shadow 160ms var(--ei-ease-launch),
+                background 160ms var(--ei-ease-soft) !important;
   }
 
   .next-button {
-    background: var(--gold) !important;
-    color: var(--text-primary) !important;
-    box-shadow: 0 2px 10px rgba(245, 158, 11, .35) !important;
+    background: var(--ei-gold-grad) !important;
+    color: #2a1a04 !important;
+    box-shadow: 0 6px 22px rgba(232, 162, 61, 0.3) !important;
 
-    &:hover {
-      background: var(--gold-light) !important;
+    &:hover:not(:disabled) {
       transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(245, 158, 11, .42) !important;
+      box-shadow: 0 12px 34px rgba(232, 162, 61, 0.44) !important;
+    }
+    &:disabled {
+      background: rgba(26, 42, 56, 0.12) !important;
+      color: var(--ei-haze) !important;
+      box-shadow: none !important;
     }
   }
 
   .prev-button {
     background: transparent !important;
-    color: var(--text-body) !important;
-    border: 1.5px solid var(--border) !important;
+    color: #4a5b69 !important;
+    border: 1.5px solid rgba(26, 42, 56, 0.2) !important;
+    box-shadow: none !important;
 
     &:hover {
-      border-color: var(--navy) !important;
-      background: var(--bg-soft) !important;
+      border-color: var(--ei-elan) !important;
+      color: var(--ei-elan) !important;
+      background: rgba(30, 91, 255, 0.06) !important;
     }
   }
 }
@@ -202,39 +286,47 @@
   }
 
   .recap-card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
+    border: 1px solid rgba(26, 42, 56, 0.12);
+    border-radius: var(--ei-r-16);
     overflow: hidden;
-    transition: var(--transition);
+    background: #fffdf7;
+    transition: border-color 200ms var(--ei-ease-soft),
+                box-shadow 200ms var(--ei-ease-soft),
+                transform 200ms var(--ei-ease-launch);
 
     &:hover {
-      border-color: var(--gold);
-      box-shadow: var(--shadow-md);
+      border-color: rgba(244, 201, 93, 0.5);
+      box-shadow: 0 16px 40px rgba(8, 18, 30, 0.12);
       transform: translateY(-3px);
     }
 
     ::ng-deep {
       .mat-mdc-card-header {
-        background: var(--bg-soft);
+        background: rgba(232, 162, 61, 0.08);
         padding: 24px;
 
         .mat-mdc-card-avatar {
           width: 48px;
           height: 48px;
-          border-radius: 50%;
-          background-color: var(--gold);
-          color: var(--text-primary);
+          border-radius: var(--ei-r-8);
+          background: var(--ei-gold-grad);
+          color: #2a1a04;
           display: flex;
           align-items: center;
           justify-content: center;
 
           mat-icon { font-size: 24px; }
         }
-        .mat-mdc-card-title { color: var(--text-primary); font-weight: 700; margin-bottom: 4px; }
-        .mat-mdc-card-subtitle { color: var(--text-body); }
+        .mat-mdc-card-title {
+          color: var(--ei-on-light);
+          font-family: var(--ei-font-display);
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+        .mat-mdc-card-subtitle { color: #5a6b79; }
       }
       .mat-mdc-card-content { padding: 24px; }
-      .mat-mdc-card-actions { padding: 16px 24px; background-color: var(--bg-soft); }
+      .mat-mdc-card-actions { padding: 16px 24px; background: rgba(26, 42, 56, 0.04); }
     }
   }
 }
@@ -248,12 +340,20 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(26, 42, 56, 0.1);
 
     &:last-child { border-bottom: none; }
 
-    strong { color: var(--text-primary); font-weight: 600; min-width: 120px; }
-    span { color: var(--text-body); text-align: right; flex: 1; margin-left: 16px; }
+    strong { color: var(--ei-on-light); font-weight: 600; min-width: 120px; }
+    span { color: #4a5b69; text-align: right; flex: 1; margin-left: 16px; overflow-wrap: anywhere; }
+
+    @media (max-width: 560px) {
+      flex-direction: column;
+      gap: 4px;
+
+      strong { min-width: 0; }
+      span { text-align: left; margin-left: 0; }
+    }
   }
 }
 
@@ -265,20 +365,21 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: var(--text-primary);
+    color: var(--ei-on-light);
+    font-family: var(--ei-font-display);
     font-weight: 600;
     margin-bottom: 12px;
 
-    mat-icon { color: var(--gold); font-size: 20px; }
+    mat-icon { color: #9a6a16; font-size: 20px; }
   }
 
   .motivation-text {
-    color: var(--text-body);
+    color: #3a4c5a;
     line-height: 1.6;
     padding: 16px;
-    background-color: var(--bg-soft);
-    border-radius: 12px;
-    border-left: 4px solid var(--gold);
+    background: rgba(232, 162, 61, 0.07);
+    border-radius: var(--ei-r-8);
+    border-left: 3px solid var(--ei-gold-1);
     max-height: 120px;
     overflow-y: auto;
   }
@@ -307,37 +408,40 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background-color: var(--blue-subtle);
+    background: rgba(30, 91, 255, 0.08);
+    border: 1px solid rgba(30, 91, 255, 0.16);
     padding: 16px;
-    border-radius: 12px;
+    border-radius: var(--ei-r-8);
     margin-bottom: 24px;
 
-    mat-icon { color: var(--blue); font-size: 20px; }
-    p { color: var(--text-primary); margin: 0; font-size: 0.9rem; line-height: 1.4; text-align: left; }
+    mat-icon { color: var(--ei-elan); font-size: 20px; }
+    p { color: var(--ei-on-light); margin: 0; font-size: 0.9rem; line-height: 1.45; text-align: left; }
   }
 
   .submit-button {
-    background: var(--gold) !important;
-    color: var(--text-primary) !important;
+    background: var(--ei-gold-grad) !important;
+    color: #2a1a04 !important;
+    font-family: var(--ei-font-text) !important;
     font-size: 1.05rem !important;
-    font-weight: 700 !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
     padding: 16px 48px !important;
-    border-radius: var(--radius-btn) !important;
+    border-radius: var(--ei-r-4) !important;
     border: none !important;
-    box-shadow: 0 4px 20px rgba(245, 158, 11, .40) !important;
-    transition: var(--transition) !important;
+    box-shadow: 0 8px 26px rgba(232, 162, 61, 0.36) !important;
+    transition: transform 160ms var(--ei-ease-launch),
+                box-shadow 160ms var(--ei-ease-launch) !important;
 
     &:hover:not(:disabled) {
-      background: var(--gold-light) !important;
       transform: translateY(-2px) !important;
-      box-shadow: 0 8px 30px rgba(245, 158, 11, .50) !important;
+      box-shadow: 0 14px 38px rgba(232, 162, 61, 0.48) !important;
     }
 
     &:disabled {
       opacity: 1 !important;
       cursor: not-allowed !important;
-      background: var(--bg-soft) !important;
-      color: var(--text-muted) !important;
+      background: rgba(26, 42, 56, 0.12) !important;
+      color: var(--ei-haze) !important;
       transform: none !important;
       box-shadow: none !important;
     }
@@ -354,59 +458,134 @@
 }
 
 @media (max-width: 768px) {
-  .form-section { padding: 60px 0; }
-  .candidature-form-wrapper .modern-stepper { border-radius: 16px; }
+  .form-section {
+    padding: 64px 0 56px;
+
+    .container { padding: 0 16px; }
+  }
+  .candidature-form-wrapper .modern-stepper { border-radius: var(--ei-r-16); }
+
+  /* ---- Stepper en mode compact lisible (header non coupé) ---- */
+  ::ng-deep .mat-stepper-vertical .mat-step {
+    .mat-step-header {
+      padding: 18px 0;
+      /* le header est un bouton : on autorise une hauteur qui suit
+         le libellé multi-lignes au lieu de le rogner */
+      height: auto;
+      min-height: 48px;
+      overflow: visible;
+      white-space: normal;
+      align-items: flex-start;
+
+      .mat-step-icon {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 auto;
+      }
+      .mat-step-label {
+        margin-left: 12px;
+        font-size: 0.98rem;
+        line-height: 1.3;
+      }
+    }
+
+    /* la colonne de contenu suit l'icône réduite, marges resserrées
+       pour laisser respirer les champs au pouce */
+    .mat-step-content {
+      margin-left: 18px;
+      padding-left: 18px;
+      padding-bottom: 28px;
+    }
+  }
+
+  .step-content {
+    h3 { font-size: clamp(1.35rem, 6vw, 1.6rem); }
+    .step-description { margin-bottom: 24px; }
+  }
+
+  /* ---- Boutons de navigation d'étape : confort pouce ---- */
+  .step-actions {
+    gap: 12px;
+    margin-top: 24px;
+
+    .next-button,
+    .prev-button {
+      min-width: 52px;
+      min-height: 52px;
+    }
+  }
+
+  .final-actions .prev-button {
+    align-self: flex-start;
+    min-width: 52px;
+    min-height: 52px;
+  }
+}
+
+/* Très petits écrans (360px) : marge supplémentaire pour le libellé */
+@media (max-width: 400px) {
+  .candidature-form-wrapper .modern-stepper { padding: 16px 14px; margin: 0; }
+
+  ::ng-deep .mat-stepper-vertical .mat-step .mat-step-header {
+    .mat-step-icon { width: 32px; height: 32px; }
+    .mat-step-label { margin-left: 10px; font-size: 0.92rem; }
+  }
+
+  .form-field ::ng-deep .mat-mdc-form-field-icon-suffix { padding-left: 4px; }
 }
 
 /* =====================================================
    ÉTATS DYNAMIQUES DES CHAMPS (compteur de caractères)
+   Sémantique conservée. Succès → vert pousse de la DA,
+   alerte → or, erreur → rouge. Surfaces teintées légères
+   adaptées à la craie.
    ===================================================== */
 .field-default {
-  .mat-mdc-form-field-outline { color: var(--border) !important; }
-  .mat-mdc-text-field-wrapper { background-color: var(--white); transition: var(--transition); }
-  .mat-mdc-form-field-label { color: var(--text-muted) !important; }
+  .mat-mdc-form-field-outline { color: rgba(26, 42, 56, 0.22) !important; }
+  .mat-mdc-text-field-wrapper { background-color: #fffdf7; transition: var(--transition); }
+  .mat-mdc-form-field-label { color: #5a6b79 !important; }
 }
 
 .field-warning {
-  .mat-mdc-form-field-outline { color: var(--warning) !important; border-width: 2px !important; }
+  .mat-mdc-form-field-outline { color: var(--ei-gold-1) !important; border-width: 2px !important; }
   .mat-mdc-text-field-wrapper {
-    background-color: #FEF3CD;
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, .1);
+    background-color: #fdf3df;
+    box-shadow: 0 0 0 3px rgba(232, 162, 61, 0.12);
     transition: var(--transition);
   }
   .mat-mdc-form-field-label,
   .mat-mdc-form-field-icon-suffix,
-  .mat-mdc-form-field-hint-wrapper { color: var(--warning) !important; font-weight: 500 !important; }
+  .mat-mdc-form-field-hint-wrapper { color: #8a5e12 !important; font-weight: 500 !important; }
 }
 
 .field-success {
-  .mat-mdc-form-field-outline { color: var(--success) !important; border-width: 2px !important; }
+  .mat-mdc-form-field-outline { color: var(--ei-sprout) !important; border-width: 2px !important; }
   .mat-mdc-text-field-wrapper {
-    background-color: #D4EDDA;
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, .1);
+    background-color: #e6f4ee;
+    box-shadow: 0 0 0 3px rgba(63, 168, 138, 0.12);
     transition: var(--transition);
   }
   .mat-mdc-form-field-label,
   .mat-mdc-form-field-icon-suffix,
-  .mat-mdc-form-field-hint-wrapper { color: var(--success) !important; font-weight: 600 !important; }
+  .mat-mdc-form-field-hint-wrapper { color: #2c7a63 !important; font-weight: 600 !important; }
 
   &::after {
     content: '✓';
     position: absolute;
     top: 10px;
     right: 50px;
-    color: var(--success);
+    color: var(--ei-sprout);
     font-size: 20px;
     font-weight: bold;
-    animation: successPulse 1s ease-in-out;
+    animation: successPulse 1s var(--ei-ease-launch);
   }
 }
 
 .field-error {
   .mat-mdc-form-field-outline { color: var(--danger) !important; border-width: 2px !important; }
   .mat-mdc-text-field-wrapper {
-    background-color: #F8D7DA;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, .1);
+    background-color: #fae3e3;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
     transition: var(--transition);
   }
   .mat-mdc-form-field-label,
@@ -420,7 +599,7 @@
     right: 50px;
     color: var(--danger);
     font-size: 20px;
-    animation: errorShake 0.5s ease-in-out;
+    animation: errorShake 0.5s var(--ei-ease-soft);
   }
 }
 
@@ -442,13 +621,13 @@
   line-height: 1.4;
   margin-top: 8px;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: var(--ei-r-4);
   transition: var(--transition);
 }
-.field-success .mat-mdc-form-field-hint-wrapper { background-color: rgba(22, 163, 74, .1);  border: 1px solid rgba(22, 163, 74, .2); }
-.field-warning .mat-mdc-form-field-hint-wrapper { background-color: rgba(245, 158, 11, .1); border: 1px solid rgba(245, 158, 11, .2); }
-.field-error   .mat-mdc-form-field-hint-wrapper { background-color: rgba(220, 38, 38, .1);  border: 1px solid rgba(220, 38, 38, .2); }
-.field-default .mat-mdc-form-field-hint-wrapper { background-color: var(--bg-soft); border: 1px solid var(--border); }
+.field-success .mat-mdc-form-field-hint-wrapper { background-color: rgba(63, 168, 138, 0.1); border: 1px solid rgba(63, 168, 138, 0.22); }
+.field-warning .mat-mdc-form-field-hint-wrapper { background-color: rgba(232, 162, 61, 0.1); border: 1px solid rgba(232, 162, 61, 0.24); }
+.field-error   .mat-mdc-form-field-hint-wrapper { background-color: rgba(220, 38, 38, 0.1);  border: 1px solid rgba(220, 38, 38, 0.2); }
+.field-default .mat-mdc-form-field-hint-wrapper { background-color: rgba(26, 42, 56, 0.05); border: 1px solid rgba(26, 42, 56, 0.1); }
 
 /* =====================================================
    BARRES DE PROGRESSION DES CARACTÈRES
@@ -464,25 +643,25 @@
 .progress-bar {
   flex: 1;
   height: 8px;
-  border-radius: 4px;
+  border-radius: var(--ei-r-4);
   overflow: hidden;
   position: relative;
-  background-color: var(--bg-soft);
+  background-color: rgba(26, 42, 56, 0.1);
   transition: var(--transition);
 
-  &.field-success { background-color: rgba(22, 163, 74, .2); }
-  &.field-warning { background-color: rgba(245, 158, 11, .2); }
-  &.field-error   { background-color: rgba(220, 38, 38, .2); }
+  &.field-success { background-color: rgba(63, 168, 138, 0.2); }
+  &.field-warning { background-color: rgba(232, 162, 61, 0.2); }
+  &.field-error   { background-color: rgba(220, 38, 38, 0.2); }
 }
 
 .progress-fill {
   height: 100%;
-  border-radius: 3px;
-  transition: width 0.4s ease, background-color 0.3s ease;
+  border-radius: var(--ei-r-4);
+  transition: width 0.4s var(--ei-ease-launch), background-color 0.3s var(--ei-ease-soft);
 
-  &.field-default { background: var(--text-muted); }
-  &.field-warning { background: var(--warning); }
-  &.field-success { background: var(--success); }
+  &.field-default { background: var(--ei-haze); }
+  &.field-warning { background: var(--ei-gold-grad); }
+  &.field-success { background: var(--ei-sprout); }
   &.field-error   { background: var(--danger); }
 }
 
@@ -491,11 +670,11 @@
   font-weight: 500;
   min-width: 80px;
   text-align: right;
-  transition: color 0.3s ease;
+  transition: color 0.3s var(--ei-ease-soft);
 
-  &.field-default { color: var(--text-muted); }
-  &.field-warning { color: var(--warning); font-weight: 600; }
-  &.field-success { color: var(--success); font-weight: 600; }
+  &.field-default { color: #6a7b89; }
+  &.field-warning { color: #8a5e12; font-weight: 600; }
+  &.field-success { color: #2c7a63; font-weight: 600; }
   &.field-error   { color: var(--danger);  font-weight: 600; }
 }
 
@@ -503,4 +682,15 @@
   .character-progress-wrapper { flex-direction: column; align-items: stretch; gap: 6px; }
   .progress-label { text-align: center; min-width: auto; }
   .progress-bar { height: 6px; }
+}
+
+/* =====================================================
+   ACCESSIBILITÉ — mouvement réduit
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .step-content { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

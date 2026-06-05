@@ -1,198 +1,225 @@
-<div class="accueil-container">
-  <!-- Hero Section -->
-  <section class="hero-section" [class.celebration-mode]="showCelebration">
-    <!-- Effet de célébration -->
-    <div class="celebration-overlay" *ngIf="showCelebration">
-      <div class="confetti" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"></div>
-    </div>
-    <div class="hero-content">
+<div class="ei-home" [class.celebration-mode]="showCelebration">
+
+  <!-- Célébration retour candidature (conservée) -->
+  <div class="celebration-overlay" *ngIf="showCelebration" aria-hidden="true">
+    <div class="confetti" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"></div>
+  </div>
+
+  <!-- ===================================================== -->
+  <!--  HERO · DÉCOLLAGE                                      -->
+  <!-- ===================================================== -->
+  <section class="hero" aria-label="Envol Impact — décollage">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-halo" aria-hidden="true"></div>
+
+    <!-- Trajectoire d'or du hero : du sol bas-gauche vers la lumière haut-droite -->
+    <svg class="hero-traj-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldHero" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E8A23D" stop-opacity="0.35" />
+          <stop offset="55%" stop-color="#E8A23D" />
+          <stop offset="100%" stop-color="#F4C95D" />
+        </linearGradient>
+      </defs>
+      <path class="hero-trajectory trajectory-path"
+            d="M -40 880 C 280 760, 470 700, 690 540 S 1080 300, 1500 90"
+            fill="none" stroke="url(#goldHero)" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+
+    <!-- Repère « oiseau » au sommet de la trajectoire -->
+    <svg class="hero-bird" viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M4 40 C 16 34, 22 24, 30 14 L 24 16 L 40 6 L 38 24 L 34 18 C 26 28, 18 36, 4 40 Z"
+            fill="#F4C95D" />
+    </svg>
+
+    <div class="hero-inner">
       <p class="hero-eyebrow">L'incubateur solidaire de l'association F.A.T.E.</p>
-      <h1>Envol Impact</h1>
+      <h1 class="hero-title">
+        <span class="line"><span class="line-inner">Ici, on prend</span></span>
+        <span class="line"><span class="line-inner">de la <em>hauteur.</em></span></span>
+      </h1>
       <p class="hero-subtitle">
-        Transformez vos idées en projets viables grâce à un accompagnement humain et un financement solidaire.
-        Donnez aux habitants des quartiers populaires les moyens de créer leur avenir.
+        Un accompagnement humain et un financement solidaire pour transformer vos idées
+        en projets viables — et donner aux habitants des quartiers populaires les moyens
+        de créer leur avenir.
       </p>
       <div class="hero-actions">
-        <button mat-raised-button color="primary" routerLink="/candidature" class="cta-button">
+        <a routerLink="/candidature" class="ei-btn ei-btn--gold" data-magnetic>
           Soumettre mon projet
-        </button>
-        <button mat-button color="primary" routerLink="/apropos" class="secondary-button">
-          Découvrir notre mission
-        </button>
+          <mat-icon>north_east</mat-icon>
+        </a>
+        <a href="#parcours" class="ei-btn ei-btn--ghost" data-magnetic>
+          Découvrir la trajectoire
+        </a>
       </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Faites défiler</span>
+      <span class="hint-line"></span>
     </div>
   </section>
 
-  <!-- Mission Section -->
-  <section class="mission-section">
-    <div class="container">
-      <h2>Notre Mission</h2>
-      <p class="section-subtitle">
-        Créer un écosystème solidaire pour accompagner l'entrepreneuriat dans les quartiers populaires
-      </p>
-      
-      <div class="mission-grid">
-        <mat-card class="mission-card">
-          <mat-card-content>
-            <div class="mission-icon">
-              <mat-icon>volunteer_activism</mat-icon>
-            </div>
-            <h3>Soutenir l'Innovation Sociale</h3>
-            <p>Identifier et financer des projets portés par des habitants de quartiers défavorisés : insertion par l'activité économique, création de micro-entreprises, rénovation de logements sociaux.</p>
-          </mat-card-content>
-        </mat-card>
+  <!-- ===================================================== -->
+  <!--  SPINE · la ligne d'or maîtresse traverse les sections -->
+  <!-- ===================================================== -->
+  <div class="trajectory-spine" aria-hidden="true">
+    <svg class="spine-svg" viewBox="0 0 200 2400" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="goldSpine" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E8A23D" />
+          <stop offset="100%" stop-color="#F4C95D" />
+        </linearGradient>
+      </defs>
+      <path class="spine-path trajectory-path"
+            d="M 20 2380 C 60 2000, 150 1900, 110 1500 S 30 1100, 120 800 S 180 400, 150 40"
+            fill="none" stroke="url(#goldSpine)" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </div>
 
-        <mat-card class="mission-card">
-          <mat-card-content>
-            <div class="mission-icon">
-              <mat-icon>diversity_3</mat-icon>
-            </div>
-            <h3>Renforcer la Cohésion Locale</h3>
-            <p>Créer un réseau d'échange et d'entraide entre porteurs de projets, associations, financeurs et acteurs locaux engagés.</p>
-          </mat-card-content>
-        </mat-card>
+  <div class="ei-flow">
 
-        <mat-card class="mission-card">
-          <mat-card-content>
-            <div class="mission-icon">
-              <mat-icon>payments</mat-icon>
-            </div>
-            <h3>Valoriser l'Épargne Citoyenne</h3>
-            <p>Proposer aux particuliers et entreprises une offre d'investissement à impact social, labellisée et transparente.</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </section>
+    <!-- ===================================================== -->
+    <!--  MISSION · piliers, registre éditorial nuit            -->
+    <!-- ===================================================== -->
+    <section class="mission" data-reveal>
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow">Notre mission</p>
+        <h2 class="block-title">
+          Créer un écosystème solidaire pour l'entrepreneuriat
+          <span class="title-em">des quartiers populaires.</span>
+        </h2>
+      </header>
 
-  <!-- Services Section -->
-  <section class="services-section">
-    <div class="container">
-      <h2>Nos Services d'Accompagnement</h2>
-      <p class="section-subtitle">
-        Un parcours en 5 étapes pour transformer votre idée en projet viable
-      </p>
-      
-      <div class="services-timeline">
-        <div class="timeline-line"></div>
-        <div class="services-grid">
-          <div *ngFor="let service of services; let i = index; let last = last" 
-               class="service-step" 
-               [class.last-step]="last">
-            <mat-card class="service-card">
-              <mat-card-content>
-                <div class="step-header">
-                  <div class="service-number">{{i + 1}}</div>
-                  <div class="service-icon">
-                    <mat-icon>{{service.icon}}</mat-icon>
-                  </div>
-                </div>
-                <h3>{{service.title}}</h3>
-                <p>{{service.description}}</p>
-              </mat-card-content>
-            </mat-card>
-            
-            <!-- Flèche de progression -->
-            <div class="progress-connector" *ngIf="!last">
-              <div class="connector-line"></div>
-            </div>
+      <div class="piliers">
+        <article class="pilier" *ngFor="let p of piliers" data-reveal-child>
+          <span class="pilier-num">{{ p.num }}</span>
+          <div class="pilier-body">
+            <h3 class="pilier-title">{{ p.title }}</h3>
+            <p class="pilier-text">{{ p.description }}</p>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!--  PARCOURS · 5 étapes posées sur la trajectoire         -->
+    <!-- ===================================================== -->
+    <section class="parcours" id="parcours" data-reveal>
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow">La trajectoire</p>
+        <h2 class="block-title">
+          Cinq étapes pour transformer
+          <span class="title-em">une idée en projet viable.</span>
+        </h2>
+      </header>
+
+      <ol class="steps">
+        <li class="step-node" *ngFor="let s of steps; let i = index; let last = last"
+            [class.is-last]="last" data-reveal-child>
+          <div class="step-marker">
+            <span class="step-index">{{ i + 1 }}</span>
+            <mat-icon class="step-icon">{{ s.icon }}</mat-icon>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">{{ s.title }}</h3>
+            <p class="step-text">{{ s.description }}</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===================================================== -->
+    <!--  CHIFFRES · count-up                                   -->
+    <!-- ===================================================== -->
+    <section class="figures" data-reveal>
+      <header class="block-head block-head--center" data-reveal-child>
+        <p class="eyebrow">Ce qui fait décoller un projet</p>
+        <h2 class="block-title">Nos facteurs de succès, en clair.</h2>
+      </header>
+
+      <div class="figures-grid">
+        <div class="figure" data-reveal-child>
+          <span class="figure-num"><span data-count="5" data-decimals="0">0</span></span>
+          <span class="figure-label">étapes d'accompagnement, du dépôt au lancement</span>
         </div>
+        <div class="figure" data-reveal-child>
+          <span class="figure-num"><span data-count="4" data-decimals="0">0</span></span>
+          <span class="figure-label">secteurs à fort impact social ciblés</span>
+        </div>
+        <div class="figure" data-reveal-child>
+          <span class="figure-num">
+            <span data-count="100" data-decimals="0" data-suffix="%">0</span>
+          </span>
+          <span class="figure-label">des projets accompagnés portés depuis les quartiers</span>
+        </div>
+        <div class="figure" data-reveal-child>
+          <span class="figure-num figure-num--tbc">[à confirmer]</span>
+          <span class="figure-label">projets déjà financés <em>— chiffre à valider avec F.A.T.E.</em></span>
+        </div>
+      </div>
+
+      <div class="figures-grid factors">
+        <article class="factor" *ngFor="let f of successFactors" data-reveal-child>
+          <mat-icon class="factor-icon">{{ f.icon }}</mat-icon>
+          <h3 class="factor-title">{{ f.title }}</h3>
+          <p class="factor-text">{{ f.description }}</p>
+        </article>
+      </div>
+    </section>
+
+  </div><!-- /.ei-flow -->
+
+  <!-- ===================================================== -->
+  <!--  TYPES DE PROJETS · bandeau craie (full-bleed clair)   -->
+  <!-- ===================================================== -->
+  <section class="sectors" data-reveal>
+    <div class="sectors-inner">
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow eyebrow--ink">Champs d'action</p>
+        <h2 class="block-title block-title--ink">
+          Les terrains où l'impact
+          <span class="title-em title-em--ink">se mesure vraiment.</span>
+        </h2>
+      </header>
+
+      <div class="sectors-grid">
+        <article class="sector" *ngFor="let t of projectTypes; let i = index" data-reveal-child>
+          <span class="sector-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <div class="sector-head">
+            <mat-icon class="sector-icon">{{ t.icon }}</mat-icon>
+            <h3 class="sector-title">{{ t.title }}</h3>
+          </div>
+          <p class="sector-text">{{ t.description }}</p>
+          <ul class="sector-tags">
+            <li *ngFor="let ex of t.examples">{{ ex }}</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Impact Section -->
-<!--
-  <section class="impact-section">
-    <div class="container">
-      <h2>Notre Impact</h2>
-      <p class="section-subtitle">
-        Des résultats concrets au service de la cohésion sociale
+  <!-- ===================================================== -->
+  <!--  CTA FINAL · le sommet lumineux                        -->
+  <!-- ===================================================== -->
+  <section class="summit" data-reveal>
+    <div class="summit-halo" aria-hidden="true"></div>
+    <div class="summit-inner" data-reveal-child>
+      <p class="eyebrow">Au sommet de la trajectoire</p>
+      <h2 class="summit-title">Rejoignez la trajectoire.</h2>
+      <p class="summit-quote">
+        « Donner à chacun les moyens de prendre de la hauteur. »
       </p>
-      
-      <div class="impact-stats">
-        <div class="stat-card">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Projets accompagnés</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">0%</div>
-          <div class="stat-label">Taux de réussite</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">0M€</div>
-          <div class="stat-label">Financements levés</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Coachs experts</div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
-  <!-- Success Factors Section -->
-  <section class="success-factors-section">
-    <div class="container">
-      <h2>Nos Facteurs de Succès</h2>
-      <p class="section-subtitle">
-        Ce qui garantit l'efficacité de notre accompagnement
-      </p>
-      
-      <div class="factors-grid">
-        <div class="factor-card" *ngFor="let factor of successFactors">
-          <div class="factor-icon">
-            <mat-icon>{{factor.icon}}</mat-icon>
-          </div>
-          <h3>{{factor.title}}</h3>
-          <p>{{factor.description}}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Project Types Section -->
-  <section class="project-types-section">
-    <div class="container">
-      <h2>Types de Projets Accompagnés</h2>
-      <p class="section-subtitle">
-        Nous concentrons notre accompagnement sur des secteurs à fort impact social
-      </p>
-      
-      <div class="types-grid">
-        <div class="type-card" *ngFor="let type of projectTypes">
-          <div class="type-icon">
-            <mat-icon>{{type.icon}}</mat-icon>
-          </div>
-          <h3>{{type.title}}</h3>
-          <p>{{type.description}}</p>
-          <div class="examples">
-            <div class="examples-list">
-              <span *ngFor="let example of type.examples" class="example-tag">
-                {{example}}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final CTA Section -->
-  <section class="final-cta-section">
-    <div class="container">
-      <h2>Prêt à concrétiser votre projet ?</h2>
-      <p>Rejoignez notre communauté d'entrepreneurs sociaux et transformez votre idée en impact positif.</p>
-      <div class="cta-actions">
-        <button mat-raised-button routerLink="/candidature" class="cta-button primary">
+      <div class="summit-actions">
+        <a routerLink="/candidature" class="ei-btn ei-btn--gold" data-magnetic>
           Soumettre mon projet
-        </button>
-        <button mat-stroked-button routerLink="/apropos" class="cta-button secondary">
+          <mat-icon>north_east</mat-icon>
+        </a>
+        <a routerLink="/apropos" class="ei-btn ei-btn--ghost" data-magnetic>
           En savoir plus
-        </button>
+        </a>
       </div>
     </div>
   </section>
-</div>
 
+</div>

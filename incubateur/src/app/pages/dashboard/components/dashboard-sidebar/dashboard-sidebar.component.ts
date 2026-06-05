@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,4 +22,32 @@ export class DashboardSidebarComponent {
 
   // Remonte l'action de deconnexion au composant parent.
   @Output() logoutRequested = new EventEmitter<void>();
+
+  // Etat du tiroir mobile (off-canvas). Sans effet sur desktop, ou
+  // la sidebar reste fixe en permanence (le drawer est masque par CSS).
+  isMobileOpen = false;
+
+  // Ouvre/ferme le tiroir et verrouille le scroll du body quand ouvert.
+  toggleMobile(): void {
+    this.isMobileOpen = !this.isMobileOpen;
+    this.lockBodyScroll(this.isMobileOpen);
+  }
+
+  // Ferme le tiroir (clic sur scrim, sur un lien, ou touche Echap).
+  closeMobile(): void {
+    if (!this.isMobileOpen) { return; }
+    this.isMobileOpen = false;
+    this.lockBodyScroll(false);
+  }
+
+  // Echap referme le tiroir pour l'accessibilite clavier.
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closeMobile();
+  }
+
+  private lockBodyScroll(lock: boolean): void {
+    if (typeof document === 'undefined') { return; }
+    document.body.style.overflow = lock ? 'hidden' : '';
+  }
 }

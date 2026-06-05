@@ -1,138 +1,139 @@
-<div class="faq-container">
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1>Questions Fréquemment Posées</h1>
-      <p class="hero-subtitle">
-        Trouvez rapidement les réponses à vos questions sur notre accompagnement, 
-        nos financements et notre processus de sélection
+<div class="ei-faq">
+
+  <!-- ===================================================== -->
+  <!--  HERO · FAQ, registre nuit                            -->
+  <!-- ===================================================== -->
+  <section class="faq-hero" aria-label="Questions fréquentes">
+    <div class="faq-hero-halo" aria-hidden="true"></div>
+    <div class="faq-hero-inner" data-reveal>
+      <p class="eyebrow" data-reveal-child>Tout ce qu'il faut savoir</p>
+      <h1 class="faq-hero-title" data-reveal-child>
+        Vos questions,
+        <em>nos réponses</em> claires.
+      </h1>
+      <p class="faq-hero-sub" data-reveal-child>
+        L'accompagnement, le financement solidaire, la sélection : l'essentiel
+        pour comprendre la trajectoire avant de déposer votre projet.
       </p>
+
+      <nav class="faq-quick" aria-label="Accès rapides" data-reveal-child>
+        <a *ngFor="let action of quickActions" [routerLink]="action.link" class="faq-quick-link" data-magnetic>
+          <span class="faq-quick-icon"><mat-icon>{{ action.icon }}</mat-icon></span>
+          <span class="faq-quick-body">
+            <span class="faq-quick-title">{{ action.title }}</span>
+            <span class="faq-quick-desc">{{ action.description }}</span>
+          </span>
+          <mat-icon class="faq-quick-arrow">north_east</mat-icon>
+        </a>
+      </nav>
     </div>
   </section>
 
-  <!-- Quick Actions -->
-  <section class="quick-actions-section">
-    <div class="container">
-      <div class="quick-actions-grid">
-        <mat-card *ngFor="let action of quickActions" class="action-card">
-          <mat-card-content>
-            <div class="action-icon" [ngClass]="'icon-' + action.color">
-              <mat-icon>{{action.icon}}</mat-icon>
-            </div>
-            <h3>{{action.title}}</h3>
-            <p>{{action.description}}</p>
-            <button mat-raised-button [color]="action.color" [routerLink]="action.link">
-              Accéder
-            </button>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </section>
+  <!-- ===================================================== -->
+  <!--  FAQ · catégories numérotées + accordéon éditorial    -->
+  <!-- ===================================================== -->
+  <section class="faq-body">
+    <div class="faq-body-inner">
 
-  <!-- FAQ Categories -->
-  <section class="faq-section">
-    <div class="container">
-      <div class="faq-category" *ngFor="let category of faqCategories">
-        <div class="category-header">
-          <div class="category-icon">
-            <mat-icon>{{category.icon}}</mat-icon>
+      <div class="faq-category"
+           *ngFor="let category of faqCategories; let i = index"
+           data-reveal>
+        <header class="faq-cat-head" data-reveal-child>
+          <span class="faq-cat-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <div class="faq-cat-titles">
+            <mat-icon class="faq-cat-icon">{{ category.icon }}</mat-icon>
+            <h2 class="faq-cat-title">{{ category.title }}</h2>
           </div>
-          <h2>{{category.title}}</h2>
-        </div>
-        
-        <mat-accordion class="faq-accordion">
+        </header>
+
+        <mat-accordion class="faq-accordion" data-reveal-child>
           <mat-expansion-panel *ngFor="let faq of category.questions" class="faq-panel">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon class="question-icon">help_center</mat-icon>
-                {{faq.question}}
+                {{ faq.question }}
               </mat-panel-title>
             </mat-expansion-panel-header>
-            
+
             <div class="faq-answer">
-              <p>{{faq.answer}}</p>
+              <p>{{ faq.answer }}</p>
             </div>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
+
     </div>
   </section>
 
-  <!-- Contact CTA -->
-  <section class="contact-cta-section">
-    <div class="container">
-      <mat-card class="cta-card">
-        <mat-card-content>
-          <div class="cta-content">
-            <div class="cta-text">
-              <h2>Vous ne trouvez pas la réponse à votre question ?</h2>
-              <p>
-                Notre équipe est à votre disposition pour répondre à toutes vos interrogations 
-                et vous accompagner dans votre démarche entrepreneuriale.
-              </p>
-            </div>
-            
-            <div class="cta-actions">
-              <button mat-raised-button color="primary" routerLink="/contact" class="contact-btn">
-                <mat-icon>contact_support</mat-icon>
-                Nous contacter
-              </button>
-              
-              <button mat-button color="primary" class="phone-btn">
-                <mat-icon>phone</mat-icon>
-                01 23 45 67 89
-              </button>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </section>
+  <!-- ===================================================== -->
+  <!--  RESSOURCES · bandeau craie (full-bleed clair)        -->
+  <!-- ===================================================== -->
+  <section class="faq-resources" data-reveal>
+    <div class="faq-resources-inner">
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow eyebrow--ink">Pour aller plus loin</p>
+        <h2 class="block-title block-title--ink">
+          Des repères pour préparer
+          <span class="title-em title-em--ink">votre candidature.</span>
+        </h2>
+      </header>
 
-  <!-- Help Section -->
-  <section class="help-section">
-    <div class="container">
-      <h2>Ressources Utiles</h2>
-      
       <div class="resources-grid">
-        <mat-card class="resource-card">
-          <mat-card-content>
-            <mat-icon class="resource-icon">description</mat-icon>
-            <h3>Guide du Candidat</h3>
-            <p>Téléchargez notre guide complet pour préparer votre candidature</p>
-            <button mat-button color="primary">
-              <mat-icon>download</mat-icon>
-              Télécharger
-            </button>
-          </mat-card-content>
-        </mat-card>
-        
-        <mat-card class="resource-card">
-          <mat-card-content>
-            <mat-icon class="resource-icon">calendar_today</mat-icon>
-            <h3>Prochaines Sessions</h3>
-            <p>Consultez le calendrier des sessions d'information et ateliers</p>
-            <button mat-button color="primary">
-              <mat-icon>event</mat-icon>
-              Voir l'agenda
-            </button>
-          </mat-card-content>
-        </mat-card>
-        
-        <mat-card class="resource-card">
-          <mat-card-content>
-            <mat-icon class="resource-icon">smart_display</mat-icon>
-            <h3>Témoignages Vidéo</h3>
-            <p>Découvrez les parcours de nos entrepreneurs accompagnés</p>
-            <button mat-button color="primary">
-              <mat-icon>play_circle</mat-icon>
-              Regarder
-            </button>
-          </mat-card-content>
-        </mat-card>
+        <article class="resource" data-reveal-child>
+          <mat-icon class="resource-icon">description</mat-icon>
+          <h3 class="resource-title">Guide du candidat</h3>
+          <p class="resource-text">Le guide complet pour préparer et structurer votre dossier.</p>
+          <button mat-button color="primary" class="resource-btn">
+            <mat-icon>download</mat-icon>
+            Télécharger
+          </button>
+        </article>
+
+        <article class="resource" data-reveal-child>
+          <mat-icon class="resource-icon">calendar_today</mat-icon>
+          <h3 class="resource-title">Prochaines sessions</h3>
+          <p class="resource-text">Le calendrier des sessions d'information et des ateliers.</p>
+          <button mat-button color="primary" class="resource-btn">
+            <mat-icon>event</mat-icon>
+            Voir l'agenda
+          </button>
+        </article>
+
+        <article class="resource" data-reveal-child>
+          <mat-icon class="resource-icon">smart_display</mat-icon>
+          <h3 class="resource-title">Parcours filmés</h3>
+          <p class="resource-text">Les trajectoires des entrepreneurs accompagnés, en vidéo.</p>
+          <button mat-button color="primary" class="resource-btn">
+            <mat-icon>play_circle</mat-icon>
+            Regarder
+          </button>
+        </article>
       </div>
     </div>
   </section>
-</div>
 
+  <!-- ===================================================== -->
+  <!--  CTA · une question sans réponse ? — sommet nuit      -->
+  <!-- ===================================================== -->
+  <section class="faq-cta" data-reveal>
+    <div class="faq-cta-halo" aria-hidden="true"></div>
+    <div class="faq-cta-inner" data-reveal-child>
+      <p class="eyebrow">Une question reste sans réponse&nbsp;?</p>
+      <h2 class="faq-cta-title">Parlons de votre projet.</h2>
+      <p class="faq-cta-sub">
+        Notre équipe répond à vos interrogations et vous oriente dans votre
+        démarche entrepreneuriale.
+      </p>
+      <div class="faq-cta-actions">
+        <a routerLink="/contact" class="ei-btn ei-btn--gold" data-magnetic>
+          Nous contacter
+          <mat-icon>north_east</mat-icon>
+        </a>
+        <a routerLink="/candidature" class="ei-btn ei-btn--ghost" data-magnetic>
+          Déposer mon projet
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule, Router } from '@angular/router';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
@@ -47,7 +47,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router
   ) {
-    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset)
+    // On bascule sur le menu compact (burger) dès qu'il n'y a plus la place
+    // d'aligner logo + liens + boutons sans les tasser — i.e. jusqu'au
+    // « demi-écran » d'un grand moniteur (~960px). Au-delà, nav horizontale.
+    this.isHandset$ = this.breakpointObserver.observe('(max-width: 1080px)')
       .pipe(
         map(result => result.matches),
         shareReplay()

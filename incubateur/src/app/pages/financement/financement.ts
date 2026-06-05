@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
 import { ProjectService, Project, ProjectFinancing, FundingSource } from '../../services/project.service';
@@ -17,13 +15,11 @@ import { ProjectService, Project, ProjectFinancing, FundingSource } from '../../
   imports: [
     CommonModule,
     RouterModule,
-    MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
     MatTableModule,
     MatChipsModule,
-    MatProgressBarModule,
     MatTooltipModule
   ],
   templateUrl: './financement.html',

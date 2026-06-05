@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Injector, afterNextRender, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,6 +29,9 @@ export class ConnexionComponent {
   connexionForm: FormGroup;
   hidePassword = true;
 
+  private host = inject(ElementRef<HTMLElement>);
+  private injector = inject(Injector);
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -40,6 +43,25 @@ export class ConnexionComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
+
+    // Léger traçage de la trajectoire d'or de l'aside (sobre, respect reduced-motion).
+    afterNextRender(() => this.drawTrajectory(), { injector: this.injector });
+  }
+
+  // Trace la ligne d'or de l'aside une fois après le 1er rendu. CSS-only, pas de lib.
+  private drawTrajectory() {
+    const reduced =
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    const path =
+      (this.host.nativeElement as HTMLElement).querySelector<SVGPathElement>('.aside-path');
+    if (!path) return;
+    if (reduced) { path.style.strokeDashoffset = '0'; return; }
+
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = `${len}`;
+    path.style.strokeDashoffset = `${len}`;
+    path.style.transition = 'stroke-dashoffset 1200ms cubic-bezier(.22,1,.36,1)';
+    requestAnimationFrame(() => { path.style.strokeDashoffset = '0'; });
   }
 
   onSubmit() {

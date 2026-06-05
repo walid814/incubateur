@@ -2,172 +2,206 @@
   display: block;
 }
 
-/* Bloc admin: gestion plateforme */
-.admin-management {
-  mat-card {
-    background: #ffffff;
-    border: 1px solid #e3e6ea;
-    border-radius: 12px;
+/* =====================================================
+   SECTIONS ADMIN — gestion plateforme, utilisateurs,
+   candidatures. DA « Envol » : cartes ardoise, chiffres
+   dorés, mini-cartes d'action bordées.
+   ===================================================== */
+.admin-management,
+.user-management-section,
+.admin-candidatures-overview {
+  font-family: var(--ei-font-text);
+
+  ::ng-deep mat-card,
+  ::ng-deep .mat-mdc-card {
+    background: var(--ei-slate);
+    border: 1px solid rgba(237, 230, 216, 0.1);
+    border-radius: var(--ei-r-8);
     box-shadow: none;
+    color: var(--ei-on-dark);
+    padding: var(--ei-s-24);
   }
 
+  mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--ei-font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--ei-on-dark);
+
+    mat-icon { color: var(--ei-gold-2); }
+  }
+}
+
+/* ---- Cartes d'action rapide ---- */
+.admin-management {
   .admin-quick-actions {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    gap: var(--ei-s-16);
+    margin-top: var(--ei-s-24);
   }
 
   .admin-action-card {
-    background: #ffffff;
-    border: 1px solid #e3e6ea;
-    border-radius: 12px;
-    padding: 20px;
+    background: rgba(237, 230, 216, 0.03);
+    border: 1px solid rgba(237, 230, 216, 0.1);
+    border-radius: var(--ei-r-8);
+    padding: var(--ei-s-24);
     text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 200ms var(--ei-ease-soft),
+                transform 200ms var(--ei-ease-launch);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      transform: translateY(-3px);
+      border-color: rgba(244, 201, 93, 0.32);
     }
 
     mat-icon {
-      color: #0b63ce;
+      color: var(--ei-gold-2);
       font-size: 2rem;
       width: 2rem;
       height: 2rem;
-      margin-bottom: 10px;
+      margin-bottom: var(--ei-s-12);
     }
 
     h3 {
-      color: #111111;
-      margin: 0 0 8px;
+      font-family: var(--ei-font-display);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ei-on-dark);
+      margin: 0 0 var(--ei-s-8);
     }
 
     p {
-      color: #4b5563;
-      margin: 0 0 14px;
+      color: var(--ei-on-dark-dim);
+      margin: 0 0 var(--ei-s-16);
+      font-size: 0.92rem;
     }
   }
 }
 
-/* Bloc utilisateurs: stats et actions */
+/* ---- Gestion utilisateurs : actions + stats ---- */
 .user-management-section {
-  margin-top: 20px;
-
-  .user-management-card {
-    background: #ffffff;
-    border: 1px solid #e3e6ea;
-    border-radius: 12px;
-    box-shadow: none;
-  }
+  margin-top: var(--ei-s-24);
 
   .user-management-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: var(--ei-s-24);
+
+    h3 {
+      font-family: var(--ei-font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--ei-on-dark-dim);
+      margin: 0 0 var(--ei-s-12);
+    }
 
     .action-buttons {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: var(--ei-s-12);
 
-      button {
-        justify-content: flex-start;
-      }
+      button { justify-content: flex-start; }
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: var(--ei-s-12);
 
       .stat-item {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 12px;
-        background: #ffffff;
-        border: 1px solid #e3e6ea;
-        border-radius: 10px;
+        padding: var(--ei-s-16);
+        background: rgba(237, 230, 216, 0.03);
+        border: 1px solid rgba(237, 230, 216, 0.1);
+        border-radius: var(--ei-r-8);
 
         mat-icon {
-          color: #0b63ce;
+          color: var(--ei-gold-2);
           margin-bottom: 6px;
         }
 
         .stat-number {
-          color: #0b63ce;
-          font-size: 1.4rem;
-          font-weight: 700;
+          font-family: var(--ei-font-display);
+          font-size: 1.5rem;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          background: var(--ei-gold-grad);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
         }
 
         .stat-label {
-          color: #4b5563;
-          font-size: 0.8rem;
+          color: var(--ei-haze);
+          font-size: 0.74rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-top: 4px;
         }
       }
     }
   }
 }
 
-/* Bloc candidatures: résumé admin */
+/* ---- Résumé candidatures ---- */
 .admin-candidatures-overview {
-  margin-top: 20px;
-
-  mat-card {
-    background: #ffffff;
-    border: 1px solid #e3e6ea;
-    border-radius: 12px;
-    box-shadow: none;
-  }
-
-  mat-card-title {
-    color: #111111;
-
-    mat-icon {
-      color: #0b63ce;
-    }
-  }
+  margin-top: var(--ei-s-24);
 
   .candidatures-summary {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--ei-s-12);
+    margin-top: var(--ei-s-8);
 
     .summary-stat {
-      text-align: center;
-      padding: 12px;
-      background: #ffffff;
-      border: 1px solid #e3e6ea;
-      border-radius: 8px;
+      text-align: left;
+      padding: var(--ei-s-16);
+      background: rgba(237, 230, 216, 0.03);
+      border: 1px solid rgba(237, 230, 216, 0.1);
+      border-radius: var(--ei-r-8);
 
       .stat-number {
-        color: #111111;
-        font-size: 1.5rem;
-        font-weight: 700;
+        font-family: var(--ei-font-display);
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        color: var(--ei-on-dark);
 
+        /* en attente / évaluation → or, accepté → vert pousse */
         &.primary,
         &.accent {
-          color: #0b63ce;
+          background: var(--ei-gold-grad);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
         }
-
-        &.success {
-          color: #198754;
-        }
+        &.success { color: var(--ei-sprout); }
       }
 
       .stat-label {
-        color: #4b5563;
+        color: var(--ei-haze);
+        font-size: 0.74rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-top: 6px;
       }
     }
   }
 
   .candidatures-actions {
-    margin-top: 16px;
+    margin-top: var(--ei-s-16);
     display: flex;
-    gap: 10px;
+    gap: var(--ei-s-12);
   }
 }
 
@@ -180,5 +214,22 @@
 @media (max-width: 768px) {
   .admin-candidatures-overview .candidatures-actions {
     flex-direction: column;
+
+    button { width: 100%; justify-content: center; }
+  }
+
+  /* actions rapides : les boutons « Gérer / Réviser » pleine largeur */
+  .admin-management .admin-action-card button { width: 100%; }
+
+  .user-management-section .user-management-actions .action-buttons button {
+    width: 100%;
+  }
+}
+
+/* tres petits ecrans : la grille de stats 2 colonnes devient 1 colonne
+   pour eviter l'ecrasement des chiffres dores. */
+@media (max-width: 380px) {
+  .user-management-section .user-management-actions .stats-grid {
+    grid-template-columns: 1fr;
   }
 }

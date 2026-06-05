@@ -1,462 +1,585 @@
-// Variables couleur — Envol Impact (navy/orange), repointées sur la marque
-$jaune-primary: #FE8701;
-$jaune-light: #FFA133;
-$jaune-dark: #E5740A;
-$jaune-secondary: #FFD8A8;
-$bleu-primary: #01306F;
-$bleu-dark: #02245A;
-$text-dark: #2c3e50;
-$text-light: #6c757d;
-$bg-light: #f8f9fa;
-$white: #ffffff;
-$success-color: #28a745;
-$danger-color: #dc3545;
-$border-color: #e1e5e9;
+/* =====================================================
+   ENVOL IMPACT · FAQ — propagation DA « Décollage »
+   Nuit d'encre → craie → sommet. Accordéon éditorial.
+   Tokens : voir src/styles.scss (--ei-*).
+   ===================================================== */
 
-.faq-container {
-  min-height: 100vh;
+:host {
+  display: block;
+  background: var(--ei-ink);
+  color: var(--ei-on-dark);
+  font-family: var(--ei-font-text);
+}
 
-  /* Force a predictable icon box so Material icons are never clipped */
+.ei-faq {
+  position: relative;
+  overflow-x: clip;
+}
+
+/* ---------- Primitives partagées (alignées sur l'accueil) ---------- */
+.eyebrow {
+  margin: 0 0 var(--ei-s-16);
+  font-family: var(--ei-font-text);
+  font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ei-gold-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  &::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--ei-gold-grad);
+  }
+  &.eyebrow--ink { color: #9a6a16; &::before { background: #c98a22; } }
+}
+
+.block-title {
+  margin: 0;
+  font-family: var(--ei-font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+  color: var(--ei-on-dark);
+  max-width: 20ch;
+
+  .title-em { color: var(--ei-gold-2); }
+  &--ink { color: var(--ei-on-light); .title-em--ink { color: #b8761a; } }
+}
+
+.block-head {
+  margin-bottom: clamp(var(--ei-s-48), 6vw, var(--ei-s-96));
+}
+
+/* ---------- Boutons de marque DA ---------- */
+.ei-btn {
+  --pad-x: 26px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px var(--pad-x);
+  border-radius: var(--ei-r-4);
+  font-family: var(--ei-font-text);
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 160ms var(--ei-ease-launch),
+              box-shadow 160ms var(--ei-ease-launch),
+              background 160ms var(--ei-ease-soft),
+              color 160ms var(--ei-ease-soft);
+  will-change: transform;
+
   mat-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-    vertical-align: middle;
+    font-size: 1.05rem;
+    width: 1.05rem;
+    height: 1.05rem;
+    transition: transform 160ms var(--ei-ease-launch);
   }
-}
 
-// Hero Section
-.hero-section {
-  background: linear-gradient(135deg, $bleu-primary 0%, $bleu-dark 100%);
-  color: $white;
-  padding: 80px 0 60px;
-  text-align: center;
-  
-  .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 24px;
-    
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      line-height: 1.2;
-      
-      @media (max-width: 768px) {
-        font-size: 2.5rem;
-      }
-    }
-    
-    .hero-subtitle {
-      font-size: 1.25rem;
-      opacity: 0.9;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-  }
-}
-
-// Quick Actions Section
-.quick-actions-section {
-  padding: 60px 0;
-  background: $bg-light;
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  
-  .quick-actions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
-  }
-  
-  .action-card {
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(231, 76, 60, 0.1);
-    transition: transform 0.3s ease;
-    
+  &--gold {
+    background: var(--ei-gold-grad);
+    color: #2a1a04;
+    box-shadow: 0 6px 22px rgba(232, 162, 61, 0.28);
     &:hover {
-      transform: translateY(-5px);
+      box-shadow: 0 14px 38px rgba(232, 162, 61, 0.42);
+      mat-icon { transform: translate(3px, -3px); }
     }
-    
-    mat-card-content {
-      padding: 32px;
-      text-align: center;
-    }
-    
-    .action-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      
-      &.icon-primary {
-        background: rgba(0, 102, 204, 0.12);
-        
-        mat-icon {
-          font-size: 40px;
-          width: 40px;
-          height: 40px;
-          line-height: 40px;
-          color: $bleu-primary;
-        }
-      }
-      
-      &.icon-accent {
-        background: rgba(0, 102, 204, 0.12);
-        
-        mat-icon {
-          font-size: 40px;
-          width: 40px;
-          height: 40px;
-          line-height: 40px;
-          color: $bleu-primary;
-        }
-      }
-    }
-    
-    h3 {
-      color: $text-dark;
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-    
-    p {
-      color: $text-light;
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-    
-    button {
-      border-radius: 12px;
-      padding: 12px 24px;
-      font-weight: 700;
-      min-height: 48px;
+  }
 
-      &.mat-mdc-raised-button,
-      &.mat-mdc-raised-button.mat-primary,
-      &.mat-mdc-raised-button.mat-accent {
-        background: $bleu-primary !important;
-        color: $white !important;
-        border: 1px solid $bleu-primary !important;
-        box-shadow: none !important;
-      }
-
-      &.mat-mdc-raised-button:hover,
-      &.mat-mdc-raised-button.mat-primary:hover,
-      &.mat-mdc-raised-button.mat-accent:hover {
-        background: $bleu-dark !important;
-        color: $white !important;
-        border: 1px solid $bleu-dark !important;
-      }
+  &--ghost {
+    background: transparent;
+    color: var(--ei-on-dark);
+    border-color: rgba(237, 230, 216, 0.28);
+    &:hover {
+      border-color: var(--ei-elan);
+      color: #fff;
+      box-shadow: 0 0 0 1px var(--ei-elan), 0 10px 30px rgba(30, 91, 255, 0.25);
     }
   }
 }
 
-// FAQ Section
-.faq-section {
-  padding: 80px 0;
-  background: $white;
-  
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 24px;
+/* =====================================================
+   HERO · registre nuit
+   ===================================================== */
+.faq-hero {
+  position: relative;
+  padding: clamp(96px, 14vh, 168px) clamp(24px, 6vw, 120px) clamp(56px, 8vh, 104px);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 88% 4%, rgba(244, 201, 93, 0.10), transparent 55%),
+    var(--ei-ink);
+}
+
+.faq-hero-halo {
+  position: absolute;
+  top: -16%;
+  right: -6%;
+  width: min(42vw, 560px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(244, 201, 93, 0.42) 0%, rgba(232, 162, 61, 0.16) 38%, transparent 68%);
+  filter: blur(18px);
+}
+
+.faq-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 64ch;
+}
+
+.faq-hero-title {
+  margin: 0;
+  font-family: var(--ei-font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+  font-size: clamp(2.6rem, 7.5vw, 6rem);
+  color: var(--ei-on-dark);
+
+  em {
+    font-style: normal;
+    background: var(--ei-gold-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  
-  .faq-category {
-    margin-bottom: 60px;
-    
-    &:last-child {
-      margin-bottom: 0;
+}
+
+.faq-hero-sub {
+  margin: clamp(22px, 3.4vh, 34px) 0 0;
+  max-width: 56ch;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.6;
+  color: var(--ei-on-dark-dim);
+}
+
+/* ---------- Accès rapides (cartouches sobres) ---------- */
+.faq-quick {
+  margin-top: clamp(32px, 4.5vh, 52px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--ei-s-16);
+}
+
+.faq-quick-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: var(--ei-r-16);
+  background: var(--ei-slate);
+  border: 1px solid rgba(237, 230, 216, 0.10);
+  text-decoration: none;
+  transition: border-color 200ms var(--ei-ease-soft),
+              transform 200ms var(--ei-ease-launch),
+              box-shadow 200ms var(--ei-ease-launch);
+  will-change: transform;
+
+  &:hover {
+    border-color: rgba(244, 201, 93, 0.34);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+
+    .faq-quick-arrow { transform: translate(3px, -3px); color: var(--ei-gold-2); }
+  }
+}
+
+.faq-quick-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ei-r-8);
+  background: rgba(232, 162, 61, 0.14);
+  mat-icon {
+    font-size: 1.4rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    color: var(--ei-gold-2);
+  }
+}
+
+.faq-quick-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.faq-quick-title {
+  font-family: var(--ei-font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+  color: var(--ei-on-dark);
+}
+.faq-quick-desc {
+  font-size: 0.85rem;
+  color: var(--ei-on-dark-dim);
+}
+.faq-quick-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--ei-haze);
+  transition: transform 200ms var(--ei-ease-launch), color 200ms var(--ei-ease-soft);
+}
+
+/* =====================================================
+   CORPS FAQ · catégories numérotées (registre nuit)
+   ===================================================== */
+.faq-body {
+  position: relative;
+  z-index: 1;
+  padding: clamp(var(--ei-s-64), 9vh, var(--ei-s-128)) clamp(24px, 6vw, 120px);
+}
+.faq-body-inner {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.faq-category {
+  & + & { margin-top: clamp(var(--ei-s-48), 7vw, var(--ei-s-96)); }
+}
+
+.faq-cat-head {
+  display: grid;
+  grid-template-columns: clamp(56px, 7vw, 92px) 1fr;
+  gap: clamp(16px, 2.4vw, 32px);
+  align-items: baseline;
+  padding-bottom: clamp(18px, 2.4vh, 28px);
+  margin-bottom: clamp(20px, 3vh, 32px);
+  border-bottom: 1px solid rgba(237, 230, 216, 0.10);
+}
+
+.faq-cat-num {
+  font-family: var(--ei-font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  background: var(--ei-gold-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.faq-cat-titles {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.faq-cat-icon {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--ei-gold-2);
+}
+.faq-cat-title {
+  margin: 0;
+  font-family: var(--ei-font-display);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  letter-spacing: -0.015em;
+  color: var(--ei-on-dark);
+}
+
+/* ---------- Accordéon éditorial sur sombre ----------
+   On surcharge le Material panel : pas de carte SaaS,
+   juste une ligne fine qui s'allume en or à l'ouverture. */
+.faq-accordion {
+  display: block;
+
+  ::ng-deep .mat-expansion-panel {
+    background: transparent;
+    color: var(--ei-on-dark);
+    border: 0;
+    border-bottom: 1px solid rgba(237, 230, 216, 0.10);
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transition: background 220ms var(--ei-ease-soft);
+  }
+
+  ::ng-deep .mat-expansion-panel:last-of-type {
+    border-bottom: 1px solid rgba(237, 230, 216, 0.10);
+  }
+
+  ::ng-deep .mat-expansion-panel-header {
+    padding: clamp(18px, 2.4vh, 26px) clamp(8px, 1.4vw, 16px);
+    height: auto;
+    transition: background 220ms var(--ei-ease-soft);
+
+    &:hover {
+      background: rgba(244, 201, 93, 0.05) !important;
     }
   }
-  
-  .category-header {
-    display: flex;
+
+  /* libellé de question */
+  ::ng-deep .mat-panel-title {
     align-items: center;
-    margin-bottom: 32px;
-    
-    .category-icon {
-      width: 60px;
-      height: 60px;
-      background: rgba(231, 76, 60, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 20px;
-      
-      mat-icon {
-        font-size: 32px;
-        width: 32px;
-        height: 32px;
-        line-height: 32px;
-        color: $bleu-primary;
-      }
-    }
-    
-    h2 {
-      color: $bleu-primary;
-      font-size: 2rem;
-      margin: 0;
-      font-weight: 600;
-    }
-  }
-  
-  .faq-accordion {
-    .faq-panel {
-      margin-bottom: 16px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(231, 76, 60, 0.08);
-      border: 1px solid rgba(231, 76, 60, 0.1);
-      
-      &:last-child {
-        margin-bottom: 0;
-      }
-      
-      .mat-expansion-panel-header {
-        padding: 20px 24px;
-        
-        .mat-panel-title {
-          display: flex;
-          align-items: center;
-          font-weight: 600;
-          color: $text-dark;
-          
-          .question-icon {
-            margin-right: 12px;
-            color: $bleu-primary;
-            font-size: 20px;
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            flex-shrink: 0;
-          }
-        }
-      }
-      
-      .faq-answer {
-        padding: 0 24px 24px;
-        
-        p {
-          color: $text-light;
-          line-height: 1.7;
-          font-size: 1rem;
-          margin: 0;
-        }
-      }
-      
-      &.mat-expanded {
-        .mat-expansion-panel-header {
-          background: rgba(231, 76, 60, 0.05);
-        }
-      }
-    }
-  }
-}
-
-// Contact CTA Section
-.contact-cta-section {
-  padding: 60px 0;
-  background: $bg-light;
-  
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  
-  .cta-card {
-    border-radius: 24px;
-    box-shadow: 0 12px 40px rgba(231, 76, 60, 0.15);
-    
-    mat-card-content {
-      padding: 48px;
-      
-      @media (max-width: 768px) {
-        padding: 32px 24px;
-      }
-    }
-    
-    .cta-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 40px;
-      align-items: center;
-      
-      @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        text-align: center;
-      }
-    }
-    
-    .cta-text {
-      h2 {
-        color: $bleu-primary;
-        font-size: 1.8rem;
-        margin-bottom: 16px;
-        font-weight: 600;
-      }
-      
-      p {
-        color: $text-light;
-        line-height: 1.6;
-        font-size: 1.1rem;
-        margin: 0;
-      }
-    }
-    
-    .cta-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      
-      .contact-btn {
-        background: $jaune-secondary;
-        color: $white;
-        border-radius: 25px;
-        padding: 14px 28px;
-        font-weight: 600;
-        box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
-        
-        &:hover {
-          background: $jaune-dark;
-          transform: translateY(-2px);
-        }
-        
-        mat-icon {
-          margin-right: 8px;
-        }
-      }
-      
-      .phone-btn {
-        color: $bleu-primary;
-        border: 2px solid $bleu-primary;
-        border-radius: 25px;
-        padding: 12px 28px;
-        font-weight: 600;
-        
-        &:hover {
-          background: $bleu-primary;
-          color: $white;
-        }
-        
-        mat-icon {
-          margin-right: 8px;
-        }
-      }
-    }
-  }
-}
-
-// Help Section
-.help-section {
-  padding: 80px 0;
-  background: $white;
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  
-  h2 {
-    color: $bleu-primary;
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 60px;
+    gap: 0;
+    margin-right: 16px;
+    font-family: var(--ei-font-display);
     font-weight: 600;
+    font-size: clamp(1.02rem, 1.5vw, 1.22rem);
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    color: var(--ei-on-dark);
   }
-  
-  .resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
+
+  .question-icon {
+    flex-shrink: 0;
+    margin-right: 14px;
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--ei-gold-1);
   }
-  
-  .resource-card {
-    border-radius: 20px;
-    box-shadow: none;
-    border: 1px solid $border-color;
-    transition: transform 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: none;
-    }
-    
-    mat-card-content {
-      padding: 32px;
-      text-align: center;
-    }
-    
-    .resource-icon {
-      font-size: 48px;
-      width: 48px;
-      height: 48px;
-      line-height: 48px;
-      color: $bleu-primary;
-      margin-bottom: 24px;
-    }
-    
-    h3 {
-      color: $text-dark;
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-    
-    p {
-      color: $text-light;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-    
-    button {
-      &.mat-mdc-button.mat-primary,
-      &.mat-mdc-outlined-button.mat-primary,
-      &.mat-mdc-raised-button.mat-primary {
-        background: transparent !important;
-        color: #111111 !important;
-        border: 1px solid #111111 !important;
-      }
 
-      &.mat-mdc-button.mat-primary:hover,
-      &.mat-mdc-outlined-button.mat-primary:hover,
-      &.mat-mdc-raised-button.mat-primary:hover {
-        background: #111111 !important;
-        color: $white !important;
-      }
+  /* chevron Material teinté */
+  ::ng-deep .mat-expansion-indicator::after {
+    color: var(--ei-haze);
+    transition: color 220ms var(--ei-ease-soft);
+  }
 
-      mat-icon {
-        margin-right: 8px;
-        color: currentColor !important;
-      }
-    }
+  /* panneau ouvert : marqueur or à gauche + titre lumineux */
+  ::ng-deep .mat-expansion-panel.mat-expanded {
+    background: linear-gradient(90deg, rgba(232, 162, 61, 0.07), transparent 60%);
+
+    .mat-expansion-panel-header { background: transparent !important; }
+    .mat-panel-title { color: var(--ei-gold-2); }
+    .question-icon { color: var(--ei-gold-2); }
+    .mat-expansion-indicator::after { color: var(--ei-gold-2); }
+  }
+
+  /* corps de réponse */
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0 clamp(8px, 1.4vw, 16px) clamp(20px, 2.6vh, 28px) clamp(38px, 3vw, 46px);
   }
 }
 
-// Responsive adjustments
-@media (max-width: 768px) {
-  .faq-section .category-header {
-    flex-direction: column;
-    text-align: center;
-    
-    .category-icon {
-      margin-right: 0;
-      margin-bottom: 16px;
+.faq-answer p {
+  margin: 0;
+  max-width: 64ch;
+  font-size: clamp(0.96rem, 1.15vw, 1.06rem);
+  line-height: 1.7;
+  color: var(--ei-on-dark-dim);
+}
+
+/* =====================================================
+   RESSOURCES · bandeau craie (full-bleed clair)
+   ===================================================== */
+.faq-resources {
+  position: relative;
+  z-index: 1;
+  background: var(--ei-chalk);
+  color: var(--ei-on-light);
+  clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
+  margin-top: -2vw;
+  padding: clamp(var(--ei-s-128), 16vh, calc(var(--ei-s-192) + 40px)) 0 clamp(var(--ei-s-96), 12vh, var(--ei-s-128));
+}
+
+.faq-resources-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 6vw, 80px);
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: rgba(26, 42, 56, 0.12);
+  border: 1px solid rgba(26, 42, 56, 0.12);
+}
+
+.resource {
+  background: var(--ei-chalk);
+  padding: clamp(28px, 3.4vw, 44px);
+  transition: background 200ms var(--ei-ease-soft);
+
+  &:hover { background: #fffdf7; }
+
+  .resource-icon {
+    font-size: 1.9rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    color: #9a6a16;
+    margin-bottom: 18px;
+  }
+  .resource-title {
+    margin: 0 0 10px;
+    font-family: var(--ei-font-display);
+    font-weight: 600;
+    font-size: clamp(1.18rem, 1.7vw, 1.45rem);
+    letter-spacing: -0.01em;
+    color: var(--ei-on-light);
+  }
+  .resource-text {
+    margin: 0 0 22px;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: #3a4c5a;
+  }
+
+  /* bouton lien éditorial sur craie */
+  .resource-btn {
+    &.mat-mdc-button.mat-primary,
+    &.mat-mdc-outlined-button.mat-primary,
+    &.mat-mdc-raised-button.mat-primary {
+      background: transparent !important;
+      color: #8a5e12 !important;
+      border: 1px solid rgba(154, 106, 22, 0.4) !important;
+      box-shadow: none !important;
     }
+    &.mat-mdc-button.mat-primary:hover,
+    &.mat-mdc-outlined-button.mat-primary:hover,
+    &.mat-mdc-raised-button.mat-primary:hover {
+      background: rgba(232, 162, 61, 0.12) !important;
+      border-color: #9a6a16 !important;
+    }
+    mat-icon { margin-right: 8px; color: currentColor !important; }
+  }
+}
+
+/* =====================================================
+   CTA FINAL · sommet nuit
+   ===================================================== */
+.faq-cta {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: clamp(var(--ei-s-128), 17vh, calc(var(--ei-s-192) + 40px)) clamp(24px, 6vw, 80px);
+  background:
+    radial-gradient(120% 120% at 50% 120%, rgba(244, 201, 93, 0.16), transparent 60%),
+    linear-gradient(180deg, var(--ei-ink) 0%, #0d2236 100%);
+}
+
+.faq-cta-halo {
+  position: absolute;
+  left: 50%;
+  top: -10%;
+  transform: translateX(-50%);
+  width: min(70vw, 720px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(244, 201, 93, 0.26) 0%, transparent 62%);
+  filter: blur(24px);
+}
+
+.faq-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+
+  .eyebrow { justify-content: center; }
+}
+
+.faq-cta-title {
+  margin: 16px 0 0;
+  font-family: var(--ei-font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  background: var(--ei-gold-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.faq-cta-sub {
+  margin: clamp(18px, 2.6vh, 26px) auto 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--ei-on-dark-dim);
+}
+
+.faq-cta-actions {
+  margin-top: clamp(30px, 4vh, 42px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ei-s-16);
+}
+
+/* =====================================================
+   RESPONSIVE — tablette
+   ===================================================== */
+@media (max-width: 768px) {
+  /* accès rapides : une colonne, cartouches empilées */
+  .faq-quick { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .faq-cat-head {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .faq-cat-num { font-size: 2.2rem; }
+}
+
+/* =====================================================
+   RESPONSIVE — mobile
+   ===================================================== */
+@media (max-width: 540px) {
+  .faq-cta-actions { width: 100%; }
+  .faq-cta-actions .ei-btn { flex: 1 1 auto; justify-content: center; }
+
+  /* accordéon : padding resserré mais touch target conservé */
+  .faq-accordion ::ng-deep .mat-expansion-panel-header {
+    padding: 16px 4px;
+    min-height: 56px; /* touch confortable */
+  }
+  .faq-accordion ::ng-deep .mat-panel-title {
+    margin-right: 8px;
+    font-size: 1.04rem;
+    line-height: 1.35;
+  }
+  /* l'icône question prend de la place inutile en mobile : on l'enlève */
+  .faq-accordion .question-icon { display: none; }
+
+  .faq-accordion ::ng-deep .mat-expansion-panel-body {
+    padding: 0 4px 20px;
+  }
+
+  /* cartouches d'accès rapide : flèche conservée, desc lisible */
+  .faq-quick-link {
+    padding: 16px;
+    gap: 14px;
+    min-height: 64px;
+  }
+  .faq-quick-icon { width: 40px; height: 40px; }
+  .faq-quick-desc { line-height: 1.4; }
+}
+
+@media (max-width: 390px) {
+  /* évite tout débordement du titre Clash Display sur petits mobiles */
+  .faq-hero-title { font-size: clamp(2.2rem, 11vw, 2.8rem); }
+}
+
+/* =====================================================
+   ACCESSIBILITÉ — mouvement réduit
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }

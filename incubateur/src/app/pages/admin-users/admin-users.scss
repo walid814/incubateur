@@ -1,8 +1,19 @@
+/* =====================================================
+   ADMIN · UTILISATEURS — back-office DA « Envol ».
+   Outil pro premium : chrome nuit d'encre, surfaces
+   ardoise, tableau dense lisible, rôles/statuts en
+   signaux sobres. Tokens : src/styles.scss (--ei-*).
+   ===================================================== */
 .admin-users-container {
-  padding: 24px;
+  padding: var(--ei-s-24);
   max-width: 1400px;
-  margin: 80px auto 0; // Ajout d'une marge supérieure pour éviter le masquage par la navbar
-  min-height: calc(100vh - 80px); // Hauteur minimale pour prendre en compte la navbar
+  margin: 80px auto 0;
+  min-height: calc(100vh - 80px);
+  background:
+    radial-gradient(110% 60% at 100% 0%, rgba(244, 201, 93, 0.05), transparent 55%),
+    var(--ei-ink);
+  color: var(--ei-on-dark);
+  font-family: var(--ei-font-text);
 }
 
 /* En-tête */
@@ -10,36 +21,51 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 24px;
+  gap: var(--ei-s-24);
+  margin-bottom: var(--ei-s-24);
 
   .header-title {
     h1 {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin: 0 0 8px 0;
+      gap: var(--ei-s-12);
+      margin: 0 0 var(--ei-s-8);
+      font-family: var(--ei-font-display);
       font-size: 2rem;
       font-weight: 600;
-      color: var(--text-dark);
+      letter-spacing: -0.02em;
+      color: var(--ei-on-dark);
 
       mat-icon {
         font-size: 2rem;
         width: 2rem;
         height: 2rem;
-        color: var(--jaune-primary);
+        color: var(--ei-gold-2);
       }
     }
 
     p {
       margin: 0;
-      color: var(--text-medium);
-      font-size: 1.1rem;
+      color: var(--ei-on-dark-dim);
+      font-size: 1.05rem;
     }
   }
 
   .header-actions {
     display: flex;
-    gap: 12px;
+    gap: var(--ei-s-12);
+  }
+}
+
+/* ---- Cartes Material : surface ardoise ---- */
+::ng-deep .admin-users-container {
+  mat-card,
+  .mat-mdc-card {
+    background: var(--ei-slate);
+    border: 1px solid rgba(237, 230, 216, 0.1);
+    border-radius: var(--ei-r-8);
+    box-shadow: none;
+    color: var(--ei-on-dark);
   }
 }
 
@@ -47,29 +73,29 @@
 .stats-overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: var(--ei-s-16);
+  margin-bottom: var(--ei-s-24);
 
   .stat-card {
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(255, 215, 0, 0.1);
-    transition: var(--transition);
+    transition: border-color 200ms var(--ei-ease-soft),
+                transform 200ms var(--ei-ease-launch);
 
     &:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      border-color: rgba(244, 201, 93, 0.32) !important;
     }
 
     .stat-content {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: var(--ei-s-16);
 
       mat-icon {
-        font-size: 2.5rem;
-        width: 2.5rem;
-        height: 2.5rem;
+        font-size: 2.4rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        color: var(--ei-gold-2);
+        flex-shrink: 0;
       }
 
       .stat-info {
@@ -77,16 +103,20 @@
         flex-direction: column;
 
         .stat-number {
+          font-family: var(--ei-font-display);
           font-size: 2rem;
-          font-weight: 700;
-          color: var(--text-dark);
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          color: var(--ei-on-dark);
           line-height: 1;
         }
 
         .stat-label {
-          font-size: 0.9rem;
-          color: var(--text-medium);
-          margin-top: 4px;
+          font-size: 0.78rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--ei-haze);
+          margin-top: 6px;
         }
       }
     }
@@ -95,32 +125,29 @@
 
 /* Filtres */
 .filters-card {
-  margin-bottom: 24px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  margin-bottom: var(--ei-s-24);
 
   h3 {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin: 0 0 16px 0;
-    color: var(--text-dark);
-    font-size: 1.2rem;
+    gap: var(--ei-s-8);
+    margin: 0 0 var(--ei-s-16);
+    font-family: var(--ei-font-display);
+    font-weight: 600;
+    color: var(--ei-on-dark);
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
 
-    mat-icon {
-      color: var(--jaune-primary);
-    }
+    mat-icon { color: var(--ei-gold-2); }
   }
 
   .filters-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr auto;
-    gap: 16px;
+    gap: var(--ei-s-16);
     align-items: end;
 
-    .search-field {
-      min-width: 300px;
-    }
+    .search-field { min-width: 300px; }
 
     .clear-filters-btn {
       height: 56px;
@@ -131,122 +158,186 @@
 
 /* Tableau */
 .table-card {
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-
   .table-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: var(--ei-s-16);
 
     h3 {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--ei-s-8);
       margin: 0;
-      color: var(--text-dark);
+      font-family: var(--ei-font-display);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ei-on-dark);
 
-      mat-icon {
-        color: var(--jaune-primary);
-      }
+      mat-icon { color: var(--ei-gold-2); }
     }
   }
 
   .table-container {
+    position: relative;
     overflow-x: auto;
-    border-radius: var(--border-radius);
-    border: 1px solid #e1e5e9;
+    border-radius: var(--ei-r-8);
+    border: 1px solid rgba(237, 230, 216, 0.08);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(244, 201, 93, 0.4) transparent;
+
+    &::-webkit-scrollbar { height: 8px; }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(244, 201, 93, 0.4);
+      border-radius: 999px;
+    }
 
     .users-table {
       width: 100%;
-      background: white;
+      background: transparent;
 
-      th {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      ::ng-deep th.mat-mdc-header-cell {
+        background: rgba(11, 27, 43, 0.85);
+        font-family: var(--ei-font-text);
         font-weight: 600;
-        color: var(--text-dark);
-        border-bottom: 2px solid var(--jaune-primary);
-        padding: 16px 12px;
+        font-size: 0.78rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--ei-on-dark-dim);
+        border-bottom: 1px solid rgba(244, 201, 93, 0.28);
+        padding: var(--ei-s-16) var(--ei-s-12);
       }
 
-      td {
-        padding: 16px 12px;
-        border-bottom: 1px solid #f1f3f5;
+      ::ng-deep td.mat-mdc-cell {
+        padding: var(--ei-s-16) var(--ei-s-12);
+        border-bottom: 1px solid rgba(237, 230, 216, 0.07);
+        color: var(--ei-on-dark);
         vertical-align: middle;
       }
 
-      tr:hover {
-        background-color: rgba(255, 215, 0, 0.05);
-      }
+      ::ng-deep .mat-sort-header-arrow { color: var(--ei-gold-2); }
+
+      tr:hover { background: rgba(244, 201, 93, 0.06); }
 
       .email-link {
-        color: var(--bleu-primary);
+        color: #93B2FF;
         text-decoration: none;
-        
-        &:hover {
-          text-decoration: underline;
-        }
+        &:hover { text-decoration: underline; }
       }
 
-      .mat-mdc-chip {
-        font-size: 0.85rem;
+      ::ng-deep .mat-mdc-chip {
+        font-size: 0.82rem;
         font-weight: 500;
       }
 
-      .danger-item {
-        color: var(--danger-color) !important;
-        
-        mat-icon {
-          color: var(--danger-color) !important;
-        }
-      }
+      ::ng-deep .mat-mdc-icon-button { color: var(--ei-on-dark-dim); }
     }
   }
 
   .no-data {
     text-align: center;
-    padding: 40px 20px;
-    color: var(--text-medium);
+    padding: var(--ei-s-48) var(--ei-s-24);
+    color: var(--ei-on-dark-dim);
 
     mat-icon {
       font-size: 4rem;
       width: 4rem;
       height: 4rem;
-      margin-bottom: 16px;
-      opacity: 0.5;
+      margin-bottom: var(--ei-s-16);
+      color: rgba(237, 230, 216, 0.22);
     }
 
     h3 {
-      margin: 0 0 8px 0;
-      font-size: 1.5rem;
+      margin: 0 0 var(--ei-s-8);
+      font-family: var(--ei-font-display);
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--ei-on-dark);
     }
 
-    p {
-      margin: 0;
-      font-size: 1rem;
-    }
+    p { margin: 0; font-size: 1rem; }
   }
 }
 
 /* Pagination */
-.mat-mdc-paginator {
-  border-top: 1px solid #e1e5e9;
-  background: #f8f9fa;
-  border-radius: 0 0 var(--border-radius) var(--border-radius);
+.table-card ::ng-deep .mat-mdc-paginator {
+  border-top: 1px solid rgba(237, 230, 216, 0.08);
+  background: transparent;
+  color: var(--ei-on-dark-dim);
+  border-radius: 0 0 var(--ei-r-8) var(--ei-r-8);
+}
+
+/* ---- Champs de formulaire Material (appearance="outline")
+   sur surface sombre : réaccordés au chrome ardoise. ---- */
+::ng-deep .admin-users-container {
+  .mat-mdc-form-field {
+    --mat-form-field-container-text-color: var(--ei-on-dark);
+    --mdc-outlined-text-field-input-text-color: var(--ei-on-dark);
+    --mdc-outlined-text-field-label-text-color: var(--ei-haze);
+    --mdc-outlined-text-field-caret-color: var(--ei-gold-2);
+    --mdc-outlined-text-field-outline-color: rgba(237, 230, 216, 0.2);
+    --mdc-outlined-text-field-hover-outline-color: rgba(237, 230, 216, 0.34);
+    --mdc-outlined-text-field-focus-outline-color: var(--ei-gold-2);
+    --mdc-outlined-text-field-focus-label-text-color: var(--ei-gold-2);
+  }
+
+  .mat-mdc-select-value,
+  .mat-mdc-select-placeholder { color: var(--ei-on-dark); }
+  .mat-mdc-select-arrow { color: var(--ei-haze); }
+  .mat-mdc-form-field-icon-suffix mat-icon { color: var(--ei-haze); }
+  input::placeholder { color: var(--ei-haze); }
+}
+
+/* Panneau de sélection (overlay global) → ardoise */
+::ng-deep .cdk-overlay-pane .mat-mdc-select-panel {
+  background: var(--ei-slate);
+  border: 1px solid rgba(237, 230, 216, 0.14);
+
+  .mat-mdc-option {
+    color: var(--ei-on-dark);
+    &:hover:not(.mdc-list-item--disabled) { background: rgba(237, 230, 216, 0.06); }
+    &.mdc-list-item--selected {
+      background: rgba(244, 201, 93, 0.14);
+      .mdc-list-item__primary-text { color: var(--ei-gold-2); }
+    }
+  }
+}
+
+/* Menu d'actions ligne (overlay global) */
+::ng-deep .mat-mdc-menu-panel .danger-item {
+  color: #E0928D !important;
+  mat-icon { color: #C9514B !important; }
+}
+
+/* ---- Chips de rôle / statut : signaux sobres ----
+   role/statut posés via [color] Material (primary/accent/warn).
+   On réaccorde sur la palette Envol, AA sur ardoise. */
+::ng-deep .admin-users-container .mat-mdc-chip,
+::ng-deep .mat-mdc-chip.mat-primary {
+  background: rgba(30, 91, 255, 0.16) !important;
+  color: #93B2FF !important;
+  border-radius: var(--ei-r-4) !important;
+}
+::ng-deep .mat-mdc-chip.mat-accent {
+  background: rgba(244, 201, 93, 0.18) !important;
+  color: var(--ei-gold-2) !important;
+}
+::ng-deep .mat-mdc-chip.mat-warn {
+  background: rgba(201, 81, 75, 0.18) !important;
+  color: #E0928D !important;
 }
 
 /* Responsive */
 @media (max-width: 1200px) {
   .filters-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: var(--ei-s-12);
 
     .search-field {
       grid-column: 1 / -1;
       min-width: auto;
     }
-
     .clear-filters-btn {
       grid-column: 1 / -1;
       justify-self: start;
@@ -254,74 +345,92 @@
   }
 }
 
-@media (max-width: 768px) {
-  .admin-users-container {
-    padding: 16px;
+/* Indice de defilement horizontal — mobile uniquement. */
+.scroll-hint {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 var(--ei-s-8);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--ei-haze);
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--ei-gold-2);
   }
+}
+
+@media (max-width: 768px) {
+  .admin-users-container { padding: var(--ei-s-16); }
 
   .users-header {
     flex-direction: column;
-    gap: 16px;
+    gap: var(--ei-s-16);
     align-items: stretch;
 
-    .header-actions {
-      justify-content: center;
-    }
+    .header-actions { justify-content: center; }
+    .header-actions button { width: 100%; justify-content: center; }
   }
 
-  .stats-overview {
-    grid-template-columns: 1fr;
-  }
-
+  .stats-overview { grid-template-columns: 1fr; }
   .filters-grid {
     grid-template-columns: 1fr;
+    button.clear-filters-btn { width: 100%; justify-self: stretch; }
+  }
+
+  .scroll-hint { display: flex; }
+
+  .table-card {
+    .users-table { min-width: 680px; }
+    .table-container ::ng-deep .mat-mdc-icon-button {
+      width: 44px;
+      height: 44px;
+    }
   }
 
   .table-container {
     font-size: 0.9rem;
-
-    th, td {
-      padding: 12px 8px;
-    }
-  }
-
-  .users-table {
-    .mat-mdc-chip {
-      font-size: 0.8rem;
-    }
+    th, td { padding: var(--ei-s-12) var(--ei-s-8); }
   }
 }
 
-/* Animation des cartes */
+@media (max-width: 480px) {
+  /* colonnes secondaires masquees : email et date moins critiques
+     que nom / role / statut / actions sur tres petit ecran. */
+  .users-table {
+    .mat-column-email,
+    .mat-column-dateCreation,
+    .mat-column-profileComplete {
+      display: none;
+    }
+  }
+  .table-card .users-table { min-width: 420px; }
+}
+
+@media (max-width: 390px) {
+  .admin-users-container { padding: var(--ei-s-12); }
+  .users-header .header-title h1 { font-size: 1.4rem; }
+  .table-card .table-header h3 { font-size: 1rem; }
+}
+
+/* Apparition douce des cartes (réservé, désactivé si
+   l'utilisateur réduit les animations) */
 .stat-card,
 .filters-card,
 .table-card {
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 0.5s var(--ei-ease-launch) both;
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Styles pour les chips de statut */
-.mat-mdc-chip.mat-primary {
-  background-color: rgba(0, 102, 204, 0.1) !important;
-  color: var(--bleu-primary) !important;
-}
-
-.mat-mdc-chip.mat-accent {
-  background-color: rgba(255, 215, 0, 0.2) !important;
-  color: var(--jaune-dark) !important;
-}
-
-.mat-mdc-chip.mat-warn {
-  background-color: rgba(220, 53, 69, 0.1) !important;
-  color: var(--danger-color) !important;
+@media (prefers-reduced-motion: reduce) {
+  .stat-card,
+  .filters-card,
+  .table-card { animation: none; }
 }

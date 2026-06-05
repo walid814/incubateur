@@ -1,137 +1,159 @@
-﻿<div class="apropos-container">
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1>À Propos de Notre Mission</h1>
+<div class="ei-apropos">
+
+  <!-- ===================================================== -->
+  <!--  HERO · l'intention                                   -->
+  <!-- ===================================================== -->
+  <section class="hero" aria-label="À propos — Envol Impact">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-halo" aria-hidden="true"></div>
+
+    <svg class="hero-traj-svg" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldAproposHero" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E8A23D" stop-opacity="0.3" />
+          <stop offset="55%" stop-color="#E8A23D" />
+          <stop offset="100%" stop-color="#F4C95D" />
+        </linearGradient>
+      </defs>
+      <path class="hero-trajectory trajectory-path"
+            d="M -40 700 C 320 600, 520 520, 760 380 S 1120 160, 1500 40"
+            fill="none" stroke="url(#goldAproposHero)" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">L'association F.A.T.E.</p>
+      <h1 class="hero-title">
+        <span class="line"><span class="line-inner">Donner à chacun</span></span>
+        <span class="line"><span class="line-inner">les moyens de <em>décoller.</em></span></span>
+      </h1>
       <p class="hero-subtitle">
-        Nous créons un écosystème solidaire pour transformer l'entrepreneuriat dans les quartiers populaires
+        Envol Impact est l'incubateur solidaire de l'association F.A.T.E. Nous accompagnons les
+        habitants des quartiers populaires, du dépôt d'une idée jusqu'au lancement, par un
+        suivi humain et un financement à impact social.
       </p>
     </div>
   </section>
 
-  <!-- Story Section -->
-  <section class="story-section">
-    <div class="container">
-      <div class="story-content">
-        <div class="story-text">
-          <h2>Notre Histoire</h2>
-          
+  <!-- ===================================================== -->
+  <!--  SPINE · ligne d'or maîtresse                          -->
+  <!-- ===================================================== -->
+  <div class="trajectory-spine" aria-hidden="true">
+    <svg class="spine-svg" viewBox="0 0 200 1800" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="goldAproposSpine" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E8A23D" />
+          <stop offset="100%" stop-color="#F4C95D" />
+        </linearGradient>
+      </defs>
+      <path class="spine-path trajectory-path"
+            d="M 30 1780 C 70 1500, 160 1380, 110 1040 S 30 700, 130 420 S 180 180, 150 30"
+            fill="none" stroke="url(#goldAproposSpine)" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </div>
+
+  <div class="ei-flow">
+
+    <!-- ===================================================== -->
+    <!--  HISTOIRE · manifeste éditorial                        -->
+    <!-- ===================================================== -->
+    <section class="story" data-reveal>
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow">Notre histoire</p>
+        <h2 class="block-title">
+          Née d'un constat de terrain,
+          <span class="title-em">portée par une conviction.</span>
+        </h2>
+      </header>
+
+      <div class="story-body">
+        <p class="story-lead" data-reveal-child>
+          Dans les quartiers populaires, les idées ne manquent pas — ce sont les portes
+          d'entrée qui manquent. Accès au financement, au réseau, à l'expertise : autant
+          de marches trop hautes pour beaucoup de porteurs de projet.
+        </p>
+        <p class="story-text" data-reveal-child>
+          Envol Impact existe pour abaisser ces marches. Nous réunissons accompagnement
+          humain, formation concrète et financement solidaire dans un même parcours, afin
+          que la viabilité d'un projet ne dépende plus de l'origine de celui qui le porte.
+        </p>
+        <p class="story-quote" data-reveal-child>
+          « Ici, on prend de la hauteur — ensemble. »
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!--  CHIFFRES · jalons d'impact (honnêtes, à confirmer)    -->
+    <!-- ===================================================== -->
+    <section class="figures" data-reveal>
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow">Notre impact</p>
+        <h2 class="block-title">
+          Une trajectoire qui se mesure
+          <span class="title-em">au fil des projets.</span>
+        </h2>
+      </header>
+
+      <div class="figures-grid">
+        <div class="figure" *ngFor="let stat of stats" data-reveal-child>
+          <span class="figure-num figure-num--tbc">{{ stat.number }}</span>
+          <span class="figure-label">{{ stat.label }}</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="stats-section">
-    <div class="container">
-      <h2>Notre Impact en Chiffres</h2>
-      <div class="stats-grid">
-        <div class="stat-card" *ngFor="let stat of stats">
-          <mat-icon class="stat-icon">{{stat.icon}}</mat-icon>
-          <span class="stat-number">{{stat.number}}</span>
-          <span class="stat-label">{{stat.label}}</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Values Section -->
-  <section class="values-section">
-    <div class="container">
-      <h2>Nos Valeurs</h2>
-      <p class="section-subtitle">
-        Les principes qui guident notre action quotidienne
+      <p class="figures-note" data-reveal-child>
+        Indicateurs en cours de consolidation <em>— chiffres à valider avec F.A.T.E.</em>
       </p>
-      
-      <div class="values-grid">
-        <mat-card *ngFor="let value of values" class="value-card">
-          <mat-card-content>
-            <div class="value-icon">
-              <mat-icon>{{value.icon}}</mat-icon>
-            </div>
-            <h3>{{value.title}}</h3>
-            <p>{{value.description}}</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Team Section -->
-  <!-- <section class="team-section">
-    <div class="container">
-      <h2>Notre Équipe</h2>
-      <p class="section-subtitle">
-        Des experts passionnés au service de votre réussite
+    <!-- ===================================================== -->
+    <!--  VALEURS · entrées éditoriales numérotées sur nuit    -->
+    <!-- ===================================================== -->
+    <section class="values" data-reveal>
+      <header class="block-head" data-reveal-child>
+        <p class="eyebrow">Nos valeurs</p>
+        <h2 class="block-title">
+          Les principes qui guident
+          <span class="title-em">chacune de nos décisions.</span>
+        </h2>
+      </header>
+
+      <ol class="values-list">
+        <li class="value-node" *ngFor="let value of values; let i = index" data-reveal-child>
+          <span class="value-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <div class="value-body">
+            <div class="value-head">
+              <mat-icon class="value-icon">{{ value.icon }}</mat-icon>
+              <h3 class="value-title">{{ value.title }}</h3>
+            </div>
+            <p class="value-text">{{ value.description }}</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+  </div><!-- /.ei-flow -->
+
+  <!-- ===================================================== -->
+  <!--  CTA · le sommet lumineux                              -->
+  <!-- ===================================================== -->
+  <section class="summit" data-reveal>
+    <div class="summit-halo" aria-hidden="true"></div>
+    <div class="summit-inner" data-reveal-child>
+      <p class="eyebrow">Rejoindre le mouvement</p>
+      <h2 class="summit-title">Devenez acteur du changement.</h2>
+      <p class="summit-quote">
+        Une idée pour votre territoire&nbsp;? Donnons-lui de la hauteur, ensemble.
       </p>
-      
-      <div class="team-grid">
-        <mat-card *ngFor="let member of team" class="team-card">
-          <mat-card-content>
-            <div class="member-avatar">
-              <mat-icon>{{member.image}}</mat-icon>
-            </div>
-            <h3>{{member.name}}</h3>
-            <h4>{{member.role}}</h4>
-            <p>{{member.description}}</p>
-            <button mat-icon-button color="primary">
-              <mat-icon>business</mat-icon>
-            </button>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </section>
- -->
-  <!-- Testimonials Section -->
-   <!--
-  <section class="testimonials-section">
-    <div class="container">
-      <h2>Ils Témoignent</h2>
-      <p class="section-subtitle">
-        La parole aux entrepreneurs accompagnés
-      </p>
-      
-      <div class="testimonials-grid">
-        <mat-card *ngFor="let testimonial of testimonials" class="testimonial-card">
-          <mat-card-content>
-            <div class="quote-icon">
-              <mat-icon>format_quote</mat-icon>
-            </div>
-            <p class="testimonial-text">"{{testimonial.quote}}"</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <mat-icon>{{testimonial.image}}</mat-icon>
-              </div>
-              <div class="author-info">
-                <h4>{{testimonial.name}}</h4>
-                <span>{{testimonial.project}}</span>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </section>
--->
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>Rejoignez le Mouvement</h2>
-      <p>Devenez acteur du changement dans votre territoire</p>
-      
-      <div class="cta-buttons">
-        <button mat-raised-button color="primary" routerLink="/candidature" class="cta-button">
-          <mat-icon>flight_takeoff</mat-icon>
+      <div class="summit-actions">
+        <a routerLink="/candidature" class="ei-btn ei-btn--gold" data-magnetic>
           Candidater maintenant
-        </button>
-        
-        <button mat-button color="primary" routerLink="/contact" class="secondary-button">
-          <mat-icon>contact_support</mat-icon>
+          <mat-icon>flight_takeoff</mat-icon>
+        </a>
+        <a routerLink="/contact" class="ei-btn ei-btn--ghost" data-magnetic>
           Nous contacter
-        </button>
+        </a>
       </div>
     </div>
   </section>
-</div>
 
+</div>

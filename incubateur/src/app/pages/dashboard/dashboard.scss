@@ -1,15 +1,15 @@
 /* =====================================================
    DASHBOARD — conteneur / layout uniquement.
-   Chaque zone (sidebar, header, stats, projets, activités,
-   sections admin) est un sous-composant qui porte son
-   propre style scopé. Les design tokens viennent de
-   src/styles.scss.
+   DA « Envol » appliquée au back-office : chrome nuit
+   d'encre, surfaces ardoise, accents or. Chaque zone est
+   un sous-composant qui porte son propre style scopé.
+   Tokens : src/styles.scss (--ei-*).
    ===================================================== */
 
 .dashboard-adecco-layout {
   display: flex;
   min-height: 100vh;
-  background-color: var(--bg-page);
+  background: var(--ei-ink);
 }
 
 /* Contenu principal — décalé de la sidebar fixe (250px)
@@ -18,26 +18,32 @@
   flex: 1;
   margin-left: 250px;
   margin-top: 64px;
-  background: var(--white);
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(244, 201, 93, 0.05), transparent 55%),
+    var(--ei-ink);
+  color: var(--ei-on-dark);
+  font-family: var(--ei-font-text);
 }
 
 /* Pile verticale des sections du tableau de bord */
 .dashboard-main-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 30px;
-  padding: 30px;
+  gap: var(--ei-s-32);
+  padding: var(--ei-s-32);
   max-width: 1200px;
 }
 
-/* Menu déroulant utilisateur (panelClass global, ::ng-deep) */
+/* Menu déroulant utilisateur (panelClass global, ::ng-deep).
+   Posé sur surface ardoise pour cohérence avec le chrome. */
 ::ng-deep .user-dropdown-menu {
   margin-top: 8px;
 
   .mat-mdc-menu-panel {
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--ei-r-8);
+    border: 1px solid rgba(237, 230, 216, 0.14);
+    background: var(--ei-slate);
+    box-shadow: 0 18px 44px rgba(5, 12, 20, 0.55);
     min-width: 200px;
   }
 
@@ -45,22 +51,36 @@
     padding: 12px 16px;
     font-size: 14px;
 
-    &:hover { background-color: var(--bg-soft); }
+    &:hover { background: rgba(237, 230, 216, 0.06); }
 
     mat-icon {
       margin-right: 12px;
-      color: var(--blue);
+      color: var(--ei-gold-2);
       font-size: 20px;
       width: 20px;
       height: 20px;
     }
-    span { color: var(--text-primary); font-weight: 500; }
+    span { color: var(--ei-on-dark); font-weight: 500; }
   }
 }
 
-/* ---- Responsive ---- */
+/* ---- Responsive ----
+   Sur mobile la sidebar passe en tiroir off-canvas (cf.
+   dashboard-sidebar) : on supprime le decalage de 250px.
+   On reserve de l'espace en bas pour le lanceur flottant. */
 @media (max-width: 768px) {
-  .dashboard-adecco-layout { flex-direction: column; }
-  .dashboard-main { margin-left: 0; }
-  .dashboard-main-grid { padding: 15px; }
+  .dashboard-main {
+    margin-left: 0;
+  }
+  .dashboard-main-grid {
+    padding: var(--ei-s-16);
+    /* marge basse pour ne pas masquer le contenu derriere le
+       bouton « Menu » flottant (48px + retrait + respiration) */
+    padding-bottom: calc(var(--ei-s-16) + 72px);
+    gap: var(--ei-s-16);
+  }
+}
+
+@media (max-width: 390px) {
+  .dashboard-main-grid { padding: var(--ei-s-12); padding-bottom: calc(var(--ei-s-12) + 72px); }
 }

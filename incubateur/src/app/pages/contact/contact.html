@@ -1,188 +1,170 @@
-<div class="contact-container">
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1>Contactez-nous</h1>
+<div class="ei-contact">
+
+  <!-- ===================================================== -->
+  <!--  HERO · prise de contact                              -->
+  <!-- ===================================================== -->
+  <section class="hero" aria-label="Contact — Envol Impact">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-halo" aria-hidden="true"></div>
+
+    <svg class="hero-traj-svg" viewBox="0 0 1440 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldContactHero" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E8A23D" stop-opacity="0.3" />
+          <stop offset="55%" stop-color="#E8A23D" />
+          <stop offset="100%" stop-color="#F4C95D" />
+        </linearGradient>
+      </defs>
+      <path class="hero-trajectory trajectory-path"
+            d="M -40 620 C 340 540, 540 470, 780 340 S 1140 150, 1500 50"
+            fill="none" stroke="url(#goldContactHero)" stroke-width="2.5" stroke-linecap="round" />
+    </svg>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Parlons de votre projet</p>
+      <h1 class="hero-title">
+        <span class="line"><span class="line-inner">Une idée, une</span></span>
+        <span class="line"><span class="line-inner">question&nbsp;? <em>Écrivons.</em></span></span>
+      </h1>
       <p class="hero-subtitle">
-        Notre équipe est à votre écoute pour répondre à toutes vos questions 
-        et vous accompagner dans votre projet entrepreneurial
+        Notre équipe est à votre écoute pour répondre à vos questions et vous accompagner
+        dans votre projet entrepreneurial.
       </p>
     </div>
   </section>
 
-  <!-- Contact Form and Info -->
-  <section class="contact-main-section">
-    <div class="container">
-      <div class="contact-content">
-        
-        <!-- Contact Form -->
-        <div class="contact-form-container">
-          <mat-card class="contact-form-card">
-            <mat-card-header>
-              <div class="form-header">
-                <mat-icon class="form-icon">mark_email_unread</mat-icon>
-                <div>
-                  <mat-card-title>Envoyez-nous un message</mat-card-title>
-                  <mat-card-subtitle>Nous vous répondons sous 24h</mat-card-subtitle>
-                </div>
-              </div>
-            </mat-card-header>
-            
-            <mat-card-content>
-              <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
-                <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Prénom</mat-label>
-                    <input matInput formControlName="prenom" required>
-                    <mat-error>{{getFieldError('prenom')}}</mat-error>
-                  </mat-form-field>
-                  
-                  <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Nom</mat-label>
-                    <input matInput formControlName="nom" required>
-                    <mat-error>{{getFieldError('nom')}}</mat-error>
-                  </mat-form-field>
-                </div>
-                
-                <div class="form-row">
-                  <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName="email" required>
-                    <mat-error>{{getFieldError('email')}}</mat-error>
-                  </mat-form-field>
-                  
-                  <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Téléphone (optionnel)</mat-label>
-                    <input matInput type="tel" formControlName="telephone">
-                  </mat-form-field>
-                </div>
-                
-                <mat-form-field appearance="outline" class="form-field-full">
-                  <mat-label>Sujet de votre demande</mat-label>
-                  <mat-select formControlName="sujet" required>
-                    <mat-option *ngFor="let reason of contactReasons" [value]="reason.value">
-                      {{reason.label}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error>{{getFieldError('sujet')}}</mat-error>
-                </mat-form-field>
-                
-                <mat-form-field appearance="outline" class="form-field-full">
-                  <mat-label>Votre message</mat-label>
-                  <textarea matInput 
-                           formControlName="message" 
-                           rows="6" 
-                           placeholder="Décrivez votre demande en détail..."
-                           required></textarea>
-                  <mat-error>{{getFieldError('message')}}</mat-error>
-                </mat-form-field>
-                
-                <button mat-raised-button 
-                        color="primary" 
-                        type="submit" 
-                        [disabled]="!contactForm.valid"
-                        class="submit-button">
-                  <mat-icon>send</mat-icon>
-                  Envoyer le message
-                </button>
-              </form>
-            </mat-card-content>
-          </mat-card>
-        </div>
+  <!-- ===================================================== -->
+  <!--  CORPS · formulaire (craie) + infos (nuit)            -->
+  <!-- ===================================================== -->
+  <section class="contact-main" data-reveal>
+    <div class="contact-grid">
 
-        <!-- Contact Info -->
-        <div class="contact-info-container">
-          
-          <!-- Office Locations -->
-          <div class="contact-locations">
-            <mat-card *ngFor="let office of contactInfo" class="location-card">
-              <mat-card-content>
-                <div class="location-header">
-                  <mat-icon class="location-icon">{{office.icon}}</mat-icon>
-                  <h3>{{office.title}}</h3>
-                </div>
-                
-                <div class="location-details">
-                  <div class="location-item">
-                    <mat-icon>home</mat-icon>
-                    <div>
-                      <p>{{office.address}}</p>
-                      <p>{{office.city}}</p>
-                    </div>
-                  </div>
-                  
-                  <div class="location-item">
-                    <mat-icon>schedule</mat-icon>
-                    <p>{{office.schedule}}</p>
-                  </div>
-                  
-                  <div class="location-item">
-                    <mat-icon>phone</mat-icon>
-                    <p>{{office.phone}}</p>
-                  </div>
-                  
-                  <div class="location-item">
-                    <mat-icon>email</mat-icon>
-                    <p>{{office.email}}</p>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
+      <!-- ----- Formulaire, panneau craie ----- -->
+      <div class="form-panel" data-reveal-child>
+        <header class="panel-head">
+          <p class="eyebrow eyebrow--ink">Écrivez-nous</p>
+          <h2 class="panel-title">Envoyez-nous un message</h2>
+          <p class="panel-sub">Nous vous répondons sous 24&nbsp;h.</p>
+        </header>
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="prenom" required>
+              <mat-error>{{getFieldError('prenom')}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="nom" required>
+              <mat-error>{{getFieldError('nom')}}</mat-error>
+            </mat-form-field>
           </div>
 
-          <!-- Quick Contact -->
-          <mat-card class="quick-contact-card">
-            <mat-card-content>
-              <h3>Contactez-nous rapidement</h3>
-              
-              <div class="quick-contact-options">
-                <a href="tel:+33123456789" class="quick-contact-item">
-                  <mat-icon>phone</mat-icon>
-                  <div>
-                    <strong>Téléphone</strong>
-                    <span>01 23 45 67 89</span>
-                  </div>
-                </a>
-                
-                <a href="mailto:contact@envolimpact.fr" class="quick-contact-item">
-                  <mat-icon>email</mat-icon>
-                  <div>
-                    <strong>Email</strong>
-                    <span>contact&#64;envolimpact.fr</span>
-                  </div>
-                </a>
-                
-                <div class="quick-contact-item">
-                  <mat-icon>chat</mat-icon>
-                  <div>
-                    <strong>Chat en ligne</strong>
-                    <span>Lun-Ven 9h-17h</span>
-                  </div>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" required>
+              <mat-error>{{getFieldError('email')}}</mat-error>
+            </mat-form-field>
 
-          <!-- Social Media
-          <mat-card class="social-card">
-            <mat-card-content>
-              <h3>Suivez-nous</h3>
-              <p>Restez informé de nos actualités et événements</p>
-              
-              <div class="social-links">
-                <a *ngFor="let social of socialLinks" 
-                   [href]="social.url" 
-                   class="social-link"
-                   [style.color]="social.color">
-                  <mat-icon>{{social.icon}}</mat-icon>
-                  <span>{{social.name}}</span>
-                </a>
-              </div>
-            </mat-card-content>
-          </mat-card> -->
-        </div>
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Téléphone (optionnel)</mat-label>
+              <input matInput type="tel" formControlName="telephone">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="form-field-full">
+            <mat-label>Sujet de votre demande</mat-label>
+            <mat-select formControlName="sujet" required>
+              <mat-option *ngFor="let reason of contactReasons" [value]="reason.value">
+                {{reason.label}}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{getFieldError('sujet')}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field-full">
+            <mat-label>Votre message</mat-label>
+            <textarea matInput
+                     formControlName="message"
+                     rows="6"
+                     placeholder="Décrivez votre demande en détail..."
+                     required></textarea>
+            <mat-error>{{getFieldError('message')}}</mat-error>
+          </mat-form-field>
+
+          <button type="submit"
+                  [disabled]="!contactForm.valid"
+                  class="ei-btn ei-btn--gold submit-button"
+                  data-magnetic>
+            Envoyer le message
+            <mat-icon>send</mat-icon>
+          </button>
+        </form>
       </div>
+
+      <!-- ----- Colonne infos, sur nuit ----- -->
+      <aside class="info-panel" data-reveal-child>
+
+        <div class="locations">
+          <article class="location" *ngFor="let office of contactInfo; let i = index">
+            <span class="location-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <h3 class="location-title">{{ office.title }}</h3>
+
+            <ul class="location-details">
+              <li class="location-item">
+                <mat-icon>home</mat-icon>
+                <span>{{ office.address }}<br>{{ office.city }}</span>
+              </li>
+              <li class="location-item">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ office.schedule }}</span>
+              </li>
+              <li class="location-item">
+                <mat-icon>phone</mat-icon>
+                <span>{{ office.phone }}</span>
+              </li>
+              <li class="location-item">
+                <mat-icon>email</mat-icon>
+                <span>{{ office.email }}</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="quick-contact">
+          <h3 class="quick-title">Au plus vite</h3>
+          <div class="quick-options">
+            <a href="tel:+33123456789" class="quick-item">
+              <mat-icon>phone</mat-icon>
+              <span class="quick-text">
+                <strong>Téléphone</strong>
+                <span>01 23 45 67 89</span>
+              </span>
+            </a>
+
+            <a href="mailto:contact@envolimpact.fr" class="quick-item">
+              <mat-icon>email</mat-icon>
+              <span class="quick-text">
+                <strong>Email</strong>
+                <span>contact&#64;envolimpact.fr</span>
+              </span>
+            </a>
+
+            <div class="quick-item quick-item--static">
+              <mat-icon>chat</mat-icon>
+              <span class="quick-text">
+                <strong>Chat en ligne</strong>
+                <span>Lun-Ven 9h-17h</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
     </div>
   </section>
-</div>
 
+</div>

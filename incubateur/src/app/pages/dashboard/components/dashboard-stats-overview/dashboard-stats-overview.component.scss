@@ -2,55 +2,82 @@
   display: block;
 }
 
-/* Bloc stats: cartes de synthèse isolées */
+/* =====================================================
+   STATS OVERVIEW — synthèse chiffrée.
+   DA « Envol » : carte ardoise, chiffres-clés en Clash
+   Display dorés, libellés discrets.
+   ===================================================== */
 .dashboard-stats-overview {
-  mat-card {
-    background: #ffffff;
-    border: 1px solid #e3e6ea;
+  font-family: var(--ei-font-text);
+
+  ::ng-deep mat-card,
+  ::ng-deep .mat-mdc-card {
+    background: var(--ei-slate);
+    border: 1px solid rgba(237, 230, 216, 0.1);
     box-shadow: none;
-    border-radius: 12px;
+    border-radius: var(--ei-r-8);
+    color: var(--ei-on-dark);
+    padding: var(--ei-s-24);
+
+    @media (max-width: 390px) { padding: var(--ei-s-16); }
   }
 
   mat-card-title {
     display: flex;
     align-items: center;
-    gap: 8px;
-    color: #111111;
+    gap: 10px;
+    font-family: var(--ei-font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--ei-on-dark);
 
-    mat-icon {
-      color: #0b63ce;
-    }
+    mat-icon { color: var(--ei-gold-2); }
   }
 
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 16px;
-    margin-top: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--ei-s-16);
+    margin-top: var(--ei-s-16);
+
+    /* tres petit ecran : deux colonnes restent lisibles avec 110px mini */
+    @media (max-width: 390px) {
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: var(--ei-s-12);
+    }
 
     .stat-item {
-      text-align: center;
-      padding: 14px;
-      background: #ffffff;
-      border: 1px solid #e3e6ea;
-      border-radius: 12px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: left;
+      padding: var(--ei-s-16);
+      background: rgba(237, 230, 216, 0.03);
+      border: 1px solid rgba(237, 230, 216, 0.1);
+      border-radius: var(--ei-r-8);
+      transition: border-color 200ms var(--ei-ease-soft),
+                  transform 200ms var(--ei-ease-launch);
 
       &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        transform: translateY(-3px);
+        border-color: rgba(244, 201, 93, 0.32);
       }
 
       .stat-number {
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: #0b63ce;
+        font-family: var(--ei-font-display);
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        background: var(--ei-gold-grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
       }
 
       .stat-label {
-        margin-top: 4px;
-        font-size: 0.85rem;
-        color: #4b5563;
+        margin-top: 8px;
+        font-size: 0.74rem;
+        letter-spacing: 0.06em;
+        color: var(--ei-haze);
         text-transform: uppercase;
       }
     }

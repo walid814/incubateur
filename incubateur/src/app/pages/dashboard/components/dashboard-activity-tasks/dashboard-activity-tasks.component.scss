@@ -2,123 +2,147 @@
   display: block;
 }
 
-/* Bloc activité/tâches: colonnes dashboard */
+/* =====================================================
+   ACTIVITÉS / TÂCHES — deux colonnes dashboard.
+   DA « Envol » : cartes ardoise, pastilles d'activité en
+   bleu élan / or, priorités en signaux sobres.
+   ===================================================== */
 .activities-tasks-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 1.5rem;
+  gap: var(--ei-s-32);
+  margin-top: var(--ei-s-24);
+  font-family: var(--ei-font-text);
 }
 
 .dashboard-activities,
 .dashboard-tasks {
-  mat-card {
-    background: #ffffff;
-    border: 1px solid #e3e6ea;
-    border-radius: 12px;
+  ::ng-deep mat-card,
+  ::ng-deep .mat-mdc-card {
+    background: var(--ei-slate);
+    border: 1px solid rgba(237, 230, 216, 0.1);
+    border-radius: var(--ei-r-8);
     box-shadow: none;
+    color: var(--ei-on-dark);
+    padding: var(--ei-s-24);
   }
 
   mat-card-title {
-    color: #111111;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    font-family: var(--ei-font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--ei-on-dark);
 
-    mat-icon {
-      color: #0b63ce;
-    }
+    mat-icon { color: var(--ei-gold-2); }
   }
 }
 
 .recent-activities {
+  margin-top: var(--ei-s-8);
+
   .activity-item {
     display: flex;
     align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #e0e0e0;
+    padding: var(--ei-s-12) 0;
+    border-bottom: 1px solid rgba(237, 230, 216, 0.08);
 
-    &:last-child {
-      border-bottom: none;
-    }
+    &:last-child { border-bottom: none; }
 
     .activity-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--ei-r-8);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 1rem;
-      color: #ffffff;
+      margin-right: var(--ei-s-16);
+      flex-shrink: 0;
+      color: var(--ei-ink);
 
-      &.approval { background: #0b63ce; }
-      &.user { background: #2f7ad8; }
-      &.funding { background: #3d8be2; }
-      &.review { background: #5a9ce9; }
-      &.profile { background: #6a7280; }
-      &.document { background: #4f5d75; }
-      &.application { background: #1f5fbf; }
-      &.none { background: #6c757d; }
+      mat-icon { font-size: 18px; width: 18px; height: 18px; }
+
+      /* succès / validation → or */
+      &.approval { background: var(--ei-gold-grad); }
+      /* nouvel utilisateur / financement → bleu élan */
+      &.user,
+      &.application { background: var(--ei-elan); color: #fff; }
+      &.funding { background: var(--ei-sprout); }
+      /* méta / système → ardoise claire */
+      &.review,
+      &.profile,
+      &.document,
+      &.none {
+        background: rgba(237, 230, 216, 0.1);
+        color: var(--ei-on-dark-dim);
+      }
     }
 
     .activity-text {
-      margin: 0 0 0.25rem;
-      color: #111111;
+      margin: 0 0 2px;
+      color: var(--ei-on-dark);
       font-weight: 500;
     }
 
     .activity-time {
       margin: 0;
-      color: #4b5563;
-      font-size: 0.85rem;
+      color: var(--ei-haze);
+      font-size: 0.8rem;
     }
   }
 }
 
 .pending-tasks {
+  margin-top: var(--ei-s-8);
+
   .task-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #e0e0e0;
+    gap: var(--ei-s-12);
+    padding: var(--ei-s-12) 0;
+    border-bottom: 1px solid rgba(237, 230, 216, 0.08);
 
-    &:last-child {
-      border-bottom: none;
-    }
+    &:last-child { border-bottom: none; }
 
     .task-text {
       margin: 0;
-      color: #111111;
+      color: var(--ei-on-dark);
       font-weight: 500;
     }
 
     .task-actions {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: var(--ei-s-8);
+      flex-shrink: 0;
     }
 
+    ::ng-deep .mat-mdc-icon-button { color: var(--ei-gold-2); }
+
     .task-priority {
-      padding: 0.25rem 0.75rem;
-      border-radius: 12px;
-      font-size: 0.75rem;
+      padding: 4px 11px;
+      border-radius: var(--ei-r-4);
+      font-size: 0.7rem;
       font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
 
+      /* signal d'erreur sobre (rouge tuilé, AA sur ardoise) */
       &.high {
-        background: #fde2e2;
-        color: #8b1e1e;
+        background: rgba(201, 81, 75, 0.16);
+        color: #E0928D;
       }
-
       &.medium {
-        background: #e6f0ff;
-        color: #0b63ce;
+        background: rgba(244, 201, 93, 0.16);
+        color: var(--ei-gold-2);
       }
-
       &.low {
-        background: #e8f5e8;
-        color: #2e7d32;
+        background: rgba(63, 168, 138, 0.16);
+        color: #6FD0B4;
       }
     }
   }
@@ -127,6 +151,6 @@
 @media (max-width: 768px) {
   .activities-tasks-row {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--ei-s-16);
   }
 }
