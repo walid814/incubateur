@@ -182,12 +182,17 @@ $white:   #FFFFFF;
 }
 
 .mission-lead {
-  font-family: 'Poppins', sans-serif; font-weight: 700;
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  color: $navy; margin: 0 0 20px; line-height: 1.4;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: $navy; margin: 0 0 20px; 
+  line-height: 1.7;
 }
 
-.mission-body { color: #4A6B80; line-height: 1.75; font-size: 1rem; margin: 0 0 40px; }
+.mission-body { color: #4A6B80; line-height: 1.8;  margin: 0 0 40px;
+font-weight: 500;
+  font-size: 1.05rem;
+  }
 
 .mission-card {
   display: flex; align-items: center; gap: 24px;
