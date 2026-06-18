@@ -40,21 +40,6 @@
           <mat-icon>arrow_forward</mat-icon>
         </a>
       </div>
-
-      <ul class="hero-bullets">
-        <li>
-          <mat-icon class="bullet-icon">check_circle</mat-icon>
-          Des gens, pas des formulaires
-        </li>
-        <li>
-          <mat-icon class="bullet-icon">check_circle</mat-icon>
-          On lâche pas tant que t'as pas décollé
-        </li>
-        <li>
-          <mat-icon class="bullet-icon">check_circle</mat-icon>
-          Né ici, pour ici
-        </li>
-      </ul>
     </div>
   </header>
 
@@ -63,7 +48,6 @@
     <div class="mission-inner">
 
       <div class="mission-text">
-        <span class="section-badge">Pourquoi nous existons</span>
         <h2 class="section-title section-title--dark">
           Le problème<br>
           <span class="section-title--orange">qu'on refuse</span><br>
@@ -84,7 +68,7 @@
             <mat-icon>lightbulb</mat-icon>
           </div>
           <div>
-            <h4 class="mission-card-title">Notre conviction</h4>
+            <h4 class="mission-card-title">Notre vision</h4>
             <p class="mission-card-body">
               Chacun doit pouvoir accéder aux ressources nécessaires pour transformer
               une idée en activité génératrice d'impact social.
@@ -133,8 +117,6 @@
 
       <!-- Contenu -->
       <div class="tontine-content-side">
-        <span class="section-badge section-badge--navy">Notre modèle</span>
-
         <h2 class="tontine-title">
           Une solution collective<br>
           <span class="tontine-title--orange">et solidaire.</span>
@@ -169,39 +151,58 @@
   <!-- ============================================================ AMBITION -->
   <section class="ambition" id="ambition">
     <div class="ambition-inner">
-      <div class="ambition-header">
-        <span class="section-badge ambition-badge">Notre objectif</span>
+
+      <!-- Stats + titre -->
+      <div class="ambition-content">
         <h2 class="ambition-title">
-          Une ambition à la hauteur<br>
+          Une ambition<br>
+          à la hauteur<br>
           <span>du défi.</span>
         </h2>
-        <p class="ambition-subtitle">
-          Des chiffres qui guident nos actions dès aujourd'hui.
-        </p>
-      </div>
-      <div class="ambition-grid">
-        <div class="ambition-stat" *ngFor="let stat of ambitionStats">
-          <span class="ambition-num">{{ stat.num }}</span>
-          <span class="ambition-label">{{ stat.label }}</span>
+        <p class="ambition-lead">Derrière chaque chiffre, une personne qui construit.</p>
+        <div class="ambition-stats">
+          <div class="ambition-stat" *ngFor="let stat of ambitionStats">
+            <span class="ambition-num">{{ stat.num }}</span>
+            <span class="ambition-label">{{ stat.label }}</span>
+          </div>
         </div>
       </div>
+
+      <!-- Photo humaine -->
+      <div class="ambition-photo">
+        <img
+          src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
+          alt="L'équipe Envol Impact au travail"
+          class="ambition-photo-img"
+        />
+        <div class="ambition-photo-overlay"></div>
+      </div>
+
     </div>
   </section>
 
   <!-- ============================================================ DOMAINES -->
   <section class="domaines" id="domaines">
     <div class="domaines-inner">
-      <span class="section-badge">Secteurs soutenus</span>
-      <h2 class="section-title section-title--dark domaines-title">
-        7 secteurs<br>
-        <span class="section-title--orange">en focus</span>
-      </h2>
+
+      <div class="domaines-header">
+        <h2 class="section-title section-title--light domaines-title">
+          6 secteurs<br>
+          <span class="section-title--orange">en focus</span>
+        </h2>
+      </div>
+
       <div class="domaines-grid">
-        <div class="domaine-pill" *ngFor="let d of domaines">
-          <mat-icon>{{ d.icon }}</mat-icon>
-          {{ d.label }}
+        <div class="domaine-card" *ngFor="let d of domaines">
+          <img [src]="d.img" [alt]="d.label" class="domaine-card-img" loading="lazy" />
+          <div class="domaine-card-overlay"></div>
+          <div class="domaine-card-content">
+            <span class="domaine-card-icon"><mat-icon>{{ d.icon }}</mat-icon></span>
+            <span class="domaine-card-name">{{ d.label }}</span>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -229,12 +230,12 @@
       </p>
 
       <div class="cta-actions-btns">
-        <a routerLink="/register" class="btn btn--green btn--pill btn--lg">
-          Je deviens sociétaire
-          <mat-icon>north_east</mat-icon>
+        <a routerLink="/candidature" class="btn btn--orange btn--pill btn--lg">
+          Déposer mon projet
         </a>
-        <a routerLink="/candidature" class="btn btn--ghost btn--pill btn--lg">
-          Je dépose mon projet
+        <a routerLink="/register" class="btn btn--ghost btn--pill btn--lg">
+          Devenir sociétaire
+          <mat-icon>arrow_forward</mat-icon>
         </a>
       </div>
     </div>
