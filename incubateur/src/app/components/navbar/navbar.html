@@ -6,7 +6,7 @@
     <div class="toolbar-content">
       <div class="main-nav-row">
         <!-- Logo -->
-        <a class="brand" routerLink="/" aria-label="Envol Impact — accueil">
+        <a class="brand" routerLink="/" aria-label="Envol Impact â€” accueil">
           <img class="brand-logo-img" src="/brand/envol-impact-logo.png" alt="Envol Impact" height="82" />
         </a>
 
@@ -20,7 +20,7 @@
           </button>
           <mat-menu #fondsMenu="matMenu" class="nav-submenu">
             <a mat-menu-item routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-sub">
-              <mat-icon>home</mat-icon><span>Présentation</span>
+              <mat-icon>home</mat-icon><span>PrÃ©sentation</span>
             </a>
             <a mat-menu-item routerLink="/apropos" routerLinkActive="active-sub">
               <mat-icon>groups</mat-icon><span>Qui sommes-nous ?</span>
@@ -44,10 +44,10 @@
               <mat-icon>groups</mat-icon><span>Participation</span>
             </a>
             <a mat-menu-item routerLink="/engagements" fragment="egalite" routerLinkActive="active-sub">
-              <mat-icon>balance</mat-icon><span>Égalité des chances</span>
+              <mat-icon>balance</mat-icon><span>Ã‰galitÃ© des chances</span>
             </a>
             <a mat-menu-item routerLink="/engagements" fragment="responsabilite" routerLinkActive="active-sub">
-              <mat-icon>verified_user</mat-icon><span>Responsabilité</span>
+              <mat-icon>verified_user</mat-icon><span>ResponsabilitÃ©</span>
             </a>
           </mat-menu>
 
@@ -58,18 +58,18 @@
 
         <!-- Section authentification -->
         <div class="auth-section">
-          <!-- Utilisateur non connecté -->
+          <!-- Utilisateur non connectÃ© -->
           <div *ngIf="!isAuthenticated()" class="auth-buttons">
             <button mat-button routerLink="/connexion" routerLinkActive="active-auth" class="login-btn">
               <mat-icon>person</mat-icon>
               Connexion
             </button>
             <a class="inscription-btn" routerLink="/candidature">
-              Adhérer ou s'inscrire
+              AdhÃ©rer ou s'inscrire
             </a>
           </div>
           
-          <!-- Utilisateur connecté -->
+          <!-- Utilisateur connectÃ© -->
           <div *ngIf="isAuthenticated()" class="user-menu">
             <button class="user-avatar-navbar" 
                     [matTooltip]="getCurrentUser()?.firstname + ' ' + getCurrentUser()?.lastname"
@@ -80,7 +80,7 @@
               </span>
             </button>
             
-            <!-- Menu déroulant utilisateur -->
+            <!-- Menu dÃ©roulant utilisateur -->
             <mat-menu #userMenuNavbar="matMenu" class="user-dropdown-menu-navbar">
               <button mat-menu-item routerLink="/dashboard">
                 <mat-icon>dashboard</mat-icon>
@@ -93,7 +93,7 @@
               <mat-divider></mat-divider>
               <button mat-menu-item (click)="logout()">
                 <mat-icon>logout</mat-icon>
-                <span>Déconnexion</span>
+                <span>DÃ©connexion</span>
               </button>
             </mat-menu>
           </div>
@@ -101,7 +101,7 @@
       </div>
     </div>
 
-    <!-- Barre de recherche (uniquement si utilisateur non connecté) -->
+    <!-- Barre de recherche (uniquement si utilisateur non connectÃ©) -->
      <!--
     <div class="search-bar-container" *ngIf="!isAuthenticated()">
       <div class="search-bar-content">
@@ -128,7 +128,7 @@
  
   <!-- Mobile Navigation -->
   <div class="mobile-nav" *ngIf="isHandset$ | async">
-    <a class="brand" routerLink="/" aria-label="Envol Impact — accueil">
+    <a class="brand" routerLink="/" aria-label="Envol Impact â€” accueil">
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 40 40" fill="none">
           <defs>
@@ -146,7 +146,7 @@
       </span>
     </a>
 
-    <!-- Utilisateur connecté sur mobile -->
+    <!-- Utilisateur connectÃ© sur mobile -->
     <div *ngIf="isAuthenticated()" class="mobile-user-info">
       <div class="user-avatar-mobile" 
            [matTooltip]="getCurrentUser()?.firstname + ' ' + getCurrentUser()?.lastname">
@@ -164,7 +164,7 @@
       <!-- Fonds d'investissement solidaire -->
       <p class="mobile-menu-label">Fonds d'investissement solidaire</p>
       <a mat-menu-item routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-mobile">
-        <mat-icon>home</mat-icon><span>Présentation</span>
+        <mat-icon>home</mat-icon><span>PrÃ©sentation</span>
       </a>
       <a mat-menu-item routerLink="/apropos" routerLinkActive="active-mobile">
         <mat-icon>groups</mat-icon><span>Qui sommes-nous ?</span>
@@ -181,10 +181,10 @@
         <mat-icon>groups</mat-icon><span>Participation</span>
       </a>
       <a mat-menu-item routerLink="/engagements" fragment="egalite" routerLinkActive="active-mobile">
-        <mat-icon>balance</mat-icon><span>Égalité des chances</span>
+        <mat-icon>balance</mat-icon><span>Ã‰galitÃ© des chances</span>
       </a>
       <a mat-menu-item routerLink="/engagements" fragment="responsabilite" routerLinkActive="active-mobile">
-        <mat-icon>verified_user</mat-icon><span>Responsabilité</span>
+        <mat-icon>verified_user</mat-icon><span>ResponsabilitÃ©</span>
       </a>
 
       <mat-divider></mat-divider>
@@ -200,7 +200,7 @@
 
       <mat-divider></mat-divider>
 
-      <!-- Utilisateur non connecté -->
+      <!-- Utilisateur non connectÃ© -->
       <div *ngIf="!isAuthenticated()">
         <button mat-menu-item routerLink="/connexion" routerLinkActive="active-mobile">
           <mat-icon>login</mat-icon>
@@ -208,15 +208,15 @@
         </button>
         <button mat-menu-item routerLink="/candidature" routerLinkActive="active-mobile">
           <mat-icon>person_add</mat-icon>
-          <span>Adhérer ou s'inscrire</span>
+          <span>AdhÃ©rer ou s'inscrire</span>
         </button>
       </div>
       
-      <!-- Utilisateur connecté -->
+      <!-- Utilisateur connectÃ© -->
       <div *ngIf="isAuthenticated()">
         <button mat-menu-item (click)="logout()">
           <mat-icon>logout</mat-icon>
-          <span>Déconnexion</span>
+          <span>DÃ©connexion</span>
         </button>
       </div>
     </mat-menu>
