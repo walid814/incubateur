@@ -39,15 +39,6 @@ export class ContactComponent {
       icon: 'location_on',
       phone: '01 23 45 67 89',
       email: 'contact@envolimpact.fr'
-    },
-    {
-      title: 'Antenne Sud',
-      address: '15, avenue de l\'Entrepreneuriat',
-      city: '13001 Marseille',
-      schedule: 'Lundi, mercredi, vendredi : 14h00 - 18h00',
-      icon: 'location_on',
-      phone: '04 91 23 45 67',
-      email: 'marseille@envolimpact.fr'
     }
   ];
 
