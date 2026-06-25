@@ -33,8 +33,8 @@ export class ContactComponent {
   contactInfo = [
     {
       title: 'Bureau Principal',
-      address: '37, rue de la Solidarité',
-      city: '93000 Bobigny',
+      address: '20 rue Robert Desnos',
+      city: '69120 Vaulx-en-Velin',
       schedule: 'Lundi au vendredi : 9h00 - 17h00',
       icon: 'location_on',
       phone: '01 23 45 67 89',

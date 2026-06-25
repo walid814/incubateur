@@ -45,7 +45,7 @@ export class FooterComponent {
 
   // Placeholders à remplacer par les vrais contacts de l'association F.A.T.E.
   contactInfo = {
-    address: '37, rue de la Solidarité, 93000 Bobigny',
+    address: '20 rue Robert Desnos, 69120 Vaulx-en-Velin',
     phone: '01 23 45 67 89',
     email: 'contact@envolimpact.fr'
   };
