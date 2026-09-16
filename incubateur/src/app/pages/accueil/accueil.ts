@@ -76,12 +76,11 @@ export class AccueilComponent implements OnInit {
   ];
 
   domaines = [
-    { icon: 'agriculture', label: 'Agriculture & agroalimentaire' },
-    { icon: 'storefront', label: 'Commerce & distribution' },
-    { icon: 'handyman', label: 'Artisanat' },
-    { icon: 'support_agent', label: 'Services à la personne' },
-    { icon: 'computer', label: 'Numérique & innovation' },
-    { icon: 'menu_book', label: 'Éducation & formation' },
-    { icon: 'park', label: 'Économie verte' },
+    { icon: 'storefront',     label: 'Commerce & distribution',       img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+    { icon: 'support_agent',  label: 'Services à la personne',        img: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+    { icon: 'handyman',       label: 'Artisanat',                     img: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+    { icon: 'computer',       label: 'Numérique & innovation',        img: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+    { icon: 'menu_book',      label: 'Éducation & formation',         img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+    { icon: 'palette',        label: 'Culture & création',            img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
   ];
 }
