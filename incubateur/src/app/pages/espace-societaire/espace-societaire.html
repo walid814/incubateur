@@ -1,0 +1,141 @@
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="false" [isUser]="false" [isSocietaire]="true" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+
+  <main class="dashboard-main">
+
+    <section class="societaire-hero">
+      <h1>Espace sociétaire</h1>
+      <p>Découvrez les projets validés par l'équipe Envol Impact et soutenez ceux qui vous inspirent.</p>
+    </section>
+
+    <section class="societaire-content">
+
+      <div class="stats-row" *ngIf="!loading">
+        <mat-card class="stat-card">
+          <mat-icon>volunteer_activism</mat-icon>
+          <div class="stat-body">
+            <span class="stat-value">{{ formatMontant(montantTotalInvesti) }}</span>
+            <span class="stat-label">Total soutenu</span>
+          </div>
+        </mat-card>
+        <mat-card class="stat-card">
+          <mat-icon>flight_takeoff</mat-icon>
+          <div class="stat-body">
+            <span class="stat-value">{{ nombreProjetsSoutenus }}</span>
+            <span class="stat-label">Projet{{ nombreProjetsSoutenus > 1 ? 's' : '' }} soutenu{{ nombreProjetsSoutenus > 1 ? 's' : '' }}</span>
+          </div>
+        </mat-card>
+        <mat-card class="stat-card">
+          <mat-icon>inbox</mat-icon>
+          <div class="stat-body">
+            <span class="stat-value">{{ nombreOpportunites }}</span>
+            <span class="stat-label">Opportunité{{ nombreOpportunites > 1 ? 's' : '' }} disponible{{ nombreOpportunites > 1 ? 's' : '' }}</span>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="loading" *ngIf="loading">
+        <mat-icon>hourglass_empty</mat-icon>
+        Chargement des projets…
+      </div>
+
+      <div class="empty-state" *ngIf="!loading && projets.length === 0">
+        <mat-icon>inbox</mat-icon>
+        <p>Aucun projet n'est disponible au soutien pour le moment.</p>
+      </div>
+
+      <mat-card class="filters-card" *ngIf="!loading && projets.length > 0">
+        <mat-card-content>
+          <div class="filters-container">
+            <mat-form-field>
+              <mat-label>Rechercher</mat-label>
+              <input matInput [(ngModel)]="rechercheTexte" placeholder="Titre, description, porteur...">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Secteur d'activité</mat-label>
+              <mat-select [(value)]="filtreSecteur">
+                <mat-option value="">Tous les secteurs</mat-option>
+                <mat-option *ngFor="let secteur of secteurOptions" [value]="secteur">
+                  {{ secteur }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-stroked-button (click)="resetFiltres()">
+              <mat-icon>clear</mat-icon>
+              Réinitialiser
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <h2 class="section-heading" *ngIf="!loading && projets.length > 0">Projets à soutenir</h2>
+
+      <div class="empty-state" *ngIf="!loading && projets.length > 0 && projetsFiltres.length === 0">
+        <mat-icon>search_off</mat-icon>
+        <p>Aucun projet ne correspond à votre recherche.</p>
+      </div>
+
+      <div class="projets-grid" *ngIf="!loading && projetsFiltres.length > 0">
+        <mat-card class="projet-card" *ngFor="let projet of projetsFiltres">
+          <div class="projet-secteur">{{ projet.secteur }}</div>
+          <h3>{{ projet.titre }}</h3>
+          <p class="projet-porteur">Porté par {{ projet.porteurFirstname }} {{ projet.porteurLastname }}</p>
+          <p class="projet-description">{{ projet.description }}</p>
+
+          <div class="projet-financement">
+            <div class="montants">
+              <span class="montant-soutenu">{{ formatMontant(projet.montantSoutenu) }}</span>
+              <span class="montant-recherche">sur {{ formatMontant(projet.montantRecherche) }} recherchés</span>
+            </div>
+            <mat-progress-bar mode="determinate" [value]="getProgression(projet)"></mat-progress-bar>
+          </div>
+
+          <button mat-flat-button color="primary" (click)="ouvrirFormulaireSoutien(projet)">
+            <mat-icon>favorite</mat-icon>
+            Soutenir ce projet
+          </button>
+        </mat-card>
+      </div>
+
+      <section class="mes-soutiens" id="mes-soutiens" *ngIf="mesSoutiens.length > 0">
+        <h2>Mes soutiens</h2>
+        <ul class="soutiens-liste">
+          <li *ngFor="let soutien of mesSoutiens">
+            <span class="soutien-projet">{{ soutien.projetTitre }}</span>
+            <span class="soutien-montant">{{ formatMontant(soutien.montant) }}</span>
+          </li>
+        </ul>
+      </section>
+
+    </section>
+  </main>
+</div>
+
+<!-- Modale simple de confirmation de soutien -->
+<div class="soutien-overlay" *ngIf="projetEnCoursDeSoutien" (click)="annulerSoutien()">
+  <mat-card class="soutien-modal" (click)="$event.stopPropagation()">
+    <h3>Soutenir "{{ projetEnCoursDeSoutien.titre }}"</h3>
+    <p class="soutien-note">
+      Ceci enregistre une intention de soutien symbolique — aucun paiement n'est effectué.
+    </p>
+    <form [formGroup]="soutienForm" (ngSubmit)="confirmerSoutien()">
+      <mat-form-field appearance="outline">
+        <mat-label>Montant (€)</mat-label>
+        <input matInput type="number" formControlName="montant" min="1" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Message (optionnel)</mat-label>
+        <textarea matInput formControlName="message" rows="2"></textarea>
+      </mat-form-field>
+      <div class="soutien-actions">
+        <button mat-button type="button" (click)="annulerSoutien()">Annuler</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="soutienForm.invalid || isSubmitting">
+          Confirmer mon soutien
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

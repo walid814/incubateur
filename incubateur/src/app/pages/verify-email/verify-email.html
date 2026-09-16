@@ -1,0 +1,53 @@
+<div class="ei-auth">
+  <aside class="ei-auth__aside" aria-hidden="true">
+    <div class="aside-inner">
+      <p class="aside-brand"><span class="brand-envol">Envol</span><span class="brand-impact">Impact</span></p>
+      <p class="aside-quote">« Votre aventure commence ici. »</p>
+      <p class="aside-meta">L'incubateur solidaire de l'association F.A.T.E.</p>
+    </div>
+  </aside>
+
+  <main class="ei-auth__panel page-content">
+    <div class="ei-auth__form-shell">
+      <header class="ei-auth__head">
+        <p class="ei-auth__eyebrow">Vérification</p>
+        <h1 class="ei-auth__title">Confirmez votre compte</h1>
+        <p class="ei-auth__lede">
+          Un code à 6 chiffres a été envoyé à <strong>{{ email }}</strong>.
+          Saisissez-le ci-dessous pour activer votre compte.
+        </p>
+      </header>
+
+      <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="ei-form">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Code de vérification</mat-label>
+          <input matInput formControlName="code" maxlength="6" placeholder="000000">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error *ngIf="verifyForm.get('code')?.hasError('required')">Le code est requis</mat-error>
+          <mat-error *ngIf="verifyForm.get('code')?.hasError('minlength')">Le code doit contenir 6 chiffres</mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="!verifyForm.valid || isSubmitting"
+            class="ei-submit">
+            <mat-icon>{{ isSubmitting ? 'hourglass_empty' : 'check_circle' }}</mat-icon>
+            {{ isSubmitting ? 'Vérification…' : 'Confirmer mon compte' }}
+          </button>
+        </div>
+
+        <div class="login-section">
+          <p class="login-text">
+            Vous n'avez pas reçu le code ?
+            <button mat-button color="accent" (click)="resendCode()" type="button">Réessayer</button>
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </main>
+</div>

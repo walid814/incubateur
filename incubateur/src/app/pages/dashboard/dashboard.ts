@@ -22,6 +22,7 @@ import { DashboardHeaderComponent } from './components/dashboard-header/dashboar
 import { DashboardStatsOverviewComponent } from './components/dashboard-stats-overview/dashboard-stats-overview.component';
 import { DashboardAdminSectionsComponent } from './components/dashboard-admin-sections/dashboard-admin-sections.component';
 import { DashboardUserProjectsComponent } from './components/dashboard-user-projects/dashboard-user-projects.component';
+import { MonDossierComponent } from './components/mon-dossier/mon-dossier.component';
 import { DashboardActivityTasksComponent } from './components/dashboard-activity-tasks/dashboard-activity-tasks.component';
 import { NotificationService } from '../../services/notification.service';
 
@@ -36,6 +37,7 @@ import { NotificationService } from '../../services/notification.service';
     DashboardStatsOverviewComponent,
     DashboardAdminSectionsComponent,
     DashboardUserProjectsComponent,
+    MonDossierComponent,
     DashboardActivityTasksComponent,
     MatCardModule,
     MatButtonModule,
@@ -139,6 +141,12 @@ export class DashboardComponent implements OnInit {
           console.error('❌ Erreur parsing userData:', error);
         }
       }
+    }
+
+    // Un sociétaire n'a pas de dashboard dédié : direction son espace.
+    if (this.currentUser?.role === 'SOCIETAIRE') {
+      this.router.navigate(['/espace-societaire']);
+      return;
     }
 
     // Bloc de redirection désactivé temporairement pour permettre l'accès au dashboard sans connexion.

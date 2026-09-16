@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,10 +16,11 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CandidatureAdminService, CandidatureAdmin } from '../../services/candidature-admin.service';
 import { AuthService } from '../../services/auth.service';
+import { DashboardSidebarComponent } from '../dashboard/components/dashboard-sidebar/dashboard-sidebar.component';
 
 @Component({
   selector: 'app-admin-candidatures',
@@ -44,7 +45,8 @@ import { AuthService } from '../../services/auth.service';
     MatSnackBarModule,
     MatTooltipModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    DashboardSidebarComponent
   ],
   templateUrl: './admin-candidatures.html',
   styleUrls: ['./admin-candidatures.scss']
@@ -86,12 +88,34 @@ export class AdminCandidaturesComponent implements OnInit {
     { value: '', label: 'Toutes les villes' }
   ];
 
+  // Consultation en lecture seule du détail d'une candidature
+  candidatureDetails: CandidatureAdmin | null = null;
+
+  // Transformation d'une candidature acceptée en projet finançable
+  candidatureATransformer: CandidatureAdmin | null = null;
+  transformerForm: FormGroup;
+  isTransforming = false;
+
   constructor(
     private candidatureService: CandidatureAdminService,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {
+    this.transformerForm = this.fb.group({
+      titre: ['', Validators.required],
+      secteur: ['', Validators.required],
+      montantRecherche: [10000, [Validators.required, Validators.min(1)]]
+    });
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
 
   ngOnInit() {
     // Vérifier d'abord l'authentification et les permissions
@@ -263,6 +287,7 @@ export class AdminCandidaturesComponent implements OnInit {
         this.snackBar.open('Statut mis à jour avec succès', 'Fermer', {
           duration: 3000
         });
+        this.cdr.detectChanges();
         this.loadStatistiques(); // Recharger les stats
       },
       error: (error) => {
@@ -270,6 +295,45 @@ export class AdminCandidaturesComponent implements OnInit {
         this.snackBar.open('Erreur lors de la mise à jour du statut', 'Fermer', {
           duration: 3000
         });
+      }
+    });
+  }
+
+  ouvrirTransformation(candidature: CandidatureAdmin) {
+    this.candidatureATransformer = candidature;
+    this.transformerForm.reset({ titre: '', secteur: '', montantRecherche: 10000 });
+    this.cdr.detectChanges();
+  }
+
+  annulerTransformation() {
+    this.candidatureATransformer = null;
+    this.cdr.detectChanges();
+  }
+
+  confirmerTransformation() {
+    if (!this.candidatureATransformer || this.transformerForm.invalid || this.isTransforming) {
+      return;
+    }
+    this.isTransforming = true;
+    const { titre, secteur, montantRecherche } = this.transformerForm.value;
+    const candidature = this.candidatureATransformer;
+
+    this.candidatureService.transformerEnProjet(candidature.id, titre, secteur, montantRecherche).subscribe({
+      next: () => {
+        this.snackBar.open(
+          `"${titre}" est maintenant visible des sociétaires dans leur espace.`,
+          'Fermer',
+          { duration: 5000 }
+        );
+        this.candidatureATransformer = null;
+        this.isTransforming = false;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        const message = error?.error?.message || 'Impossible de transformer cette candidature en projet.';
+        this.snackBar.open(message, 'Fermer', { duration: 6000 });
+        this.isTransforming = false;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -336,8 +400,11 @@ export class AdminCandidaturesComponent implements OnInit {
   }
 
   voirDetails(candidature: CandidatureAdmin) {
-    // Logique pour ouvrir une modal avec les détails
-    console.log('Voir détails:', candidature);
+    this.candidatureDetails = candidature;
+  }
+
+  fermerDetails() {
+    this.candidatureDetails = null;
   }
 
   supprimerCandidature(candidature: CandidatureAdmin) {

@@ -45,6 +45,7 @@
       <button mat-button routerLink="/admin/reports" (click)="closeMobile()"><mat-icon>analytics</mat-icon><span>Rapports</span></button>
       <button mat-button routerLink="/admin/settings" (click)="closeMobile()"><mat-icon>settings</mat-icon><span>Configuration</span></button>
       <button mat-button routerLink="/admin/support" (click)="closeMobile()"><mat-icon>support_agent</mat-icon><span>Support</span></button>
+      <button mat-button routerLink="/admin/logs" (click)="closeMobile()"><mat-icon>history</mat-icon><span>Journal d'activité</span></button>
     }
 
     @if (isUser) {
@@ -53,10 +54,12 @@
       <button mat-button routerLink="/candidatures" (click)="closeMobile()"><mat-icon>assignment</mat-icon><span>Candidatures</span></button>
       <button mat-button routerLink="/documents" (click)="closeMobile()"><mat-icon>description</mat-icon><span>Documents</span></button>
       <button mat-button routerLink="/formations" (click)="closeMobile()"><mat-icon>school</mat-icon><span>Formations</span></button>
-      <button mat-button routerLink="/mentoring" (click)="closeMobile()"><mat-icon>support_agent</mat-icon><span>Mentoring</span></button>
       <button mat-button routerLink="/financement" (click)="closeMobile()"><mat-icon>account_balance</mat-icon><span>Financement</span></button>
-      <button mat-button routerLink="/ressources" (click)="closeMobile()"><mat-icon>menu_book</mat-icon><span>Ressources</span></button>
-      <button mat-button routerLink="/evenements" (click)="closeMobile()"><mat-icon>event</mat-icon><span>Événements</span></button>
+    }
+
+    @if (isSocietaire) {
+      <button mat-button routerLink="/espace-societaire" (click)="closeMobile()"><mat-icon>dashboard</mat-icon><span>Tableau de bord</span></button>
+      <button mat-button routerLink="/espace-societaire" fragment="mes-soutiens" (click)="closeMobile()"><mat-icon>volunteer_activism</mat-icon><span>Mes soutiens</span></button>
     }
 
     <div class="sidebar-separator"></div>

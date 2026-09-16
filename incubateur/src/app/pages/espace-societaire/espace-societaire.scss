@@ -1,0 +1,328 @@
+.dashboard-adecco-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ei-ink, #0b1520);
+}
+
+.dashboard-main {
+  flex: 1;
+  margin-left: 250px;
+  margin-top: 64px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    margin-left: 0;
+  }
+}
+
+.societaire-hero {
+  background: var(--navy);
+  color: var(--white);
+  padding: 64px 24px 48px;
+  text-align: center;
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 2.25rem;
+    margin: 0 0 12px;
+  }
+
+  p {
+    font-family: 'DM Sans', sans-serif;
+    opacity: 0.85;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
+
+.societaire-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ---- Recherche et filtres sur les projets à soutenir ----
+   Même langage visuel que le filtre admin-candidatures. */
+.filters-card {
+  margin-bottom: 24px;
+
+  ::ng-deep mat-card-content { padding: 20px !important; }
+
+  .filters-container {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    mat-form-field {
+      min-width: 220px;
+      flex: 1;
+    }
+  }
+}
+
+/* Champs de formulaire Material sur surface sombre : Material rend les
+   form-fields en clair par défaut : on les réaccorde au thème Envol Impact. */
+::ng-deep .societaire-content {
+  .mat-mdc-form-field {
+    --mat-form-field-container-text-color: var(--ei-on-dark, #ede6d8);
+    --mdc-filled-text-field-input-text-color: var(--ei-on-dark, #ede6d8);
+    --mdc-filled-text-field-label-text-color: var(--ei-haze, #9aa5b1);
+    --mdc-filled-text-field-caret-color: var(--ei-gold-2, #ffb340);
+    --mdc-filled-text-field-active-indicator-color: rgba(237, 230, 216, 0.28);
+    --mdc-filled-text-field-focus-active-indicator-color: var(--ei-gold-2, #ffb340);
+    --mdc-filled-text-field-focus-label-text-color: var(--ei-gold-2, #ffb340);
+    --mdc-filled-text-field-container-color: rgba(237, 230, 216, 0.04);
+    --mdc-filled-text-field-hover-state-layer-color: rgba(237, 230, 216, 0.06);
+  }
+
+  .mat-mdc-select-value,
+  .mat-mdc-select-placeholder { color: var(--ei-on-dark, #ede6d8); }
+  .mat-mdc-select-arrow { color: var(--ei-haze, #9aa5b1); }
+  .mat-mdc-form-field-icon-suffix mat-icon { color: var(--ei-haze, #9aa5b1); }
+  input::placeholder { color: var(--ei-haze, #9aa5b1); }
+}
+
+::ng-deep .cdk-overlay-pane .mat-mdc-select-panel {
+  background: var(--ei-slate, #16202c);
+  border: 1px solid rgba(237, 230, 216, 0.14);
+
+  .mat-mdc-option {
+    color: var(--ei-on-dark, #ede6d8);
+    &:hover:not(.mdc-list-item--disabled) { background: rgba(237, 230, 216, 0.06); }
+    &.mdc-list-item--selected {
+      background: rgba(255, 179, 64, 0.14);
+      .mdc-list-item__primary-text { color: var(--ei-gold-2, #ffb340); }
+    }
+  }
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--orange);
+  }
+
+  .stat-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+}
+
+.section-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.4rem;
+  margin: 0 0 16px;
+}
+
+.loading,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  padding: 48px 0;
+  font-family: 'DM Sans', sans-serif;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.projets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.projet-card {
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  // Sans ça, un texte sans espaces (URL, mot très long, entrée invalide...)
+  // force la carte à s'élargir au lieu de rester dans la grille.
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  .projet-secteur {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin: 0;
+  }
+
+  .projet-porteur {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .projet-description {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-body);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .projet-financement {
+    margin: 8px 0;
+
+    .montants {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: 6px;
+
+      .montant-soutenu {
+        font-weight: 700;
+        color: var(--navy);
+      }
+
+      .montant-recherche {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+    }
+  }
+
+  button {
+    align-self: flex-start;
+  }
+}
+
+.mes-soutiens {
+  margin-top: 56px;
+  scroll-margin-top: 24px;
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+
+  .soutiens-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      background: var(--bg-soft);
+      border-radius: var(--radius-btn);
+      padding: 12px 16px;
+      font-family: 'DM Sans', sans-serif;
+
+      .soutien-projet {
+        color: var(--text-primary);
+      }
+
+      .soutien-montant {
+        font-weight: 700;
+        color: var(--orange);
+      }
+    }
+  }
+}
+
+.soutien-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.soutien-modal {
+  max-width: 420px;
+  width: 100%;
+  padding: 28px;
+  border-radius: var(--radius-card);
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    color: var(--navy);
+    margin: 0 0 8px;
+  }
+
+  .soutien-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    display: block;
+  }
+
+  .soutien-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+  }
+}

@@ -100,7 +100,7 @@
             <ul class="location-details">
               <li class="location-item">
                 <mat-icon>home</mat-icon>
-                <span>{{ office.address }}<br>{{ office.city }}</span>
+                <a [href]="office.mapUrl" target="_blank" rel="noopener">{{ office.address }}<br>{{ office.city }}</a>
               </li>
               <li class="location-item">
                 <mat-icon>schedule</mat-icon>
@@ -121,19 +121,19 @@
         <div class="quick-contact">
           <h3 class="quick-title">Au plus vite</h3>
           <div class="quick-options">
-            <a href="tel:+33123456789" class="quick-item">
+            <a href="tel:+33783671126" class="quick-item">
               <mat-icon>phone</mat-icon>
               <span class="quick-text">
                 <strong>Téléphone</strong>
-                <span>01 23 45 67 89</span>
+                <span>+33 7 83 67 11 26</span>
               </span>
             </a>
 
-            <a href="mailto:contact@envolimpact.fr" class="quick-item">
+            <a href="mailto:infosfatetousensemble@gmail.com" class="quick-item">
               <mat-icon>email</mat-icon>
               <span class="quick-text">
                 <strong>Email</strong>
-                <span>contact&#64;envolimpact.fr</span>
+                <span>infosfatetousensemble&#64;gmail.com</span>
               </span>
             </a>
 

@@ -341,7 +341,7 @@
   }
 
   /* libellé de question */
-  ::ng-deep .mat-panel-title {
+  ::ng-deep .mat-expansion-panel-header-title {
     align-items: center;
     gap: 0;
     margin-right: 16px;
@@ -351,6 +351,7 @@
     letter-spacing: -0.01em;
     line-height: 1.35;
     color: var(--ei-on-dark);
+    --mat-expansion-header-text-color: var(--ei-on-dark);
   }
 
   .question-icon {
@@ -373,7 +374,7 @@
     background: linear-gradient(90deg, rgba(254, 135, 1, 0.07), transparent 60%);
 
     .mat-expansion-panel-header { background: transparent !important; }
-    .mat-panel-title { color: var(--ei-gold-2); }
+    .mat-expansion-panel-header-title { color: var(--ei-gold-2); --mat-expansion-header-text-color: var(--ei-gold-2); }
     .question-icon { color: var(--ei-gold-2); }
     .mat-expansion-indicator::after { color: var(--ei-gold-2); }
   }
@@ -560,7 +561,7 @@
     padding: 16px 4px;
     min-height: 56px; /* touch confortable */
   }
-  .faq-accordion ::ng-deep .mat-panel-title {
+  .faq-accordion ::ng-deep .mat-expansion-panel-header-title {
     margin-right: 8px;
     font-size: 1.04rem;
     line-height: 1.35;

@@ -1,0 +1,123 @@
+.admin-projects-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-header {
+  margin-bottom: 24px;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--navy, #01306F);
+    margin: 0 0 4px;
+  }
+
+  p {
+    color: var(--text-muted, #94A3B8);
+    margin: 0;
+  }
+}
+
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  border-radius: 12px;
+}
+
+.stat-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--navy, #01306F);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted, #94A3B8);
+}
+
+.projects-table-card {
+  border-radius: 12px;
+}
+
+.loading-state,
+.no-projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 24px;
+  color: var(--text-muted, #94A3B8);
+  text-align: center;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.projects-table {
+  width: 100%;
+}
+
+.titre-cell {
+  font-weight: 600;
+  color: var(--navy, #01306F);
+}
+
+.financement-cell {
+  min-width: 200px;
+
+  .montants {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--text-muted, #94A3B8);
+    margin-bottom: 4px;
+    white-space: nowrap;
+  }
+}
+
+/* --- Mise en page avec sidebar persistante (ajouté) --- */
+.dashboard-adecco-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ei-ink, #0b1520);
+}
+
+.dashboard-main {
+  flex: 1;
+  margin-left: 250px;
+  margin-top: 64px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    margin-left: 0;
+  }
+}

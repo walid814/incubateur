@@ -26,7 +26,7 @@ interface CandidatureFormData extends CandidaturePayload {
   providedIn: 'root'
 })
 export class CandidatureService {
-  private apiUrl = 'http://localhost:8080/api/candidatures/addCandidature'; // URL complète temporaire
+  private apiUrl = '/api/candidatures/addCandidature'; // URL complète temporaire
   private submittedEmails = new Set<string>(); // Cache des emails déjà soumis
   private lastSubmissionTime = 0;
   private readonly MIN_INTERVAL = 30000; // 30 secondes minimum entre soumissions

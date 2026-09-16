@@ -33,23 +33,29 @@ export class ContactComponent {
   contactInfo = [
     {
       title: 'Bureau Principal',
-      address: '37, rue de la Solidarité',
-      city: '93000 Bobigny',
+      address: '20 Rue Robert Desnos',
+      city: '69120 Vaulx-en-Velin',
       schedule: 'Lundi au vendredi : 9h00 - 17h00',
       icon: 'location_on',
-      phone: '01 23 45 67 89',
-      email: 'contact@envolimpact.fr'
+      phone: '+33 7 83 67 11 26',
+      email: 'infosfatetousensemble@gmail.com',
+      mapUrl: this.buildMapUrl('20 Rue Robert Desnos, 69120 Vaulx-En-Velin, France')
     },
     {
-      title: 'Antenne Sud',
-      address: '15, avenue de l\'Entrepreneuriat',
-      city: '13001 Marseille',
+      title: 'Antenne Lyon',
+      address: '14 avenue Berthelot',
+      city: '69007 Lyon',
       schedule: 'Lundi, mercredi, vendredi : 14h00 - 18h00',
       icon: 'location_on',
-      phone: '04 91 23 45 67',
-      email: 'marseille@envolimpact.fr'
+      phone: '+33 9 51 18 34 96',
+      email: 'art.afrovibes@gmail.com',
+      mapUrl: this.buildMapUrl('14 avenue Berthelot, 69007 Lyon, France')
     }
   ];
+
+  private buildMapUrl(address: string): string {
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+  }
 
   contactReasons = [
     { value: 'candidature', label: 'Question sur ma candidature' },

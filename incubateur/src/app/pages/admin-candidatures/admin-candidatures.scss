@@ -351,7 +351,12 @@
   color: var(--ei-gold-2);
 }
 
-/* Statuts — pastilles signal sobres, AA sur ardoise */
+/* Statuts — pastilles signal sobres, AA sur ardoise.
+   Important : Angular Material fixe la couleur du texte via la variable CSS
+   --mat-chip-label-text-color sur le label interne (.mdc-evolution-chip__text-label),
+   avec une valeur par defaut sombre. Un simple `color` sur .statut-chip ne suffit pas
+   a la surcharger (le label interne a une regle plus specifique) : il faut definir
+   cette variable directement, en plus de `color` pour les navigateurs plus anciens. */
 ::ng-deep .statut-chip {
   border-radius: var(--ei-r-4) !important;
   font-size: 0.76rem !important;
@@ -361,18 +366,22 @@
   &.statut-en_attente {
     background: rgba(30, 91, 255, 0.16) !important;
     color: #FFB340 !important;
+    --mat-chip-label-text-color: #FFB340;
   }
   &.statut-en_cours_evaluation {
     background: rgba(255, 179, 64, 0.16) !important;
     color: var(--ei-gold-2) !important;
+    --mat-chip-label-text-color: var(--ei-gold-2);
   }
   &.statut-accepte {
     background: rgba(63, 168, 138, 0.16) !important;
     color: #6FD0B4 !important;
+    --mat-chip-label-text-color: #6FD0B4;
   }
   &.statut-refuse {
     background: rgba(201, 81, 75, 0.16) !important;
     color: #E0928D !important;
+    --mat-chip-label-text-color: #E0928D;
   }
 }
 
@@ -516,3 +525,129 @@
 }
 
 
+
+// --- Modale de transformation en projet finançable ---
+.details-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.details-modal {
+  max-width: 560px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 28px;
+  background: var(--ei-slate, #16202c);
+  color: var(--ei-on-dark, #ede6d8);
+
+  h3 {
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ei-on-dark, #ede6d8);
+  }
+
+  .details-row {
+    display: flex;
+    gap: 20px;
+
+    .details-section { flex: 1; }
+  }
+
+  .details-section {
+    margin-bottom: 14px;
+
+    .details-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ei-gold-2, #ffb340);
+      margin-bottom: 2px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--ei-on-dark, #ede6d8);
+      word-break: break-word;
+    }
+  }
+
+  .details-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
+}
+
+.transformer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.transformer-modal {
+  max-width: 440px;
+  width: 100%;
+  padding: 28px;
+
+  h3 {
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .transformer-note {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0 0 16px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    display: block;
+  }
+
+  .transformer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+  }
+}
+
+/* --- Mise en page avec sidebar persistante (ajouté) --- */
+.dashboard-adecco-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ei-ink, #0b1520);
+}
+
+.dashboard-main {
+  flex: 1;
+  margin-left: 250px;
+  margin-top: 64px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    margin-left: 0;
+  }
+}

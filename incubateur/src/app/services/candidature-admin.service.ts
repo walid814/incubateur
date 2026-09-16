@@ -26,8 +26,8 @@ export interface CandidatureAdmin {
   providedIn: 'root'
 })
 export class CandidatureAdminService {
-  private apiUrl = 'http://localhost:8080/api/candidatures';
-  private listeUrl = 'http://localhost:8080/api/candidatures/liste-candidatures';
+  private apiUrl = '/api/candidatures';
+  private listeUrl = '/api/candidatures/liste-candidatures';
 
   constructor(private http: HttpClient) {}
 
@@ -113,6 +113,15 @@ export class CandidatureAdminService {
   // Supprimer une candidature
   deleteCandidature(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  }
+
+  // Transformer une candidature acceptée en projet finançable (visible des sociétaires)
+  transformerEnProjet(id: number, titre: string, secteur: string, montantRecherche: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${id}/transformer-en-projet`,
+      { titre, secteur, montantRecherche },
+      { headers: this.getHeaders() }
+    );
   }
 
   // Statistiques des candidatures

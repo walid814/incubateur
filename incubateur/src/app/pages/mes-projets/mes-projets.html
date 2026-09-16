@@ -1,0 +1,46 @@
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="false" [isUser]="true" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+  <main class="dashboard-main">
+    <div class="mes-projets-container">
+
+      <div class="page-header">
+        <h1>
+          <mat-icon>flight_takeoff</mat-icon>
+          Mes projets
+        </h1>
+        <p>Vos projets validés et leur avancement de financement auprès des sociétaires.</p>
+      </div>
+
+      <div *ngIf="loading" class="loading-state">Chargement…</div>
+
+      <div *ngIf="!loading && projets.length === 0" class="empty-state">
+        <mat-icon class="large-icon">flight_takeoff</mat-icon>
+        <p>Aucun projet validé pour le moment. Un projet apparaît ici une fois votre candidature acceptée et transformée en projet finançable par l'équipe Envol Impact.</p>
+        <a mat-raised-button color="primary" routerLink="/candidatures">
+          <mat-icon>assignment_turned_in</mat-icon>
+          Suivre mes candidatures
+        </a>
+      </div>
+
+      <mat-card class="projet-card" *ngFor="let projet of projets">
+        <div class="card-top">
+          <span class="projet-secteur">{{ projet.secteur }}</span>
+          <span class="card-date">Validé le {{ formatDate(projet.dateCreation) }}</span>
+        </div>
+
+        <h3>{{ projet.titre }}</h3>
+        <p class="projet-description">{{ projet.description }}</p>
+
+        <div class="projet-financement">
+          <div class="montants">
+            <span class="montant-soutenu">{{ formatMontant(projet.montantSoutenu) }}</span>
+            <span class="montant-recherche">sur {{ formatMontant(projet.montantRecherche) }} recherchés</span>
+          </div>
+          <mat-progress-bar mode="determinate" [value]="getProgression(projet)"></mat-progress-bar>
+          <span class="progression-pct">{{ getProgression(projet) }}% financé</span>
+        </div>
+      </mat-card>
+
+    </div>
+  </main>
+</div>

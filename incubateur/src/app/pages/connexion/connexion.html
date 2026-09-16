@@ -55,11 +55,11 @@
           <mat-checkbox formControlName="rememberMe" class="remember-checkbox">
             Se souvenir de moi
           </mat-checkbox>
-          <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+          <a routerLink="/mot-de-passe-oublie" class="forgot-password">Mot de passe oublié ?</a>
         </div>
 
         <div class="form-actions">
-          <button mat-flat-button color="primary" type="submit" [disabled]="!connexionForm.valid" class="ei-submit login-button">
+          <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!connexionForm.valid" class="ei-submit login-button">
             <mat-icon>login</mat-icon>
             Se connecter
           </button>

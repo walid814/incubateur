@@ -40,7 +40,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/v1/auth'; // Match backend controller: api/v1/auth
+  private apiUrl = '/api/v1/auth'; // Match backend controller: api/v1/auth
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -112,6 +112,14 @@ export class AuthService {
 
   isAdmin(): boolean {
     return this.getCurrentUser()?.role === 'ADMIN';
+  }
+
+  isSocietaire(): boolean {
+    return this.getCurrentUser()?.role === 'SOCIETAIRE';
+  }
+
+  isEntrepreneur(): boolean {
+    return this.getCurrentUser()?.role === 'USER';
   }
 
   // Obtenir le rôle de l'utilisateur actuel

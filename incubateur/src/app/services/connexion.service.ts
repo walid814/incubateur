@@ -12,7 +12,7 @@ export interface ConnexionPayload {
   providedIn: 'root'
 })
 export class ConnexionService {
-  private apiUrl = 'http://localhost:8080/api/v1/auth/authenticate';
+  private apiUrl = '/api/v1/auth/authenticate';
 
   constructor(private http: HttpClient) {}
 

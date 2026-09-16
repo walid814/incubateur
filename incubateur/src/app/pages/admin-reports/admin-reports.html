@@ -1,0 +1,66 @@
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="true" [isUser]="false" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+  <main class="dashboard-main">
+    <div class="admin-reports-container">
+  <div class="reports-header">
+    <h1>
+      <mat-icon>analytics</mat-icon>
+      Rapports
+    </h1>
+    <p>Synthèse de l'activité de la plateforme, calculée à partir des données réelles.</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">Chargement…</div>
+
+  <div class="reports-grid" *ngIf="!loading">
+
+    <mat-card class="report-card">
+      <mat-card-title>
+        <mat-icon>assignment_turned_in</mat-icon>
+        Rapport Candidatures
+      </mat-card-title>
+      <mat-card-content>
+        <div class="report-rows">
+          <div class="report-row"><span>Total déposées</span><strong>{{ candidatureStats.total }}</strong></div>
+          <div class="report-row"><span>En attente</span><strong>{{ candidatureStats.enAttente }}</strong></div>
+          <div class="report-row"><span>En cours d'évaluation</span><strong>{{ candidatureStats.enCoursEvaluation }}</strong></div>
+          <div class="report-row"><span>Acceptées</span><strong>{{ candidatureStats.acceptees }}</strong></div>
+          <div class="report-row"><span>Refusées</span><strong>{{ candidatureStats.refusees }}</strong></div>
+          <div class="report-row highlight"><span>Taux d'acceptation</span><strong>{{ candidatureStats.tauxAcceptation }}%</strong></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="report-card">
+      <mat-card-title>
+        <mat-icon>account_balance</mat-icon>
+        Rapport Projets &amp; Financements
+      </mat-card-title>
+      <mat-card-content>
+        <div class="report-rows">
+          <div class="report-row"><span>Projets finançables</span><strong>{{ projetStats.total }}</strong></div>
+          <div class="report-row"><span>Montant total recherché</span><strong>{{ formatMontant(projetStats.montantRecherche) }}</strong></div>
+          <div class="report-row"><span>Montant total soutenu</span><strong>{{ formatMontant(projetStats.montantSoutenu) }}</strong></div>
+          <div class="report-row highlight"><span>Taux de financement moyen</span><strong>{{ projetStats.tauxMoyen }}%</strong></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="report-card">
+      <mat-card-title>
+        <mat-icon>groups_2</mat-icon>
+        Rapport Utilisateurs
+      </mat-card-title>
+      <mat-card-content>
+        <div class="report-rows">
+          <div class="report-row"><span>Comptes au total</span><strong>{{ userStats.total }}</strong></div>
+          <div class="report-row"><span>Entrepreneurs / sociétaires</span><strong>{{ userStats.entrepreneurs }}</strong></div>
+          <div class="report-row highlight"><span>Administrateurs</span><strong>{{ userStats.admins }}</strong></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
+  </main>
+</div>

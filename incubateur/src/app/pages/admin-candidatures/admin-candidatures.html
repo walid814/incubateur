@@ -1,4 +1,7 @@
-<div class="admin-candidatures-container page-content-dashboard">
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="true" [isUser]="false" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+  <main class="dashboard-main">
+    <div class="admin-candidatures-container">
   <!-- En-tête avec statistiques -->
   <div class="candidatures-header">
     <div class="header-title">
@@ -259,13 +262,23 @@
                   <span>Accepter</span>
                 </button>
                 
-                <button mat-menu-item 
+                <button mat-menu-item
                         (click)="changerStatut(candidature, 'refuse')"
                         [disabled]="candidature.statut === 'refuse'">
                   <mat-icon style="color: #f44336;">cancel</mat-icon>
                   <span>Refuser</span>
                 </button>
-                
+
+                <mat-divider></mat-divider>
+
+                <button mat-menu-item
+                        (click)="ouvrirTransformation(candidature)"
+                        [disabled]="candidature.statut !== 'accepte'"
+                        matTooltip="La candidature doit d'abord être acceptée">
+                  <mat-icon style="color: #FE8701;">volunteer_activism</mat-icon>
+                  <span>Transformer en projet</span>
+                </button>
+
                 <mat-divider></mat-divider>
                 
                 <button mat-menu-item (click)="supprimerCandidature(candidature)"
@@ -303,4 +316,110 @@
   </mat-card>
 </div>
 
+<!-- Modale de consultation du détail d'une candidature -->
+<div class="details-overlay" *ngIf="candidatureDetails" (click)="fermerDetails()">
+  <mat-card class="details-modal" (click)="$event.stopPropagation()">
+    <h3>
+      <mat-icon style="color: #FE8701; vertical-align: middle;">visibility</mat-icon>
+      Détail de la candidature
+    </h3>
 
+    <div class="details-section">
+      <span class="details-label">Porteur de projet</span>
+      <p>{{candidatureDetails.firstname}} {{candidatureDetails.lastname}}</p>
+    </div>
+
+    <div class="details-row">
+      <div class="details-section">
+        <span class="details-label">Email</span>
+        <p>{{candidatureDetails.email}}</p>
+      </div>
+      <div class="details-section">
+        <span class="details-label">Téléphone</span>
+        <p>{{candidatureDetails.telephone}}</p>
+      </div>
+    </div>
+
+    <div class="details-section">
+      <span class="details-label">Adresse</span>
+      <p>{{candidatureDetails.adresse}}, {{candidatureDetails.codePostal}} {{candidatureDetails.ville}}</p>
+    </div>
+
+    <div class="details-section">
+      <span class="details-label">Motivation</span>
+      <p>{{candidatureDetails.motivation}}</p>
+    </div>
+
+    <div class="details-section">
+      <span class="details-label">Objectifs</span>
+      <p>{{candidatureDetails.objectifs}}</p>
+    </div>
+
+    <div class="details-row">
+      <div class="details-section">
+        <span class="details-label">Statut</span>
+        <p>{{candidatureDetails.statut}}</p>
+      </div>
+      <div class="details-section" *ngIf="candidatureDetails.dateCreation">
+        <span class="details-label">Déposée le</span>
+        <p>{{candidatureDetails.dateCreation | date:'dd/MM/yyyy'}}</p>
+      </div>
+    </div>
+
+    <div class="details-row" *ngIf="candidatureDetails.evaluateur || candidatureDetails.dateEvaluation">
+      <div class="details-section" *ngIf="candidatureDetails.evaluateur">
+        <span class="details-label">Évaluée par</span>
+        <p>{{candidatureDetails.evaluateur}}</p>
+      </div>
+      <div class="details-section" *ngIf="candidatureDetails.dateEvaluation">
+        <span class="details-label">Le</span>
+        <p>{{candidatureDetails.dateEvaluation | date:'dd/MM/yyyy'}}</p>
+      </div>
+    </div>
+
+    <div class="details-section" *ngIf="candidatureDetails.commentaires">
+      <span class="details-label">Commentaire de l'équipe</span>
+      <p>{{candidatureDetails.commentaires}}</p>
+    </div>
+
+    <div class="details-actions">
+      <button mat-flat-button color="primary" (click)="fermerDetails()">Fermer</button>
+    </div>
+  </mat-card>
+</div>
+
+<!-- Modale de transformation en projet finançable -->
+<div class="transformer-overlay" *ngIf="candidatureATransformer" (click)="annulerTransformation()">
+  <mat-card class="transformer-modal" (click)="$event.stopPropagation()">
+    <h3>
+      <mat-icon style="color: #FE8701; vertical-align: middle;">volunteer_activism</mat-icon>
+      Transformer en projet finançable
+    </h3>
+    <p class="transformer-note">
+      Le projet de <strong>{{candidatureATransformer.firstname}} {{candidatureATransformer.lastname}}</strong>
+      deviendra visible dans l'espace sociétaire, avec un montant recherché à définir.
+    </p>
+    <form [formGroup]="transformerForm" (ngSubmit)="confirmerTransformation()">
+      <mat-form-field appearance="outline">
+        <mat-label>Titre du projet</mat-label>
+        <input matInput formControlName="titre" placeholder="Ex : Jardin partagé de Bobigny" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Secteur d'activité</mat-label>
+        <input matInput formControlName="secteur" placeholder="Ex : Agriculture urbaine" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Montant recherché (€)</mat-label>
+        <input matInput type="number" formControlName="montantRecherche" min="1" />
+      </mat-form-field>
+      <div class="transformer-actions">
+        <button mat-button type="button" (click)="annulerTransformation()">Annuler</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="transformerForm.invalid || isTransforming">
+          Créer le projet
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+  </main>
+</div>

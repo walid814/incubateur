@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 
-// Composant: navigation laterale du dashboard (admin ou entrepreneur).
+// Composant: navigation laterale du dashboard (admin, entrepreneur ou societaire).
 @Component({
   selector: 'app-dashboard-sidebar',
   standalone: true,
@@ -19,6 +19,9 @@ export class DashboardSidebarComponent {
 
   // Active les liens entrepreneur dans la sidebar.
   @Input() isUser = false;
+
+  // Active les liens societaire dans la sidebar.
+  @Input() isSocietaire = false;
 
   // Remonte l'action de deconnexion au composant parent.
   @Output() logoutRequested = new EventEmitter<void>();

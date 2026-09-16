@@ -1,0 +1,66 @@
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="false" [isUser]="true" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+  <main class="dashboard-main">
+    <div class="documents-container">
+
+      <div class="page-header">
+        <h1>
+          <mat-icon>description</mat-icon>
+          Documents
+        </h1>
+        <p>Importez les pièces nécessaires à la constitution de votre dossier de projet.</p>
+      </div>
+
+      <mat-card class="upload-card">
+        <h3>Importer un document</h3>
+        <div class="upload-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Type de document</mat-label>
+            <mat-select [(ngModel)]="typeSelectionne">
+              <mat-option *ngFor="let t of typesDocuments" [value]="t.value">{{ t.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <label class="file-picker">
+            <input id="file-input" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" (change)="onFileSelected($event)" hidden />
+            <mat-icon>attach_file</mat-icon>
+            <span>{{ fichierSelectionne ? fichierSelectionne.name : 'Choisir un fichier' }}</span>
+          </label>
+
+          <button mat-raised-button color="primary" (click)="importer()" [disabled]="!typeSelectionne || !fichierSelectionne || uploading">
+            <mat-icon>cloud_upload</mat-icon>
+            {{ uploading ? 'Import…' : 'Importer' }}
+          </button>
+        </div>
+        <p class="upload-hint">Formats acceptés : PDF, JPG, PNG, DOC, DOCX — 10 Mo maximum.</p>
+      </mat-card>
+
+      <div *ngIf="loading" class="loading-state">Chargement…</div>
+
+      <div *ngIf="!loading && documents.length === 0" class="empty-state">
+        <mat-icon class="large-icon">folder_open</mat-icon>
+        <p>Aucun document importé pour le moment.</p>
+      </div>
+
+      <div class="documents-list" *ngIf="!loading && documents.length > 0">
+        <mat-card class="document-row" *ngFor="let doc of documents">
+          <mat-icon class="doc-icon">{{ getIconePour(doc.contentType) }}</mat-icon>
+          <div class="doc-info">
+            <span class="doc-type">{{ doc.typeLibelle }}</span>
+            <span class="doc-name">{{ doc.nomOriginal }}</span>
+            <span class="doc-meta">{{ formatTaille(doc.taille) }} · importé le {{ formatDate(doc.dateImport) }}</span>
+          </div>
+          <div class="doc-actions">
+            <button mat-icon-button (click)="telecharger(doc)" matTooltip="Télécharger">
+              <mat-icon>download</mat-icon>
+            </button>
+            <button mat-icon-button (click)="supprimer(doc)" matTooltip="Supprimer" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+  </main>
+</div>

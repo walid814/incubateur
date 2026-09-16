@@ -226,7 +226,10 @@ mat-toolbar {
 ::ng-deep .user-dropdown-menu-navbar {
   margin-top: 8px;
 
-  .mat-mdc-menu-panel {
+  // Important : Angular Material applique cette classe SUR le même élément que
+  // .mat-mdc-menu-panel (pas sur un parent) — d'où le "&" et non un sélecteur
+  // descendant, qui ne matcherait jamais.
+  &.mat-mdc-menu-panel {
     border-radius: 12px !important;
     background: $navy !important;
     border: 1px solid rgba($white, .12) !important;

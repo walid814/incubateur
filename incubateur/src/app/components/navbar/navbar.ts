@@ -89,6 +89,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return this.authService.isAuthenticated();
   }
 
+  isSocietaire(): boolean {
+    return this.authService.isSocietaire();
+  }
+
   getCurrentUser() {
     return this.authService.getCurrentUser();
   }

@@ -1,0 +1,122 @@
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="true" [isUser]="false" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+  <main class="dashboard-main">
+    <div class="admin-projects-container">
+  <div class="projects-header">
+    <h1>
+      <mat-icon>assignment</mat-icon>
+      Tous les projets
+    </h1>
+    <p>Vue d'ensemble des projets finançables issus des candidatures acceptées</p>
+  </div>
+
+  <div class="stats-overview">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon color="primary">assignment</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ totalProjets }}</span>
+            <span class="stat-label">Projets au total</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #FFB340;">payments</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ formatMontant(totalRecherche) }}</span>
+            <span class="stat-label">Montant total recherché</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #4CAF50;">volunteer_activism</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ formatMontant(totalSoutenu) }}</span>
+            <span class="stat-label">Montant total soutenu</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #FE8701;">trending_up</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ tauxFinancementMoyen }}%</span>
+            <span class="stat-label">Taux de financement moyen</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card class="projects-table-card">
+    <mat-card-content>
+      <div *ngIf="loading" class="loading-state">Chargement…</div>
+
+      <div *ngIf="!loading && projets.length === 0" class="no-projects">
+        <mat-icon>inbox</mat-icon>
+        <p>Aucun projet finançable pour le moment. Transformez une candidature acceptée depuis "Gestion candidatures".</p>
+      </div>
+
+      <div class="table-container" *ngIf="!loading && projets.length > 0">
+        <table mat-table [dataSource]="dataSource" class="projects-table">
+
+          <ng-container matColumnDef="titre">
+            <th mat-header-cell *matHeaderCellDef>Projet</th>
+            <td mat-cell *matCellDef="let projet">
+              <span class="titre-cell">{{ projet.titre }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef>Prénom</th>
+            <td mat-cell *matCellDef="let projet">{{ projet.porteurFirstname }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let projet">{{ projet.porteurLastname }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="secteur">
+            <th mat-header-cell *matHeaderCellDef>Secteur</th>
+            <td mat-cell *matCellDef="let projet">{{ projet.secteur }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="financement">
+            <th mat-header-cell *matHeaderCellDef>Financement</th>
+            <td mat-cell *matCellDef="let projet">
+              <div class="financement-cell">
+                <span class="montants">
+                  {{ formatMontant(projet.montantSoutenu) }} / {{ formatMontant(projet.montantRecherche) }}
+                </span>
+                <mat-progress-bar mode="determinate" [value]="getProgression(projet)"></mat-progress-bar>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dateCreation">
+            <th mat-header-cell *matHeaderCellDef>Créé le</th>
+            <td mat-cell *matCellDef="let projet">{{ formatDate(projet.dateCreation) }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+  </main>
+</div>

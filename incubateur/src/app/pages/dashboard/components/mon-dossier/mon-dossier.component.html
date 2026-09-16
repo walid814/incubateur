@@ -1,0 +1,41 @@
+<section class="mon-dossier">
+  <div class="section-title">
+    <mat-icon>assignment_turned_in</mat-icon>
+    Mon dossier de candidature
+  </div>
+
+  <div *ngIf="loading" class="dossier-loading">
+    Chargement…
+  </div>
+
+  <div *ngIf="!loading && candidatures.length === 0" class="no-candidature">
+    <mat-icon class="large-icon" color="primary">assignment</mat-icon>
+    <p>Vous n'avez pas encore déposé de candidature.</p>
+    <a mat-raised-button color="primary" routerLink="/candidature">
+      <mat-icon>add</mat-icon>
+      Déposer mon projet
+    </a>
+  </div>
+
+  <mat-card class="dossier-card" *ngFor="let candidature of candidatures">
+    <div class="dossier-header">
+      <mat-chip [class]="'statut-chip statut-' + candidature.statut">
+        <mat-icon>{{ getStatutIcon(candidature.statut) }}</mat-icon>
+        {{ getStatutLabel(candidature.statut) }}
+      </mat-chip>
+      <span class="dossier-date">Déposée le {{ formatDate(candidature.dateCreation) }}</span>
+    </div>
+
+    <p class="dossier-motivation">{{ candidature.motivation }}</p>
+
+    <div class="dossier-commentaire" *ngIf="candidature.commentaires">
+      <mat-icon>chat</mat-icon>
+      <span><strong>Retour de l'équipe :</strong> {{ candidature.commentaires }}</span>
+    </div>
+  </mat-card>
+
+  <a *ngIf="candidatures.length > 0" routerLink="/candidatures" class="voir-tout-link">
+    Voir le détail de mes candidatures
+    <mat-icon>arrow_forward</mat-icon>
+  </a>
+</section>

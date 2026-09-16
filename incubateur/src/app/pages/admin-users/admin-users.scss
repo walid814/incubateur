@@ -274,6 +274,9 @@
   .mat-mdc-form-field {
     --mat-form-field-container-text-color: var(--ei-on-dark);
     --mdc-outlined-text-field-input-text-color: var(--ei-on-dark);
+    /* Nom de variable reel consomme par cette version d'Angular Material pour le texte
+       saisi dans un champ outline (le nom --mdc-... ci-dessus ne suffit pas) : */
+    --mat-form-field-outlined-input-text-color: var(--ei-on-dark);
     --mdc-outlined-text-field-label-text-color: var(--ei-haze);
     --mdc-outlined-text-field-caret-color: var(--ei-gold-2);
     --mdc-outlined-text-field-outline-color: rgba(237, 230, 216, 0.2);
@@ -320,7 +323,7 @@
   border-radius: var(--ei-r-4) !important;
 }
 ::ng-deep .mat-mdc-chip.mat-accent {
-  background: rgba(255, 179, 64, 0.18) !important;
+  background: rgba(63, 168, 138, 0.18) !important;
   color: var(--ei-gold-2) !important;
 }
 ::ng-deep .mat-mdc-chip.mat-warn {
@@ -435,4 +438,92 @@
   .table-card { animation: none; }
 }
 
+/* --- Mise en page avec sidebar persistante (ajouté) --- */
+.dashboard-adecco-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ei-ink, #0b1520);
+}
 
+.dashboard-main {
+  flex: 1;
+  margin-left: 250px;
+  margin-top: 64px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    margin-left: 0;
+  }
+}
+
+/* --- Modale créer / modifier un utilisateur --- */
+.user-form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 14, 24, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.user-form-modal {
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  border-radius: var(--ei-r-8);
+  background: var(--ei-slate);
+  border: 1px solid rgba(237, 230, 216, 0.14);
+
+  h3 {
+    font-family: var(--ei-font-display);
+    font-weight: 600;
+    color: var(--ei-on-dark);
+    margin: 0 0 20px;
+    font-size: 1.3rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    display: block;
+
+    --mat-form-field-container-text-color: var(--ei-on-dark);
+    --mdc-outlined-text-field-input-text-color: var(--ei-on-dark);
+    /* Nom de variable reel consomme par cette version d'Angular Material pour le texte
+       saisi dans un champ outline (le nom --mdc-... ci-dessus ne suffit pas) : */
+    --mat-form-field-outlined-input-text-color: var(--ei-on-dark);
+    --mdc-outlined-text-field-label-text-color: var(--ei-haze);
+    --mdc-outlined-text-field-outline-color: rgba(237, 230, 216, 0.2);
+    --mdc-outlined-text-field-hover-outline-color: rgba(237, 230, 216, 0.34);
+    --mdc-outlined-text-field-focus-outline-color: var(--ei-gold-2);
+    --mdc-outlined-text-field-focus-label-text-color: var(--ei-gold-2);
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px;
+    .form-row { grid-template-columns: 1fr; }
+  }
+}

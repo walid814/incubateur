@@ -72,6 +72,16 @@
     margin-bottom: 12px;
     font-size: 1.7rem;
     font-weight: 600;
+
+    .user-firstname {
+      font-weight: 700;
+      margin-right: 0.35em;
+    }
+
+    .user-lastname {
+      font-weight: 400;
+      opacity: 0.75;
+    }
   }
 
   .user-role-badge {

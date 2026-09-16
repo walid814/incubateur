@@ -1,0 +1,83 @@
+.admin-logs-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logs-header {
+  margin-bottom: 24px;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--navy, #01306F);
+    margin: 0 0 4px;
+  }
+
+  p {
+    color: var(--text-muted, #94A3B8);
+    margin: 0;
+  }
+}
+
+.filter-card {
+  border-radius: 12px;
+  margin-bottom: 16px;
+
+  mat-form-field { min-width: 260px; }
+}
+
+.logs-table-card {
+  border-radius: 12px;
+}
+
+.loading-state,
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 24px;
+  color: var(--text-muted, #94A3B8);
+  text-align: center;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.logs-table {
+  width: 100%;
+}
+
+.action-chip {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  &.action-success { background: #D1FAE5; color: #065F46; }
+  &.action-warn { background: #FEE2E2; color: #991B1B; }
+  &.action-default { background: #E2E8F0; color: #334155; }
+}
+
+/* --- Mise en page avec sidebar persistante (ajouté) --- */
+.dashboard-adecco-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ei-ink, #0b1520);
+}
+
+.dashboard-main {
+  flex: 1;
+  margin-left: 250px;
+  margin-top: 64px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    margin-left: 0;
+  }
+}

@@ -23,7 +23,7 @@
 
       <div class="welcome-text">
         <h1>Bonjour,</h1>
-        <h2>{{ currentUser?.firstname }} {{ currentUser?.lastname }}</h2>
+        <h2><span class="user-firstname">{{ currentUser?.firstname }}</span>&nbsp;<span class="user-lastname">{{ currentUser?.lastname }}</span></h2>
         <span class="user-role-badge" [ngClass]="{'admin-badge': isAdmin, 'user-badge': isUser}">
           {{ isAdmin ? 'Administrateur' : 'Entrepreneur' }}
         </span>
@@ -44,16 +44,12 @@
         <mat-icon>dashboard</mat-icon>
         Voir tous les projets
       </button>
-      <button mat-raised-button color="warn" *ngIf="isUser">
-        <mat-icon>flight_takeoff</mat-icon>
-        Découvrir les opportunités
-      </button>
     </div>
   </div>
 
   <div class="dashboard-actions">
     <ng-container *ngIf="isAdmin">
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" routerLink="/admin/reports">
         <mat-icon>analytics</mat-icon>
         Rapports de la plateforme
       </button>
@@ -64,17 +60,13 @@
     </ng-container>
 
     <ng-container *ngIf="isUser">
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" routerLink="/candidatures">
+        <mat-icon>assignment_turned_in</mat-icon>
+        Voir mes candidatures
+      </button>
+      <button mat-raised-button color="accent" routerLink="/documents">
         <mat-icon>cloud_upload</mat-icon>
-        Soumettre un business plan
-      </button>
-      <button mat-raised-button color="accent">
-        <mat-icon>send</mat-icon>
-        Envoyer un document
-      </button>
-      <button mat-raised-button color="warn">
-        <mat-icon>verified_user</mat-icon>
-        Demander un accompagnement
+        Soumettre un document
       </button>
     </ng-container>
   </div>

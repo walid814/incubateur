@@ -43,11 +43,12 @@ export class FooterComponent {
     { name: 'YouTube', icon: 'smart_display', url: '#' }
   ];
 
-  // Placeholders à remplacer par les vrais contacts de l'association F.A.T.E.
   contactInfo = {
-    address: '37, rue de la Solidarité, 93000 Bobigny',
-    phone: '01 23 45 67 89',
-    email: 'contact@envolimpact.fr'
+    address: '20 Rue Robert Desnos, 69120 Vaulx-en-Velin, France',
+    phone: '+33 7 83 67 11 26',
+    email: 'infosfatetousensemble@gmail.com',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=' +
+      encodeURIComponent('20 Rue Robert Desnos, 69120 Vaulx-En-Velin, France')
   };
 }
 

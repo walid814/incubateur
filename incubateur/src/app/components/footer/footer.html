@@ -53,7 +53,7 @@
           <div class="contact-info">
             <div class="contact-item">
               <mat-icon>location_on</mat-icon>
-              <span>{{contactInfo.address}}</span>
+              <a [href]="contactInfo.mapUrl" target="_blank" rel="noopener">{{contactInfo.address}}</a>
             </div>
             
             <div class="contact-item">

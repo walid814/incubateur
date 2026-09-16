@@ -6,8 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Router, RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -20,7 +20,8 @@ import { NotificationService } from '../../services/notification.service';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RouterLink
   ],
   templateUrl: './connexion.html',
   styleUrls: ['./connexion.scss']
@@ -28,6 +29,7 @@ import { NotificationService } from '../../services/notification.service';
 export class ConnexionComponent {
   connexionForm: FormGroup;
   hidePassword = true;
+  isSubmitting = false;
 
   private host = inject(ElementRef<HTMLElement>);
   private injector = inject(Injector);
@@ -35,7 +37,7 @@ export class ConnexionComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
+    private http: HttpClient,
     private notify: NotificationService
   ) {
     this.connexionForm = this.formBuilder.group({
@@ -43,20 +45,14 @@ export class ConnexionComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
-
-    // Léger traçage de la trajectoire d'or de l'aside (sobre, respect reduced-motion).
     afterNextRender(() => this.drawTrajectory(), { injector: this.injector });
   }
 
-  // Trace la ligne d'or de l'aside une fois après le 1er rendu. CSS-only, pas de lib.
   private drawTrajectory() {
-    const reduced =
-      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-    const path =
-      (this.host.nativeElement as HTMLElement).querySelector<SVGPathElement>('.aside-path');
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    const path = (this.host.nativeElement as HTMLElement).querySelector<SVGPathElement>('.aside-path');
     if (!path) return;
     if (reduced) { path.style.strokeDashoffset = '0'; return; }
-
     const len = path.getTotalLength();
     path.style.strokeDasharray = `${len}`;
     path.style.strokeDashoffset = `${len}`;
@@ -65,32 +61,35 @@ export class ConnexionComponent {
   }
 
   onSubmit() {
-    if (!this.connexionForm.valid) {
-      this.notify.showWarning('Formulaire incomplet', 'Veuillez remplir tous les champs correctement.');
-      return;
-    }
-
+    console.log('onSubmit appele');
+    if (!this.connexionForm.valid || this.isSubmitting) return;
+    this.isSubmitting = true;
     const { email, password } = this.connexionForm.value;
-
-    this.authService.login({ email, password }).subscribe({
-      next: () => {
-        this.router.navigate(['/dashboard']).then(success => {
-          if (!success) {
-            this.router.navigate(['/']);
-          }
-        }).catch(() => this.router.navigate(['/']));
-      },
-      error: (error) => {
-        if (error.status === 401) {
-          this.notify.showError('Connexion refusée', 'Email ou mot de passe incorrect.');
-        } else if (error.status === 0) {
-          this.notify.showError('Serveur injoignable', 'Impossible de contacter le serveur. Réessayez plus tard.');
+    this.http.post<any>('/api/v1/auth/authenticate', { email, password }).subscribe({
+      next: (response) => {
+        console.log('Reponse:', response);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify({
+          id: response.id,
+          email: response.email,
+          firstname: response.firstname,
+          lastname: response.lastname,
+          role: response.role
+        }));
+        this.notify.showSuccess('Connexion reussie', 'Bienvenue ' + response.firstname);
+        if (response.role === 'ADMIN') {
+          this.router.navigate(['/admin/candidatures']);
+        } else if (response.role === 'SOCIETAIRE') {
+          this.router.navigate(['/espace-societaire']);
         } else {
-          this.notify.showError(
-            'Erreur de connexion',
-            error.error?.message || error.message || 'Une erreur est survenue. Réessayez.'
-          );
+          this.router.navigate(['/dashboard']);
         }
+        this.isSubmitting = false;
+      },
+      error: (err) => {
+        console.log('Erreur:', err);
+        this.notify.showError('Echec', err.error?.message || 'Email ou mot de passe incorrect.');
+        this.isSubmitting = false;
       }
     });
   }
@@ -100,6 +99,6 @@ export class ConnexionComponent {
   }
 
   goToSignup() {
-    this.router.navigate(['/candidature']);
+    this.router.navigate(['/register']);
   }
 }

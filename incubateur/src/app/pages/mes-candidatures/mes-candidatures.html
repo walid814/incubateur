@@ -1,0 +1,52 @@
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="false" [isUser]="true" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+  <main class="dashboard-main">
+    <div class="mes-candidatures-container">
+
+      <div class="page-header">
+        <h1>
+          <mat-icon>assignment_turned_in</mat-icon>
+          Mes candidatures
+        </h1>
+        <p>Suivez ici l'état de vos projets déposés.</p>
+      </div>
+
+      <div *ngIf="loading" class="loading-state">Chargement…</div>
+
+      <div *ngIf="!loading && candidatures.length === 0" class="empty-state">
+        <mat-icon class="large-icon">assignment</mat-icon>
+        <p>Vous n'avez pas encore déposé de candidature.</p>
+        <a mat-raised-button color="primary" routerLink="/candidature">
+          <mat-icon>add</mat-icon>
+          Déposer mon projet
+        </a>
+      </div>
+
+      <mat-card class="candidature-card" *ngFor="let c of candidatures" [class]="'statut-' + c.statut">
+        <div class="card-top">
+          <mat-chip [class]="'statut-chip statut-' + c.statut">
+            <mat-icon>{{ getStatutIcon(c.statut) }}</mat-icon>
+            {{ getStatutLabel(c.statut) }}
+          </mat-chip>
+          <span class="card-date">Déposée le {{ formatDate(c.dateCreation) }}</span>
+        </div>
+
+        <h3>Motivation</h3>
+        <p>{{ c.motivation }}</p>
+
+        <h3>Objectifs</h3>
+        <p>{{ c.objectifs }}</p>
+
+        <div class="card-commentaire" *ngIf="c.commentaires">
+          <mat-icon>chat</mat-icon>
+          <div>
+            <strong>Retour de l'équipe</strong>
+            <span *ngIf="c.dateEvaluation" class="commentaire-date">le {{ formatDate(c.dateEvaluation) }}</span>
+            <p>{{ c.commentaires }}</p>
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
+  </main>
+</div>

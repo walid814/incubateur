@@ -364,3 +364,61 @@
     padding: 24px 20px 48px;
   }
 }
+
+
+/* --- Choix du profil (entrepreneur / sociétaire) --- */
+.role-choice {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  .role-choice {
+    grid-template-columns: 1fr;
+  }
+}
+
+.role-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 2px solid rgba(1, 48, 111, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+
+  input[type="radio"] {
+    margin-top: 3px;
+    accent-color: #FE8701;
+  }
+
+  mat-icon {
+    color: #FE8701;
+  }
+
+  strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #01306F;
+  }
+
+  small {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 2px;
+  }
+
+  &.selected {
+    border-color: #FE8701;
+    background: rgba(254, 135, 1, 0.06);
+  }
+
+  &:hover {
+    border-color: rgba(254, 135, 1, 0.5);
+  }
+}

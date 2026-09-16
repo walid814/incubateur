@@ -1,0 +1,108 @@
+<div class="dashboard-adecco-layout">
+  <app-dashboard-sidebar [isAdmin]="true" [isUser]="false" (logoutRequested)="onLogout()"></app-dashboard-sidebar>
+  <main class="dashboard-main">
+    <div class="admin-financements-container">
+  <div class="financements-header">
+    <h1>
+      <mat-icon>account_balance</mat-icon>
+      Financements
+    </h1>
+    <p>Historique des soutiens déclarés par les sociétaires — cette page se met à jour au fil des nouveaux soutiens.</p>
+  </div>
+
+  <div class="stats-overview">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon color="primary">volunteer_activism</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ soutiens.length }}</span>
+            <span class="stat-label">Soutiens enregistrés</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #4CAF50;">payments</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ formatMontant(totalSoutenu) }}</span>
+            <span class="stat-label">Montant total soutenu</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #FE8701;">groups_2</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ nombreSocietaires }}</span>
+            <span class="stat-label">Sociétaires contributeurs</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon style="color: #FFB340;">assignment</mat-icon>
+          <div class="stat-info">
+            <span class="stat-number">{{ projetsFinances }}</span>
+            <span class="stat-label">Projets financés</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card class="financements-table-card">
+    <mat-card-content>
+      <div *ngIf="loading" class="loading-state">Chargement…</div>
+
+      <div *ngIf="!loading && soutiens.length === 0" class="no-data">
+        <mat-icon>inbox</mat-icon>
+        <p>Aucun soutien enregistré pour le moment.</p>
+      </div>
+
+      <div class="table-container" *ngIf="!loading && soutiens.length > 0">
+        <table mat-table [dataSource]="dataSource" class="financements-table">
+
+          <ng-container matColumnDef="projet">
+            <th mat-header-cell *matHeaderCellDef>Projet</th>
+            <td mat-cell *matCellDef="let s">{{ s.projetTitre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="societaire">
+            <th mat-header-cell *matHeaderCellDef>Sociétaire</th>
+            <td mat-cell *matCellDef="let s">{{ s.societaireFirstname }} {{ s.societaireLastname }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef>Montant</th>
+            <td mat-cell *matCellDef="let s"><strong>{{ formatMontant(s.montant) }}</strong></td>
+          </ng-container>
+
+          <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef>Message</th>
+            <td mat-cell *matCellDef="let s">{{ s.message || '—' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let s">{{ formatDate(s.dateCreation) }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+  </main>
+</div>
